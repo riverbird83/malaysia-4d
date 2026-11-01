@@ -11,8 +11,13 @@ Safety properties:
 from __future__ import annotations
 
 import csv
+import sys
 import time
 from pathlib import Path
+
+# Make repository-root modules importable when this file is executed as a script.
+REPO_ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO_ROOT))
 
 import pandas as pd
 
