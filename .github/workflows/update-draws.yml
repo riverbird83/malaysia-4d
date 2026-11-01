@@ -38,6 +38,9 @@ jobs:
       - name: Update Da Ma Cai
         run: python scraper_damacai.py --update
 
+      - name: Run database rule tests
+        run: python -m unittest discover -s tests -v
+
       - name: Validate all datasets before publishing
         run: python scripts/validate_data.py --allow-legacy-sportstoto-consolation
 
