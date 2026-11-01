@@ -34,7 +34,7 @@ def canonical_number(raw: str) -> str | None:
     return value.zfill(4)
 
 
-def audit_file(operator: str, path: Path) -> dict:
+def audit_file(operator: str, path: Path, allow_legacy_sportstoto_consolation: bool = False) -> dict:
     report = {
         "operator": operator,
         "file": str(path),
@@ -68,6 +68,7 @@ def audit_file(operator: str, path: Path) -> dict:
         dates = Counter()
         sequences = Counter()
         missing_by_field = Counter()
+        disallowed_missing = []
         date_values = []
         for line_no, row in enumerate(reader, start=2):
             report["rows"] += 1
@@ -98,6 +99,17 @@ def audit_file(operator: str, path: Path) -> dict:
                 raw = (row.get(field) or "").strip()
                 if not raw:
                     missing_by_field[field] += 1
+                    legacy_allowed = (
+                        allow_legacy_sportstoto_consolation
+                        and operator == "sportstoto"
+                        and field.startswith("consol_")
+                        and len(draw_date) == 10
+                        and draw_date < "2011-06-11"
+                    )
+                    if not legacy_allowed:
+                        disallowed_missing.append(
+                            {"line": line_no, "date": draw_date, "field": field}
+                        )
                     continue
                 normalized = canonical_number(raw)
                 if normalized is None:
@@ -129,13 +141,15 @@ def audit_file(operator: str, path: Path) -> dict:
         ]
         report["duplicate_draw_seq_count"] = sum(1 for count in sequences.values() if count > 1)
         report["missing_numbers_by_field"] = dict(sorted(missing_by_field.items()))
+        report["disallowed_missing_number_count"] = len(disallowed_missing)
+        report["disallowed_missing_number_examples"] = disallowed_missing[:20]
 
     critical = (
         bool(report.get("invalid_dates"))
         or bool(report["duplicate_dates"])
         or bool(report["missing_main_prize_rows"])
         or report["number_format_counts"]["invalid"] > 0
-        or any(report["missing_numbers_by_field"].values())
+        or report["disallowed_missing_number_count"] > 0
     )
     report["status"] = "FAIL" if critical else (
         "PASS_WITH_NORMALIZATION" if (
@@ -151,9 +165,17 @@ def audit_file(operator: str, path: Path) -> dict:
 def main() -> int:
     parser = argparse.ArgumentParser(description="Audit 4D CSV data without modifying it")
     parser.add_argument("--json", action="store_true", help="Print machine-readable JSON")
+    parser.add_argument(
+        "--allow-legacy-sportstoto-consolation",
+        action="store_true",
+        help="Temporarily allow pre-2011-06-11 Sport Toto Consolation gaps; newer rows must be complete.",
+    )
     args = parser.parse_args()
 
-    reports = [audit_file(name, path) for name, path in DATASETS.items()]
+    reports = [
+        audit_file(name, path, args.allow_legacy_sportstoto_consolation)
+        for name, path in DATASETS.items()
+    ]
     result = {"datasets": reports}
     if args.json:
         print(json.dumps(result, indent=2))
@@ -167,6 +189,7 @@ def main() -> int:
             )
             print(f"  number formats: {item['number_format_counts']}")
             print(f"  missing fields: {item['missing_numbers_by_field']}")
+            print(f"  missing values outside legacy exception: {item.get('disallowed_missing_number_count', 0)}")
             if item["duplicate_draw_seq_count"]:
                 print(f"  advisory: {item['duplicate_draw_seq_count']} repeated draw_seq values")
             if item["duplicate_numbers_within_draw"]:
