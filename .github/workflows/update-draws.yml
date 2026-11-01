@@ -41,11 +41,17 @@ jobs:
       - name: Run database rule tests
         run: python -m unittest discover -s tests -v
 
-      - name: Validate all datasets before publishing
+      - name: Validate raw datasets before normalization
         run: python scripts/validate_data.py --allow-legacy-sportstoto-consolation
 
-      - name: Sync data → docs/data (for GitHub Pages)
-        run: cp data/*.csv docs/data/
+      - name: Build canonical normalized datasets
+        run: python scripts/normalize_data.py
+
+      - name: Sync source and normalized data to GitHub Pages
+        run: |
+          cp data/*.csv docs/data/
+          mkdir -p docs/data/normalized
+          cp data/normalized/*.csv docs/data/normalized/
 
       - name: Update dashboard date
         run: |
