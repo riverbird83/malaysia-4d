@@ -2,6 +2,12 @@ name: Backfill Sport Toto 2006-2011 Consolation
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - recovery/sportstoto-consolation-2006-2011
+    paths:
+      - scripts/backfill_sportstoto_consolation.py
+      - .github/workflows/backfill-sportstoto-2006-2011.yml
 
 permissions:
   contents: read
@@ -9,12 +15,12 @@ permissions:
 jobs:
   backfill:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     steps:
-      - name: Checkout development branch
+      - name: Checkout recovery branch
         uses: actions/checkout@v4
         with:
-          ref: data-quality-foundation
+          ref: ${{ github.ref }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -24,7 +30,7 @@ jobs:
       - name: Install dependencies
         run: pip install requests beautifulsoup4 pandas lxml
 
-      - name: Run official-source historical backfill
+      - name: Run multi-source historical backfill
         run: python scripts/backfill_sportstoto_consolation.py
 
       - name: Upload recovered candidate dataset
