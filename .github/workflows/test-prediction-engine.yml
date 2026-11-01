@@ -7,8 +7,10 @@ on:
     paths:
       - "scripts/prediction_engine.py"
       - "scripts/backtest_engine.py"
+      - "scripts/normalize_data.py"
       - "tests/test_prediction_engine.py"
       - "tests/test_backtest_engine.py"
+      - "tests/test_normalize_data.py"
   workflow_dispatch:
 
 permissions:
@@ -24,6 +26,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Run engine tests
+      - name: Run prediction and backtest tests
         run: |
           python -m unittest discover -s tests -p "test_*engine.py" -v
+      - name: Run normalization tests
+        run: |
+          python -m unittest discover -s tests -p "test_normalize_data.py" -v
