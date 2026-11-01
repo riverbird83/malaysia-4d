@@ -75,7 +75,7 @@ def main() -> int:
     unresolved = []
     for draw_date in sorted(target_missing_dates):
         record = official_by_date.get(draw_date)
-        values = (record or {}).get("consols", [])
+        values = [(record or {}).get(f"consol_{i}", "") for i in range(1, 11)]
         if len(values) != 10 or any(not str(v).isdigit() or len(str(v)) != 4 for v in values):
             unresolved.append(draw_date)
             continue
