@@ -105,17 +105,17 @@ def parse_month_official(year: int, month: int) -> list[dict]:
         # immediately after the Consolation list. Newer pages may place
         # "TOTO 4D JACKPOT" there. Stop at either heading.
         sp_m = re.search(
-            r"Special Prize\\s+(.*?)(?=Consolation Prize)",
+            r"Special Prize\s+(.*?)(?=Consolation Prize)",
             body,
             flags=re.IGNORECASE | re.DOTALL,
         )
         cp_m = re.search(
-            r"Consolation Prize\\s+(.*?)(?=TOTO 4D JACKPOT|Toto lotto games|TOTO 5D|$)",
+            r"Consolation Prize\s+(.*?)(?=TOTO 4D JACKPOT|Toto lotto games|TOTO 5D|$)",
             body,
             flags=re.IGNORECASE | re.DOTALL,
         )
-        specials = re.findall(r"(?<!\\d)\\d{4}(?!\\d)", sp_m.group(1)) if sp_m else []
-        consols = re.findall(r"(?<!\\d)\\d{4}(?!\\d)", cp_m.group(1)) if cp_m else []
+        specials = re.findall(r"(?<!\d)\d{4}(?!\d)", sp_m.group(1)) if sp_m else []
+        consols = re.findall(r"(?<!\d)\d{4}(?!\d)", cp_m.group(1)) if cp_m else []
 
         # Do not silently save a partial draw. Each section must contain
         # exactly ten four-digit numbers before it can enter the dataset.
