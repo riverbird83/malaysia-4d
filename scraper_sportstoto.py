@@ -101,11 +101,30 @@ def parse_month_official(year: int, month: int) -> list[dict]:
             continue
         p1, p2, p3 = p_m.group(1), p_m.group(2), p_m.group(3)
 
-        sp_m = re.search(r"Special Prize\s+([\d\s]+?)Consolation Prize", body)
-        specials = re.findall(r"\d{4}", sp_m.group(1))[:10] if sp_m else []
+        # Older archive pages (e.g. 1992) place "Toto lotto games"
+        # immediately after the Consolation list. Newer pages may place
+        # "TOTO 4D JACKPOT" there. Stop at either heading.
+        sp_m = re.search(
+            r"Special Prize\\s+(.*?)(?=Consolation Prize)",
+            body,
+            flags=re.IGNORECASE | re.DOTALL,
+        )
+        cp_m = re.search(
+            r"Consolation Prize\\s+(.*?)(?=TOTO 4D JACKPOT|Toto lotto games|TOTO 5D|$)",
+            body,
+            flags=re.IGNORECASE | re.DOTALL,
+        )
+        specials = re.findall(r"(?<!\\d)\\d{4}(?!\\d)", sp_m.group(1)) if sp_m else []
+        consols = re.findall(r"(?<!\\d)\\d{4}(?!\\d)", cp_m.group(1)) if cp_m else []
 
-        cp_m = re.search(r"Consolation Prize\s+([\d\s]+?)TOTO 4D JACKPOT", body)
-        consols = re.findall(r"\d{4}", cp_m.group(1))[:10] if cp_m else []
+        # Do not silently save a partial draw. Each section must contain
+        # exactly ten four-digit numbers before it can enter the dataset.
+        if len(specials) != 10 or len(consols) != 10:
+            print(
+                f"  [WARN] Incomplete prize sections for {yr_v:04d}-{mon_v:02d}-{day_v:02d}: "
+                f"special={len(specials)}, consolation={len(consols)}"
+            )
+            continue
 
         record = {
             "draw_seq": draw_seq,
