@@ -87,8 +87,19 @@ Files:
 
 1. Reconcile Sport Toto's 31,300 blank consolation cells against official historical publications. The current data cannot tell us which blanks are legitimate historical omissions.
 2. Verify every historical draw against its operator source (or a clearly labelled secondary source) and record provenance.
-3. Investigate repeated numbers within the same draw. The current audit flags examples for source checking; it does not automatically delete them because a repeated result may be a genuine published record or a parser/data issue.
+3. Repeated winning numbers within one draw are permitted. Do not deduplicate prize values within a draw, across prize tiers, or across operators. Only prevent duplicate draw records using operator + draw date.
 4. Repair the scrapers and scheduled workflow so that failed or partial scrapes cannot silently publish a new dashboard date.
 5. Only after the above, create a canonical model-ready dataset and freeze dated snapshots for walk-forward backtesting.
 
 **Important:** The normalized copies fix representation, not factual correctness. They are not yet certified official datasets and must not be treated as fully verified training data.
+
+
+## User-confirmed data rules (2026-11-01)
+
+- Sport Toto historical Consolation results are expected to exist for the currently blank 1992–2011 records; treat this as a historical extraction gap to investigate and backfill, not as evidence that the operator did not publish those prizes.
+- Repeated four-digit winning numbers are valid data. A number may appear more than once within one draw, across different prize tiers, or on different operators on the same date. Never deduplicate winning-number values.
+- The only draw-level uniqueness constraint is `operator + date`. The same date across different operators is expected and valid.
+
+## Sport Toto parser change
+
+The Sport Toto official-page parser was updated to recognize the historical consolation section ending at either `TOTO 4D JACKPOT` or `Toto lotto games`. It now refuses to silently accept a draw unless it extracts exactly 10 Special and 10 Consolation numbers. This change is on the development branch and has **not yet been run against the full historical archive**. The normalized CSV remains unchanged until a complete scrape has been validated and reconciled.
