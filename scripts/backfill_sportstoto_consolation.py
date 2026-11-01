@@ -21,8 +21,8 @@ from scraper_sportstoto import parse_month_official
 
 SOURCE = Path("data/normalized/sportstoto_draws.csv")
 OUTPUT = Path("data/backfill/sportstoto_draws_backfilled.csv")
-START_YEAR = 1992
-END_YEAR = 2011
+START_DATE = "2006-01-01"
+END_DATE = "2011-06-10"
 DELAY_SECONDS = 0.6
 CONSOL_FIELDS = [f"consol_{i}" for i in range(1, 11)]
 
@@ -37,7 +37,7 @@ def main() -> int:
     if missing_columns:
         raise SystemExit(f"Missing columns: {sorted(missing_columns)}")
 
-    target_mask = df["date"].str[:4].between(str(START_YEAR), str(END_YEAR))
+    target_mask = df["date"].between(START_DATE, END_DATE)
     target_rows = df[target_mask]
     blank_mask = target_mask & df[CONSOL_FIELDS].eq("").any(axis=1)
     target_missing_dates = set(df.loc[blank_mask, "date"])
@@ -52,9 +52,10 @@ def main() -> int:
 
     official_by_date: dict[str, dict] = {}
     failed_months: list[str] = []
-    for year in range(START_YEAR, END_YEAR + 1):
-        for month in range(1, 13):
-            key = f"{year:04d}-{month:02d}"
+    months_to_fetch = sorted({d[:7] for d in target_missing_dates})
+    for month_key in months_to_fetch:
+            year, month = map(int, month_key.split("-"))
+            key = month_key
             try:
                 records = parse_month_official(year, month)
                 if records is None:
