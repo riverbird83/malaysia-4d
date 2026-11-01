@@ -228,6 +228,17 @@ def parse_date_check4d(draw_date_str: str) -> dict | None:
     return None
 
 
+def parse_dates_check4d(draw_dates: set[str]) -> list[dict]:
+    """Fetch exact known missing draw dates, including Tuesday/special draws."""
+    draws = []
+    for draw_date in sorted(draw_dates):
+        record = parse_date_check4d(draw_date)
+        if record:
+            draws.append(record)
+        time.sleep(DELAY + random.uniform(0, 0.2))
+    return draws
+
+
 def parse_month_check4d(year: int, month: int) -> list[dict]:
     """Scrape a full month of Sport Toto draws via check4d.com, day by day."""
     today = date.today()
