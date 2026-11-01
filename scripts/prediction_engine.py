@@ -46,9 +46,13 @@ def read_draws(paths=None, cutoff=None):
 def _age_weight(draw_date, as_of):
     age_days = max(0, (as_of - draw_date).days)
     age_years = age_days / 365.2425
-    for years, weight in WINDOW_WEIGHTS:
-        if age_years <= years:
-            return weight
+    # Explicit non-overlapping bands: 0-3y, 4-10y, and 11-20y.
+    if age_years < 3:
+        return 0.60
+    if age_years <= 10:
+        return 0.25
+    if age_years <= 20:
+        return 0.15
     return 0.0
 
 
