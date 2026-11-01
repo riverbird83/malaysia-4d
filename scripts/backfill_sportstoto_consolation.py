@@ -11,7 +11,6 @@ Safety properties:
 from __future__ import annotations
 
 import csv
-import sys
 import time
 from pathlib import Path
 
@@ -38,7 +37,6 @@ def main() -> int:
         raise SystemExit(f"Missing columns: {sorted(missing_columns)}")
 
     target_mask = df["date"].between(START_DATE, END_DATE)
-    target_rows = df[target_mask]
     blank_mask = target_mask & df[CONSOL_FIELDS].eq("").any(axis=1)
     target_missing_dates = set(df.loc[blank_mask, "date"])
     if not target_missing_dates:
@@ -54,21 +52,21 @@ def main() -> int:
     failed_months: list[str] = []
     months_to_fetch = sorted({d[:7] for d in target_missing_dates})
     for month_key in months_to_fetch:
-            year, month = map(int, month_key.split("-"))
-            key = month_key
-            try:
-                records = parse_month_official(year, month)
-                if records is None:
-                    failed_months.append(key)
-                else:
-                    for record in records:
-                        draw_date = record.get("date", "")
-                        if draw_date in target_missing_dates:
-                            official_by_date[draw_date] = record
-            except Exception as exc:
-                print(f"[ERROR] {key}: {exc}")
+        year, month = map(int, month_key.split("-"))
+        key = month_key
+        try:
+            records = parse_month_official(year, month)
+            if records is None:
                 failed_months.append(key)
-            time.sleep(DELAY_SECONDS)
+            else:
+                for record in records:
+                    draw_date = record.get("date", "")
+                    if draw_date in target_missing_dates:
+                        official_by_date[draw_date] = record
+        except Exception as exc:
+            print(f"[ERROR] {key}: {exc}")
+            failed_months.append(key)
+        time.sleep(DELAY_SECONDS)
 
     # Work on a copy. Do not write anything if any target date is unresolved.
     updated = df.copy()
