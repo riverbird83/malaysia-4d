@@ -21,7 +21,7 @@ sys.path.insert(0, str(REPO_ROOT))
 
 import pandas as pd
 
-from scraper_sportstoto import parse_month_official, parse_month_check4d
+from scraper_sportstoto import parse_month_official, parse_dates_check4d
 
 SOURCE = Path("data/normalized/sportstoto_draws.csv")
 OUTPUT = Path("data/backfill/sportstoto_draws_backfilled.csv")
@@ -81,7 +81,7 @@ def main() -> int:
         if still_missing:
             print(f"[INFO] {key}: official source did not provide {len(still_missing)} complete target draws; trying check4d fallback")
             try:
-                fallback_records = parse_month_check4d(year, month)
+                fallback_records = parse_dates_check4d(still_missing)
                 month_records.extend(fallback_records or [])
             except Exception as exc:
                 print(f"[WARN] Fallback source {key}: {exc}")
