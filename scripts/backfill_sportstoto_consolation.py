@@ -21,7 +21,7 @@ sys.path.insert(0, str(REPO_ROOT))
 
 import pandas as pd
 
-from scraper_sportstoto import parse_month_official
+from scraper_sportstoto import parse_month_official, parse_month_check4d
 
 SOURCE = Path("data/normalized/sportstoto_draws.csv")
 OUTPUT = Path("data/backfill/sportstoto_draws_backfilled.csv")
@@ -59,18 +59,43 @@ def main() -> int:
     for month_key in months_to_fetch:
         year, month = map(int, month_key.split("-"))
         key = month_key
+        month_targets = {d for d in target_missing_dates if d.startswith(key + "-")}
+        month_records = []
+        official_error = None
         try:
-            records = parse_month_official(year, month)
-            if records is None:
-                failed_months.append(key)
-            else:
-                for record in records:
-                    draw_date = record.get("date", "")
-                    if draw_date in target_missing_dates:
-                        official_by_date[draw_date] = record
+            official_records = parse_month_official(year, month)
+            if official_records:
+                month_records.extend(official_records)
         except Exception as exc:
-            print(f"[ERROR] {key}: {exc}")
-            failed_months.append(key)
+            official_error = str(exc)
+            print(f"[WARN] Official source {key}: {exc}")
+
+        official_dates = {
+            r.get("date", "") for r in month_records
+            if r.get("date", "") in month_targets
+            and all(str(r.get(f"consol_{i}", "")).isdigit()
+                    and len(str(r.get(f"consol_{i}", ""))) == 4
+                    for i in range(1, 11))
+        }
+        still_missing = month_targets - official_dates
+        if still_missing:
+            print(f"[INFO] {key}: official source did not provide {len(still_missing)} complete target draws; trying check4d fallback")
+            try:
+                fallback_records = parse_month_check4d(year, month)
+                month_records.extend(fallback_records or [])
+            except Exception as exc:
+                print(f"[WARN] Fallback source {key}: {exc}")
+
+        for record in month_records:
+            draw_date = record.get("date", "")
+            if draw_date in month_targets:
+                # Prefer an official record when available; otherwise retain fallback.
+                current = official_by_date.get(draw_date)
+                complete = all(str(record.get(f"consol_{i}", "")).isdigit()
+                               and len(str(record.get(f"consol_{i}", ""))) == 4
+                               for i in range(1, 11))
+                if complete and (current is None or record.get("_source") == "official"):
+                    official_by_date[draw_date] = record
         time.sleep(DELAY_SECONDS)
 
     # Work on a copy. Do not write anything if any target date is unresolved.
