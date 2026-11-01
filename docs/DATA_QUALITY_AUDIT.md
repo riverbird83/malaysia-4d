@@ -64,3 +64,31 @@ A model score is a ranking score, not a probability. Only show a probability if 
 ## Audit tooling
 
 `scripts/validate_data.py` is a read-only first-pass validator. It reports structural errors and recoverable formatting issues without changing source CSVs. It is a guardrail, not an official-source verification or a complete data reconciliation system.
+
+
+## Normalized dataset copies created (2026-11-01)
+
+To avoid destructive edits, canonicalized copies were written under `data/normalized/`. The original `data/*.csv` files remain unchanged.
+
+| Operator | Rows | Numeric cells checked | Non-4-digit values after normalization | Blank number cells |
+|---|---:|---:|---:|---:|
+| Magnum | 6,835 | 157,205 | 0 | 0 |
+| Sport Toto | 5,689 | 130,847 | 0 | 31,300 |
+| Da Ma Cai | 3,664 | 84,272 | 0 | 0 |
+
+All non-empty winning-number cells in the normalized copies are now exactly four digits. Recoverable values were zero-padded; Sport Toto decimal artifacts were converted to four-digit strings. No missing values were invented.
+
+Files:
+- `data/normalized/magnum_draws.csv`
+- `data/normalized/sportstoto_draws.csv`
+- `data/normalized/damacai_draws.csv`
+
+### Remaining blockers before model training
+
+1. Reconcile Sport Toto's 31,300 blank consolation cells against official historical publications. The current data cannot tell us which blanks are legitimate historical omissions.
+2. Verify every historical draw against its operator source (or a clearly labelled secondary source) and record provenance.
+3. Investigate repeated numbers within the same draw. The current audit flags examples for source checking; it does not automatically delete them because a repeated result may be a genuine published record or a parser/data issue.
+4. Repair the scrapers and scheduled workflow so that failed or partial scrapes cannot silently publish a new dashboard date.
+5. Only after the above, create a canonical model-ready dataset and freeze dated snapshots for walk-forward backtesting.
+
+**Important:** The normalized copies fix representation, not factual correctness. They are not yet certified official datasets and must not be treated as fully verified training data.
