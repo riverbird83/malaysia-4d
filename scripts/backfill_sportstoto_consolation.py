@@ -1,12 +1,5 @@
 #!/usr/bin/env python3
-"""Recover missing Sport Toto Consolation results for 2006-01-01..2011-06-10.
-
-Reads the normalized source, never overwrites populated Consolation cells, and
-writes a candidate CSV only when every targeted row is complete. Sources:
-1) Sport Toto monthly official archive
-2) check4d exact-date fallback
-3) 4D2U exact draw-id archive (draw sequence from the source CSV)
-"""
+"""Recover missing Sport Toto Consolation results for 2006-01-01..2011-06-10."""
 from __future__ import annotations
 
 import csv
@@ -45,31 +38,26 @@ def complete_consol(record: dict | None) -> bool:
     )
 
 
-def parse_4d2u(draw_seq: int, year: int, expected_date: str) -> dict | None:
-    """Fetch one 4D2U result by Sports Toto draw ID and validate date + draw ID."""
-    draw_id = f"{int(draw_seq)}/{int(year) % 100:02d}"
-    url = (
-        "https://www.4d2u.com/result.php?drawid="
-        + quote(draw_id, safe="")
-        + "&lang=E&s=&source=T"
-    )
-    try:
-        response = session.get(url, timeout=20)
-        if response.status_code != 200 or len(response.text) < 1500:
-            return None
-    except requests.RequestException:
-        return None
-
-    soup = BeautifulSoup(response.text, "html.parser")
+def parse_4d2u_html(html: str, draw_seq: int, year: int, expected_date: str) -> dict | None:
+    """Parse a 4D2U result page; supports its actual 'Date 07/06/2008' format."""
+    soup = BeautifulSoup(html, "html.parser")
     page_text = soup.get_text(" ", strip=True)
+    page_text = re.sub(r"\s+", " ", page_text).strip()
+
     if not re.search(r"Sports\s*Toto\s*4D|SportsToto\s*4D", page_text, re.I):
         return None
 
-    id_match = re.search(r"DrawID\s*:?\s*(\d+\s*/\s*\d{2})", page_text, re.I)
-    if not id_match or re.sub(r"\s+", "", id_match.group(1)) != draw_id:
+    expected_draw_id = f"{int(draw_seq)}/{int(year) % 100:02d}"
+    id_match = re.search(r"\bDrawID\s*:?\s*(\d+\s*/\s*\d{2})\b", page_text, re.I)
+    if not id_match or re.sub(r"\s+", "", id_match.group(1)) != expected_draw_id:
         return None
 
-    date_match = re.search(r"Date\s*:?\s*(\d{1,2})/(\d{1,2})/(\d{4})", page_text, re.I)
+    # 4D2U labels this as 'Date 07/06/2008 (Sat)' — no colon after Date.
+    date_match = re.search(
+        r"\bDate\s*:?\s*(\d{1,2})/(\d{1,2})/(\d{4})\b",
+        page_text,
+        re.I,
+    )
     if not date_match:
         return None
     actual_date = (
@@ -79,7 +67,7 @@ def parse_4d2u(draw_seq: int, year: int, expected_date: str) -> dict | None:
         return None
 
     section = re.search(
-        r"Consolation\s+Prize(.*?)(?:Image\s*:?\s*Toto|Toto\s+6/\d+|Jackpot|Permutation)",
+        r"\bConsolation\s+Prize\b(.*?)(?=\bImage\s*:?\s*Toto\b|\bToto\s+6/\d+|\bJackpot\b|\bPermutation\b|$)",
         page_text,
         re.I | re.S,
     )
@@ -98,6 +86,41 @@ def parse_4d2u(draw_seq: int, year: int, expected_date: str) -> dict | None:
     }
     for index, value in enumerate(values, 1):
         record[f"consol_{index}"] = value
+    return record
+
+
+def parse_4d2u(draw_seq: int, year: int, expected_date: str) -> dict | None:
+    """Fetch one 4D2U result by Sports Toto Draw ID and validate date + draw ID."""
+    draw_id = f"{int(draw_seq)}/{int(year) % 100:02d}"
+    url = (
+        "https://4d2u.com.my/result.php?drawid="
+        + quote(draw_id, safe="")
+        + "&lang=E&s=&source=T"
+    )
+    try:
+        response = session.get(url, timeout=20)
+        if response.status_code != 200 or len(response.text) < 1000:
+            print(f"[4D2U HTTP] {expected_date} draw={draw_id} status={response.status_code} bytes={len(response.text)}")
+            return None
+    except requests.RequestException as exc:
+        print(f"[4D2U HTTP] {expected_date} draw={draw_id} request_error={exc}")
+        return None
+
+    record = parse_4d2u_html(response.text, draw_seq, year, expected_date)
+    if not record:
+        soup = BeautifulSoup(response.text, "html.parser")
+        text = re.sub(r"\s+", " ", soup.get_text(" ", strip=True))
+        if "Sports" not in text and "Toto" not in text:
+            reason = "wrong_or_blocked_page"
+        elif not re.search(r"\bDrawID\s*:?\s*\d+\s*/\s*\d{2}", text, re.I):
+            reason = "draw_id_label_not_found"
+        elif not re.search(r"\bDate\s*:?\s*\d{1,2}/\d{1,2}/\d{4}", text, re.I):
+            reason = "date_label_not_found"
+        elif not re.search(r"\bConsolation\s+Prize\b", text, re.I):
+            reason = "consolation_section_not_found"
+        else:
+            reason = "date_draw_id_or_ten_number_validation_failed"
+        print(f"[4D2U PARSE] {expected_date} draw={draw_id} reason={reason}")
     return record
 
 
@@ -153,7 +176,7 @@ def main() -> int:
 
     print(f"[PASS 2] Check4D cumulative recovery: {len(recovered)}/{len(target_dates)} dates.")
 
-    # Pass 3: 4D2U archive, using each row's exact draw sequence.
+    # Pass 3: exact 4D2U archive lookup by the known Sports Toto draw sequence.
     for row in targets.itertuples(index=False):
         if row.date in recovered:
             continue
@@ -213,7 +236,6 @@ def main() -> int:
             print(f"  {draw_date}")
         return 2
 
-    # Final integrity check: all target rows must contain ten four-digit values.
     final_missing = updated.loc[target_mask, CONSOL_FIELDS].eq("").any(axis=1)
     if final_missing.any():
         print(f"BACKFILL NOT WRITTEN: final integrity check found {int(final_missing.sum())} incomplete rows.")
