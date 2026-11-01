@@ -31,7 +31,6 @@ jobs:
 
       - name: Update Sport Toto
         run: python scraper_sportstoto.py --update
-        continue-on-error: true
 
       - name: Update Magnum 4D
         run: python scraper_magnum.py --update
@@ -40,6 +39,9 @@ jobs:
       - name: Update Da Ma Cai
         run: python scraper_damacai.py --update
         continue-on-error: true
+
+      - name: Validate all datasets before publishing
+        run: python scripts/validate_data.py
 
       - name: Sync data → docs/data (for GitHub Pages)
         run: cp data/*.csv docs/data/
