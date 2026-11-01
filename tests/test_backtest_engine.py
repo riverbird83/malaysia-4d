@@ -23,9 +23,9 @@ class BacktestEngineTests(unittest.TestCase):
 
         run_backtest(rows, sample_every=1, random_trials=0, ranker=fake_ranker)
         target_day_two = [item for item in observed if item[0] == date(2025, 1, 2)]
-        self.assertEqual(len(target_day_two), 2)
-        self.assertTrue(all(len(operators) == 1 and operators == ["A"]
-                            for _, operators in target_day_two))
+        # One prediction is shared by both operators on the same target date.
+        self.assertEqual(len(target_day_two), 1)
+        self.assertEqual(target_day_two[0][1], ["A"])
 
     def test_result_counts_and_random_baseline_are_reported(self):
         rows = [
