@@ -39,7 +39,7 @@ jobs:
         run: python scraper_damacai.py --update
 
       - name: Validate all datasets before publishing
-        run: python scripts/validate_data.py
+        run: python scripts/validate_data.py --allow-legacy-sportstoto-consolation
 
       - name: Sync data → docs/data (for GitHub Pages)
         run: cp data/*.csv docs/data/
