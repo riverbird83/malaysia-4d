@@ -41,12 +41,18 @@ def run_backtest(rows, *, sample_every=30, max_draws=None, random_trials=1000,
     operator_stats = defaultdict(lambda: {"draws": 0, "hits": 0})
     total_random = 0
 
+    # Compute a single prediction per date; all operators on that date share
+    # the same strictly-prior history and must not leak same-day outcomes.
+    predictions_by_date = {}
+    for target_date in sorted({target["date"] for target in targets}):
+        history = [row for row in ordered if row["date"] < target_date]
+        predictions_by_date[target_date] = [
+            item["number"] for item in ranker(history, as_of=target_date, limit=3)
+        ]
+
     for target in targets:
         target_date = target["date"]
-        # Strictly earlier dates only: no same-day cross-operator leakage.
-        history = [row for row in ordered if row["date"] < target_date]
-        picks = ranker(history, as_of=target_date, limit=3)
-        predicted = [item["number"] for item in picks]
+        predicted = predictions_by_date[target_date]
         actual = [target.get("prizes", [])[i] for i in range(3)]
         actual_set = set(actual)
         hit = bool(set(predicted) & actual_set)
