@@ -135,6 +135,7 @@ def audit_file(operator: str, path: Path) -> dict:
         or bool(report["duplicate_dates"])
         or bool(report["missing_main_prize_rows"])
         or report["number_format_counts"]["invalid"] > 0
+        or any(report["missing_numbers_by_field"].values())
     )
     report["status"] = "FAIL" if critical else (
         "PASS_WITH_NORMALIZATION" if (
@@ -168,6 +169,8 @@ def main() -> int:
             print(f"  missing fields: {item['missing_numbers_by_field']}")
             if item["duplicate_draw_seq_count"]:
                 print(f"  advisory: {item['duplicate_draw_seq_count']} repeated draw_seq values")
+            if item["duplicate_numbers_within_draw"]:
+                print("  advisory: repeated winning numbers within a draw are preserved and are not errors")
     return 1 if any(item["status"] == "FAIL" for item in reports) else 0
 
 
