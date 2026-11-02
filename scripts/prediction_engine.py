@@ -41,7 +41,7 @@ START_DATES = {
     "magnum": date(2006, 1, 1),
     "sportstoto": date(2006, 1, 1),
     "damacai": date(2006, 1, 1),
-    "haolong": date(2017, 1, 1),
+    "haolong": date(2016, 1, 1),
 }
 
 
