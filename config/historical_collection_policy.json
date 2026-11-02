@@ -36,7 +36,8 @@
     "independent_operator_datasets": true,
     "independent_release": true,
     "rule": "Do not block a platform release because another platform is incomplete. Release a platform or a clearly labeled date-range tranche when its own validation gates pass.",
-    "tranche_policy": "Publish validated yearly or monthly tranches with explicit coverage and unresolved-date counts; do not label a partial tranche as a complete historical database."
+    "tranche_policy": "Publish validated yearly or monthly tranches with explicit coverage and unresolved-date counts; do not label a partial tranche as a complete historical database.",
+    "auxiliary_platform_first": "Magnum is the first auxiliary development candidate after/alongside Grand Dragon because its historical archive has the strongest disclosed cross-check coverage. Sports Toto and Da Ma Cai continue independently; do not wait for one another."
   },
   "source_policy": {
     "accepted_source_types": [
@@ -87,5 +88,75 @@
     "provenance": "Every imported row must retain source lineage and evidence reference in an audit/staging record.",
     "normalization": "Canonical output must contain prize_1..3, special_1..10, consolation_1..10 and must be independently readable by that operator's model.",
     "release": "A platform may be developed/released independently once its declared tranche passes structural, provenance, duplicate, conflict, and model-read tests. Full-history completion requires all dates in its declared historical scope to be accounted for."
+  },
+  "source_coverage_evidence": {
+    "grand_dragon": [
+      {
+        "source": "4D Live Today",
+        "url": "https://4dlivetoday.com/en/sources",
+        "evidence": "Lists Grand Dragon on-record since 2020-04-11; draw-night source gdlotto.com; 101 draws since 2021 checked against the operator archive; remaining older records mainly check4d.org only.",
+        "assessment": "High-value archive/API candidate; not all years are independently corroborated."
+      },
+      {
+        "source": "4D Results Now",
+        "url": "https://4dresultsnow.com/data-sources",
+        "evidence": "Discloses Grand Dragon uses trusted-community 4DMoon feed; its Verified label means its own checks passed against that approved feed.",
+        "assessment": "Useful secondary source, but do not count as independent of 4DMoon lineage."
+      },
+      {
+        "source": "Keputusan4D",
+        "url": "https://keputusan4d.com/4d-operators/grand-dragon/",
+        "evidence": "Claims daily draw archive and about 853 past draws, with all 23 prize positions.",
+        "assessment": "Useful full-tier archive candidate; must measure exact date coverage and compare numbers."
+      },
+      {
+        "source": "4D Malaya",
+        "url": "https://4dmalaya.com/en/dragon-4d/",
+        "evidence": "Lists 35 draws from 2026-09-25 to 2026-11-01, with top-three prizes and draw numbers.",
+        "assessment": "Recent top-prize cross-check only unless detail pages expose all 23 numbers."
+      },
+      {
+        "source": "Hoseh4D",
+        "url": "https://hoseh4d.com/results/grand-dragon-4d/2026",
+        "evidence": "Lists 122 Grand Dragon 4D draws from 2026-07-01 to 2026-10-30 with draw IDs and top-three numbers.",
+        "assessment": "Recent date/Draw ID cross-check; inspect detail pages for full tiers."
+      }
+    ],
+    "magnum": [
+      {
+        "source": "4D Live Today",
+        "url": "https://4dlivetoday.com/en/sources",
+        "evidence": "Reports Magnum history since 1985 and says all 6,817 draws in its archive agree between Magnum official archive and check4d.org as of 2026-10-02.",
+        "assessment": "Strongest current auxiliary-platform candidate for the 2006-present target; independently corroborated per provider disclosure."
+      },
+      {
+        "source": "LotteryMalaysia",
+        "url": "https://www.lotterymalaysia.com/zh/past-results/",
+        "evidence": "Publishes all 23 prize fields and exposes year/month archive navigation back to 1985; discloses upstream data from 4dlivetoday.com.",
+        "assessment": "Convenient manual/source mirror; same lineage as 4D Live Today, not independent."
+      }
+    ],
+    "sportstoto": [
+      {
+        "source": "4D Live Today",
+        "url": "https://4dlivetoday.com/en/sources",
+        "evidence": "Reports older Sports Toto records from check4d.org and 4dmoon archives agreeing; explicitly identifies missing periods in 2008 and 2009 (49 and 84 draws on record versus about 157 in a normal year).",
+        "assessment": "Strong source for backfill, but known historical gaps must remain explicit."
+      }
+    ],
+    "damacai": [
+      {
+        "source": "4D Live Today",
+        "url": "https://4dlivetoday.com/en/sources",
+        "evidence": "Reports 414 Da Ma Cai draws since 2005 checked against the official archive; remaining older records are mainly from check4d.org only.",
+        "assessment": "Useful broad archive; older rows have weaker corroboration than Magnum."
+      },
+      {
+        "source": "LotteryMalaysia",
+        "url": "https://www.lotterymalaysia.com/zh/past-results/",
+        "evidence": "Publishes full 23-number result rows and year/month archive navigation; discloses upstream data from 4dlivetoday.com.",
+        "assessment": "Convenient mirror; same lineage as 4D Live Today."
+      }
+    ]
   }
 }
