@@ -2,6 +2,13 @@ name: Grand Dragon multi-source archive audit
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - data-quality-foundation
+    paths:
+      - "config/grand_dragon_sources.json"
+      - "scripts/audit_grand_dragon_sources.py"
+      - ".github/workflows/grand-dragon-source-audit.yml"
 
 permissions:
   contents: write
@@ -21,6 +28,7 @@ jobs:
       - name: Check candidate archives and save snapshots
         run: python scripts/audit_grand_dragon_sources.py
       - name: Commit source audit
+        if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
