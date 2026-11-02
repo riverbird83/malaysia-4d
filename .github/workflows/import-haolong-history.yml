@@ -20,7 +20,7 @@ on:
       start_date:
         description: "Historical backfill start date (default 2016-01-01)"
         required: false
-        default: "2017-01-01"
+        default: "2016-01-01"
         type: string
       end_date:
         description: "Backfill end date (blank means yesterday UTC)"
@@ -83,7 +83,7 @@ jobs:
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             START_DATE="${{ inputs.start_date }}"
             END_DATE="${{ inputs.end_date }}"
-            if [ -z "$START_DATE" ]; then START_DATE="2017-01-01"; fi
+            if [ -z "$START_DATE" ]; then START_DATE="2016-01-01"; fi
             if [ -z "$END_DATE" ]; then END_DATE=$(date -u -d "yesterday" +%F); fi
           else
             END_DATE=$(date -u -d "yesterday" +%F)
@@ -106,7 +106,7 @@ jobs:
       - name: Validate Haolong data and print coverage report
         run: |
           python scripts/validate_haolong.py \
-            --from 2017-01-01 \
+            --from 2016-01-01 \
             --to "${{ steps.range.outputs.end }}"
 
       - name: Commit Haolong raw, audit, and normalized data
