@@ -219,6 +219,20 @@
       "claimed_coverage": "Number-history page lists 7503 as Grand Dragon first prize on 2021-12-17; other historical hits are indexed by operator, date and prize",
       "lineage": "unknown",
       "notes": "Use only for individual-number/date/prize corroboration. It is not a full-draw source and cannot reconstruct the remaining 22 numbers."
+    },
+    {
+      "id": "4ds_asia",
+      "url": "https://4ds.asia/",
+      "role": "recent_full_draw_cross_check",
+      "lineage": "unknown",
+      "notes": "Full 2026-11-02 Grand Dragon 3+10+10 result observed; historical depth not established; source-lineage independence from other mirrors is unproven."
+    },
+    {
+      "id": "4dresult_me",
+      "url": "https://4dresult.me/past_result/?d=2010-12-19",
+      "role": "recent_full_draw_cross_check",
+      "lineage": "unknown",
+      "notes": "Full 2026-11-02 Grand Dragon 3+10+10 result observed; query URL is the site's date-results page; historical depth and upstream lineage are unproven."
     }
   ],
   "validation_policy": {
