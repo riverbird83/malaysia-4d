@@ -207,9 +207,9 @@
       "url": "https://4dgpt.com/en/dragon-4d/2026-04-23",
       "role": "historical_date_archive",
       "priority": 1,
-      "claimed_coverage": "Date-specific Grand Dragon historical pages found for 2023-09-06, 2023-11-16, 2024-08-31, 2024-09-30 and 2026-04-23; site labels some records as official draw data",
+      "claimed_coverage": "At least one date-specific historical record exists from 2021-12-17, with additional pages in 2022-2026; continuous day-by-day coverage and earliest archive depth are not established",
       "lineage": "claims_official",
-      "notes": "Third-party archive claims official draw data and names gdlotto.com as the operator site. Treat the lineage as a claim until independently verified."
+      "notes": "Third-party archive claims official draw data and names gdlotto.com as the operator site. Specific pages have been found for 2021-12-17, 2022-05-17, 2022-09-17 and multiple dates in 2023-2026. Treat the official-lineage statement as a claim until independently verified; use date-by-date checks."
     }
   ],
   "validation_policy": {
