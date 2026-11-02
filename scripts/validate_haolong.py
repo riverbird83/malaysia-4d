@@ -33,7 +33,8 @@ def validate(start: date | None = None, end: date | None = None) -> dict:
     normalized, normalized_fields = read_csv(NORMALIZED)
     audit_rows, audit_fields = read_csv(AUDIT)
     dates = [row.get("date", "") for row in raw]
-    duplicate_dates = sorted(d for d, count in Counter(dates).items() if count > 1)
+    missing_date_rows = [index + 2 for index, row in enumerate(raw) if not row.get("date", "")]
+    duplicate_dates = sorted(d for d, count in Counter(d for d in dates if d).items() if count > 1)
     valid_dates = sorted(d for d in dates if d)
     earliest = valid_dates[0] if valid_dates else None
     latest = valid_dates[-1] if valid_dates else None
@@ -88,10 +89,22 @@ def validate(start: date | None = None, end: date | None = None) -> dict:
         d for d, count in Counter(audit_dates).items() if count > 1
     )
     audit_by_date = {row.get("date", ""): row for row in audit_rows if row.get("date")}
-    if start is None and valid_dates:
-        start = date.fromisoformat(earliest)
-    if end is None and valid_dates:
-        end = date.fromisoformat(latest)
+    policy_path = ROOT / "config" / "historical_collection_policy.json"
+    policy_start = "2016-01-01"
+    if policy_path.exists():
+        try:
+            policy = json.loads(policy_path.read_text(encoding="utf-8"))
+            policy_start = policy["historical_targets"]["grand_dragon"]["start_date"]
+        except (KeyError, TypeError, json.JSONDecodeError):
+            pass
+    if start is None:
+        start = date.fromisoformat(policy_start)
+    if end is None:
+        audited_dates = [date.fromisoformat(d) for d in audit_dates]
+        if audited_dates:
+            end = max(audited_dates)
+        elif valid_dates:
+            end = date.fromisoformat(latest)
     expected_dates = []
     if start and end and end >= start:
         current = start
@@ -136,6 +149,7 @@ def validate(start: date | None = None, end: date | None = None) -> dict:
         "raw_rows": len(raw),
         "unique_raw_dates": len(set(valid_dates)),
         "duplicate_dates": duplicate_dates,
+        "missing_date_rows": missing_date_rows,
         "audit_duplicate_dates": audit_duplicate_dates,
         "earliest_date": earliest,
         "latest_date": latest,
@@ -184,8 +198,11 @@ def validate(start: date | None = None, end: date | None = None) -> dict:
     }
     report["strict_complete"] = (
         RAW.exists() and NORMALIZED.exists() and AUDIT.exists()
-        and bool(raw) and not duplicate_dates and not invalid_main_rows
-        and not invalid_number_cells and normalized_matches_raw
+        and bool(raw) and not duplicate_dates and not missing_date_rows
+        and not invalid_main_rows and not invalid_number_cells
+        and special_complete_rows == len(raw)
+        and consolation_complete_rows == len(raw)
+        and not invalid_normalized_number_cells and normalized_matches_raw
         and not missing_raw_columns and not report["missing_audit_columns"]
         and not unaccounted_dates and not unresolved_dates
         and not missing_record_for_parsed
