@@ -1,0 +1,223 @@
+{
+  "data": {
+    "date": "2006-01-01",
+    "results": [
+      {
+        "operator": "cashsweep",
+        "operator_name": "Sarawak Cash Sweep",
+        "date": "2006-01-01",
+        "draw_no": "1769/06",
+        "first": "6988",
+        "second": "1750",
+        "third": "4573",
+        "special": [
+          "6023",
+          "6292",
+          "8184",
+          "2083",
+          "6051",
+          "5110",
+          "3122",
+          "8665",
+          "8362",
+          "2307"
+        ],
+        "consolation": [
+          "5817",
+          "8669",
+          "1079",
+          "0249",
+          "8632",
+          "3031",
+          "1591",
+          "5354",
+          "7110",
+          "6786"
+        ],
+        "status": "history",
+        "url": "https://4dlivetoday.com/en/results/2006-01-01"
+      },
+      {
+        "operator": "damacai",
+        "operator_name": "Da Ma Cai 1+3D",
+        "date": "2006-01-01",
+        "draw_no": "2555/06",
+        "first": "6755",
+        "second": "9058",
+        "third": "2194",
+        "special": [
+          "4116",
+          "5270",
+          "4625",
+          "9719",
+          "0921",
+          "3376",
+          "7210",
+          "3840",
+          "3143",
+          "6504"
+        ],
+        "consolation": [
+          "7078",
+          "4728",
+          "2977",
+          "6954",
+          "1147",
+          "0679",
+          "4471",
+          "5337",
+          "6299",
+          "1159"
+        ],
+        "status": "history",
+        "url": "https://4dlivetoday.com/en/results/2006-01-01"
+      },
+      {
+        "operator": "magnum",
+        "operator_name": "Magnum 4D",
+        "date": "2006-01-01",
+        "draw_no": "001/06",
+        "first": "0882",
+        "second": "0101",
+        "third": "1281",
+        "special": [
+          "7001",
+          "1834",
+          "0510",
+          "5891",
+          "0025",
+          "2697",
+          "6003",
+          "3382",
+          "0413",
+          "0429"
+        ],
+        "consolation": [
+          "1718",
+          "5318",
+          "9546",
+          "9069",
+          "4654",
+          "5790",
+          "1659",
+          "3937",
+          "4787",
+          "1354"
+        ],
+        "status": "checked",
+        "url": "https://4dlivetoday.com/en/results/2006-01-01"
+      },
+      {
+        "operator": "sabah88",
+        "operator_name": "Sabah 88 4D",
+        "date": "2006-01-01",
+        "draw_no": "674/06",
+        "first": "7088",
+        "second": "9768",
+        "third": "8672",
+        "special": [
+          "0193",
+          "0750",
+          "0896",
+          "2039",
+          "2095",
+          "4056",
+          "4502",
+          "5784",
+          "6610",
+          "7585"
+        ],
+        "consolation": [
+          "0206",
+          "1362",
+          "2971",
+          "4910",
+          "5353",
+          "6187",
+          "6229",
+          "7228",
+          "7919",
+          "9113"
+        ],
+        "status": "history",
+        "url": "https://4dlivetoday.com/en/results/2006-01-01"
+      },
+      {
+        "operator": "stc",
+        "operator_name": "Sandakan STC 4D",
+        "date": "2006-01-01",
+        "draw_no": "001/06",
+        "first": "9602",
+        "second": "6984",
+        "third": "0223",
+        "special": [
+          "6141",
+          "7790",
+          "3770",
+          "2351",
+          "3241",
+          "6223",
+          "6690",
+          "5042",
+          "5928",
+          "9524"
+        ],
+        "consolation": [
+          "9958",
+          "6832",
+          "1524",
+          "1808",
+          "8584",
+          "3213",
+          "1477",
+          "8673",
+          "8763",
+          "0072"
+        ],
+        "status": "history",
+        "url": "https://4dlivetoday.com/en/results/2006-01-01"
+      },
+      {
+        "operator": "toto",
+        "operator_name": "Sports Toto 4D",
+        "date": "2006-01-01",
+        "draw_no": "2608/06",
+        "first": "0841",
+        "second": "6049",
+        "third": "7235",
+        "special": [
+          "2529",
+          "5380",
+          "4905",
+          "1886",
+          "6022",
+          "1398",
+          "2071",
+          "7019",
+          "3985",
+          "9903"
+        ],
+        "consolation": [
+          "0667",
+          "2940",
+          "3926",
+          "0149",
+          "7086",
+          "9058",
+          "2535",
+          "0608",
+          "8930",
+          "3644"
+        ],
+        "status": "checked",
+        "url": "https://4dlivetoday.com/en/results/2006-01-01"
+      }
+    ]
+  },
+  "source": "4dlivetoday.com",
+  "license": "CC BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "attribution": "Results from 4dlivetoday.com (https://4dlivetoday.com), compiled from each operator's official site.",
+  "generated_at": "2026-11-02T15:50:18.246Z",
+  "url": "https://4dlivetoday.com/en/results/2006-01-01"
+}

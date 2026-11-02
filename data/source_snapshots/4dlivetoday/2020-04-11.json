@@ -1,0 +1,48 @@
+{
+  "data": {
+    "date": "2020-04-11",
+    "results": [
+      {
+        "operator": "gd",
+        "operator_name": "Grand Dragon 4D",
+        "date": "2020-04-11",
+        "draw_no": "",
+        "first": "0950",
+        "second": "3313",
+        "third": "6529",
+        "special": [
+          "1334",
+          "5111",
+          "4064",
+          "4865",
+          "4172",
+          "3294",
+          "1234",
+          "8078",
+          "4333",
+          "7109"
+        ],
+        "consolation": [
+          "5216",
+          "8318",
+          "7309",
+          "5789",
+          "1730",
+          "7378",
+          "1740",
+          "4604",
+          "6401",
+          "0861"
+        ],
+        "status": "history",
+        "url": "https://4dlivetoday.com/en/results/2020-04-11"
+      }
+    ]
+  },
+  "source": "4dlivetoday.com",
+  "license": "CC BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "attribution": "Results from 4dlivetoday.com (https://4dlivetoday.com), compiled from each operator's official site.",
+  "generated_at": "2026-11-02T15:50:20.925Z",
+  "url": "https://4dlivetoday.com/en/results/2020-04-11"
+}
