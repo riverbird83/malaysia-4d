@@ -16,7 +16,13 @@ OPERATORS = {
     "magnum": "Magnum 4D",
     "sportstoto": "Sports Toto 4D",
     "damacai": "Da Ma Cai 1+3D",
-    "gd": "Grand Dragon 4D",
+    "grand_dragon": "Grand Dragon 4D",
+}
+API_TO_INTERNAL = {
+    "magnum": "magnum",
+    "toto": "sportstoto",
+    "damacai": "damacai",
+    "gd": "grand_dragon",
 }
 DEFAULT_DATES = [
     "2006-01-01",
@@ -72,8 +78,9 @@ def main() -> None:
             if not isinstance(results, list):
                 raise ValueError("API data.results is not a list")
             for item in results:
-                operator_id = item.get("operator", "")
-                if operator_id in OPERATORS:
+                api_operator_id = item.get("operator", "")
+                operator_id = API_TO_INTERNAL.get(api_operator_id)
+                if operator_id:
                     row_by_operator[operator_id] = item
             for operator_id, operator_name in OPERATORS.items():
                 item = row_by_operator.get(operator_id)
