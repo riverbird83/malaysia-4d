@@ -7,7 +7,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from scrape_haolong import FIELDS, parse_page
 
 
-class HaolongParserTests(unittest.TestCase):
+class HaolongParserTests(unittest.TestCase):\n    """Regression coverage for source row structure and fixed-width numbers."""
     def test_parse_main_prizes_and_preserve_15_special_slots(self):
         html = """
         <html><body><table>
