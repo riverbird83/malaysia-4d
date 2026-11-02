@@ -42,23 +42,35 @@
   "source_policy": {
     "accepted_source_types": [
       "official",
-      "third_party_archive",
-      "community_archive",
-      "manual_transcription"
+      "third_party",
+      "manual_transcribed"
     ],
     "official_source_required": false,
     "minimum_provenance_per_record": [
       "operator_id",
       "draw_date",
+      "source_url",
       "source_type",
       "source_name",
-      "source_url_or_evidence_ref",
-      "captured_at_utc",
-      "verification_status"
+      "verification_status",
+      "verification_notes"
     ],
     "lineage_rule": "Websites that mirror the same upstream feed count as one source lineage, not independent corroboration.",
     "conflict_rule": "Never silently overwrite. Preserve each candidate and resolve field-by-field; unresolved conflicts remain quarantined.",
-    "missing_data_rule": "Never invent or statistically fill winning numbers. Keep unknown dates/fields explicitly missing until evidence is found."
+    "missing_data_rule": "Never invent or statistically fill winning numbers. Keep unknown dates/fields explicitly missing until evidence is found.",
+    "timestamp_requirement": {
+      "at_least_one_of": [
+        "retrieved_at",
+        "transcribed_at"
+      ],
+      "retrieved_at_for": [
+        "official",
+        "third_party"
+      ],
+      "transcribed_at_for": [
+        "manual_transcribed"
+      ]
+    }
   },
   "manual_import": {
     "enabled": true,
@@ -73,13 +85,25 @@
     },
     "required_evidence": "A source URL, archived page, screenshot, scan, or other retrievable evidence reference must accompany each manually transcribed draw.",
     "verification_statuses": [
-      "candidate",
-      "single_source_checked",
+      "unverified",
       "corroborated",
       "conflict",
       "rejected"
     ],
-    "promotion_rule": "Only structurally valid, provenance-complete records with no unresolved conflict may be promoted to the operator's canonical CSV. Single-source records must remain visibly labeled as single-source checked."
+    "promotion_rule": "Only structurally valid, provenance-complete records with no unresolved conflict may be promoted to the operator's canonical CSV. Any record that cannot be independently cross-checked remains unverified and quarantined; do not infer missing numbers.",
+    "required_fields": [
+      "operator_id",
+      "draw_date",
+      "source_url",
+      "source_type",
+      "source_name",
+      "verification_status",
+      "verification_notes"
+    ],
+    "timestamp_requirement": [
+      "retrieved_at",
+      "transcribed_at"
+    ]
   },
   "validation_gates": {
     "structural": "All 23 winning numbers must be present and four digits; leading zeroes must be preserved.",
