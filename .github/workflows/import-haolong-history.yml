@@ -1,0 +1,105 @@
+name: Import Grand Dragon 4D History
+
+on:
+  push:
+    branches:
+      - data-quality-foundation
+    paths:
+      - "scripts/scrape_haolong.py"
+      - "scripts/validate_haolong.py"
+      - "tests/test_haolong_scraper.py"
+      - "scripts/normalize_data.py"
+      - ".github/workflows/import-haolong-history.yml"
+  schedule:
+    # Cambodia daily draw is around 7pm local; run after results should be posted.
+    - cron: "0 14 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: haolong-history-import
+  cancel-in-progress: false
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Checkout development branch
+        uses: actions/checkout@v4
+        with:
+          ref: data-quality-foundation
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install scraper dependencies
+        run: pip install requests beautifulsoup4
+
+      - name: Run Haolong parser tests
+        run: python -m unittest discover -s tests -p "test_haolong_scraper.py" -v
+
+      - name: Smoke-test historical source pages
+        run: |
+          set -e
+          for DRAW_DATE in 2023-08-11 2025-07-04 2026-08-14; do
+            python scripts/scrape_haolong.py \
+              --from "$DRAW_DATE" --to "$DRAW_DATE" \
+              --output /tmp/haolong-smoke.csv \
+              --audit /tmp/haolong-smoke-audit.csv \
+              --delay 0.2 --require-records 1
+          done
+          python - <<'PY'
+          import csv
+          with open("/tmp/haolong-smoke-audit.csv", newline="", encoding="utf-8") as f:
+              rows = {r["date"]: r for r in csv.DictReader(f)}
+          sample = rows["2025-07-04"]
+          assert int(sample["special_slots_observed"]) == 15, sample
+          assert int(sample["consolation_slots_observed"]) == 10, sample
+          print("Live source smoke test passed:", sample)
+          PY
+
+      - name: Resolve import range
+        id: range
+        run: |
+          END_DATE=$(date -u -d "yesterday" +%F)
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            START_DATE="$END_DATE"
+          else
+            START_DATE="2017-01-01"
+          fi
+          echo "start=$START_DATE" >> "$GITHUB_OUTPUT"
+          echo "end=$END_DATE" >> "$GITHUB_OUTPUT"
+          echo "Import range: $START_DATE to $END_DATE"
+
+      - name: Import historical or latest daily records
+        run: |
+          python scripts/scrape_haolong.py \
+            --from "${{ steps.range.outputs.start }}" \
+            --to "${{ steps.range.outputs.end }}" \
+            --delay 0.6 --resume --checkpoint-every 100
+
+      - name: Build normalized Haolong dataset
+        run: python scripts/normalize_data.py
+
+      - name: Validate Haolong data and print coverage report
+        run: |
+          python scripts/validate_haolong.py \
+            --from 2017-01-01 \
+            --to "${{ steps.range.outputs.end }}"
+
+      - name: Commit Haolong raw, audit, and normalized data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/haolong_draws.csv data/audit/haolong_coverage.csv data/normalized/haolong_draws.csv
+          if git diff --cached --quiet; then
+            echo "No Haolong data or audit changes to commit."
+          else
+            git commit -m "data: import Grand Dragon 4D history through ${{ steps.range.outputs.end }}"
+            git push origin data-quality-foundation
+          fi
