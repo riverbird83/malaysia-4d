@@ -11,12 +11,13 @@
 - Latest result page: https://live4dresult.net/lotto-4d/
 - Date archive pattern: https://live4dresult.net/past-results/YYYY-MM-DD/
 - Example verified historical pages: 2022-09-23, 2023-08-11, 2025-07-04, 2026-08-14, 2026-11-01.
-- These examples prove records exist on those dates; they do not prove uninterrupted coverage or the operator's founding date.
+- The first full crawl (2017-01-01 through 2026-11-01) parsed 891 unique dates from this source, 2022-04-21 through 2026-10-30. It returned `operator_not_found` for 2,701 calendar dates; these are unresolved source gaps, not verified non-draw days.
+- The crawl did not establish that this preferred source has complete daily coverage. It must not be used alone to define the full historical range.
 
 ## Prize schema
 - Main prizes: First, Second, Third (required for a model-training row).
-- Special section: up to 15 visible cells (3 rows x 5 columns on some dates); some cells are explicit `----` placeholders and must be stored as blank while preserving their slot positions.
-- Consolation section: up to 10 visible cells (2 rows x 5 columns on some dates); some historical pages may expose fewer cells. Preserve the observed count in the audit manifest.
+- Special section: 10 prize numbers displayed in a 15-cell layout (3 rows x 5 columns on some dates); explicit `----` placeholders and empty layout cells must remain blank while preserving their positions. Completeness is measured against 10 prize numbers, not 15 visual cells.
+- Consolation section: 10 prize numbers displayed in up to 10 cells (2 rows x 5 columns). Preserve missing cells and observed counts in the audit manifest.
 - Every 4D value is stored as a four-character string, including leading zeroes.
 - Draw sequence is blank unless the source publishes a verified draw number.
 
@@ -33,9 +34,10 @@
 - Do not call the historical range complete until every expected date is accounted for, source gaps are cross-checked, all conflicts are resolved, and the normalized file validates.
 
 ## Historical boundary
-- Verified examples exist in 2022, 2023, 2025, and 2026.
-- A prior source search found 2017 examples, but the oldest available date and founding year are still unverified.
-- Begin the first backfill at 2017-02-01 as a provisional crawl boundary. Keep every date's result status so earlier history can be tested separately and gaps are not hidden.
+- The current primary-source dataset begins on 2022-04-21, but this is not the operator's historical start.
+- Independent historical evidence exists at least as early as 2017-01-21 on `live4d.org/history/YYYY-MM-DD`.
+- The `4d2ulive.com/grand-dragon-4d-all` archive reaches at least 2020-06-16 (page 388) and shows daily consecutive records around that date.
+- The exact founding date and earliest recoverable historical draw remain unverified. Backfill 2017 onward from secondary archives, reconcile overlaps, and preserve source provenance.
 
 ## Model policy
 - Train and evaluate Haolong independently.
