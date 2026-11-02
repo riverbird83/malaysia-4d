@@ -95,7 +95,7 @@
         "source": "4D Live Today",
         "url": "https://4dlivetoday.com/en/sources",
         "evidence": "Lists Grand Dragon on-record since 2020-04-11; draw-night source gdlotto.com; 101 draws since 2021 checked against the operator archive; remaining older records mainly check4d.org only.",
-        "assessment": "High-value archive/API candidate; not all years are independently corroborated."
+        "assessment": "Its API archive was probed successfully from 2020-04-11 onward, but this is not the operator's proven inception date. A separate GD-filtered number-history source suggests a 2019 hit; 2016-2018 remains unresolved."
       },
       {
         "source": "4D Results Now",
@@ -148,7 +148,7 @@
       {
         "source": "GD4D number history",
         "url": "https://gd4d.co/en/4d-history/0950",
-        "evidence": "Number-history page shows Grand Dragon-labelled hits for 0950 including First Prize on 2020-04-11, and earlier 2016 hits belonging to other operators.",
+        "evidence": "Operator-filtered number history for 3313 shows Grand Dragon hits from 2020-03-03 onward. Its 9411 page has 2016 hits, but those rows are labelled as other operators (Magnum/Sandakan/Singapore), not Grand Dragon; operator identity must be read from the icon.",
         "assessment": "Can corroborate individual number/date/prize and operator identity only; must not mistake other operators' 2016 hits for Grand Dragon draws."
       },
       {
@@ -156,6 +156,12 @@
         "url": "https://mobile.fast4dking.com/v2/searchnumber.php?GD=on&n=3313",
         "evidence": "Grand Dragon-filtered number history lists prize category, draw ID and date for number 3313.",
         "assessment": "Useful Draw ID and individual-hit cross-check, not a full-draw source."
+      },
+      {
+        "source": "Fast4DKing GD-filtered number history",
+        "url": "https://mobile.fast4dking.com/v2/searchnumber.php?GD=on&n=3313",
+        "evidence": "The GD-filtered search result lists number 3313 as a Grand Dragon prize hit on 2019-01-21 (draw 766/2019), plus 2020 and later hits.",
+        "assessment": "2019 is an earlier-history candidate requiring a full-draw page or second source; do not promote this single-number hit as a full draw."
       }
     ],
     "magnum": [
