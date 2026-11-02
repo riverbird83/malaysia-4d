@@ -8,9 +8,11 @@ on:
       - "scripts/prediction_engine.py"
       - "scripts/backtest_engine.py"
       - "scripts/normalize_data.py"
+      - "scripts/scrape_haolong.py"
       - "tests/test_prediction_engine.py"
       - "tests/test_backtest_engine.py"
       - "tests/test_normalize_data.py"
+      - "tests/test_haolong_scraper.py"
   workflow_dispatch:
 
 permissions:
@@ -32,3 +34,4 @@ jobs:
       - name: Run normalization tests
         run: |
           python -m unittest discover -s tests -p "test_normalize_data.py" -v
+          python -m unittest discover -s tests -p "test_haolong_scraper.py" -v
