@@ -565,3 +565,25 @@ If you or someone you know has a gambling problem, contact the **National Counci
 ## License
 
 MIT — see [LICENSE](LICENSE).
+
+---
+
+## Grand Dragon 4D — expanded source collection (development branch)
+
+The Grand Dragon dataset uses the canonical operator key `grand_dragon`. The former `haolong` key is retained as a legacy alias during migration; existing data is not silently renamed or discarded.
+
+Candidate public result archives are registered in `config/grand_dragon_sources.json`. The registry includes 4D Results Now, Keputusan4D, 4D Lotto, 4D Malaya, Hoseh4D, Lucky4DNow, 4DLatestResult and My 4D Recorder. These are candidate sources, not assumed independent authorities. In particular, a site that republishes another site's feed must not count as independent corroboration.
+
+Run `python scripts/audit_grand_dragon_sources.py` to check source availability and save timestamped page snapshots plus SHA-256 audit metadata. This discovery audit does **not** import numbers into the draw database. Source-specific parsers must preserve the date, all prize positions, source URL, retrieval time and content hash before records can be merged.
+
+Grand Dragon completeness gate:
+- one record per verified draw date, with leading zeroes preserved;
+- First, Second and Third required;
+- exactly 10 Special and 10 Consolation values for a complete draw;
+- missing dates classified separately as confirmed no-draw, confirmed draw with missing archive, fetch failure, parser failure or unverified;
+- source lineage tracked so mirrored feeds are not mistaken for independent confirmation;
+- disagreements retained as conflicts until explicitly resolved;
+- normalized Grand Dragon output remains isolated from Magnum, Sports Toto and Da Ma Cai.
+
+The legacy `data/haolong_draws.csv` and `data/normalized/haolong_draws.csv` remain in place until the migration and independent normalization tests pass. Do not treat the current normalized file as independently normalized while its Git blob is identical to the raw file.
+
