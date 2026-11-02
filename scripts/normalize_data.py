@@ -11,6 +11,7 @@ SOURCES = {
     "magnum": ROOT / "data" / "magnum_draws.csv",
     "sportstoto": ROOT / "data" / "sportstoto_draws.csv",
     "damacai": ROOT / "data" / "damacai_draws.csv",
+    "haolong": ROOT / "data" / "haolong_draws.csv",
 }
 NUMBER_FIELD = re.compile(r"^(?:prize_[123]|special_\d+|consol_\d+)$")
 VALID_NUMBER = re.compile(r"^\d{1,4}(?:\.0+)?$")
@@ -64,6 +65,9 @@ def main():
     for key in SOURCES:
         source = args.source_dir / f"{key}_draws.csv"
         destination = args.output_dir / f"{key}_draws.csv"
+        if key == "haolong" and not source.exists():
+            print("haolong: skipped (raw dataset has not been collected yet)")
+            continue
         reports.append(normalize_file(source, destination))
     for report in reports:
         print(f"{report['destination']}: rows={report['rows']} "
