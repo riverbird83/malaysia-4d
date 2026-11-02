@@ -183,6 +183,33 @@
       "claimed_coverage": "Displays the 2026-11-02 Grand Dragon draw 3611/2026 with all 23 numbers; historical depth not established",
       "lineage": "unknown",
       "notes": "Recent full-tier cross-check candidate. No upstream lineage disclosure established; do not count as independent until lineage is confirmed."
+    },
+    {
+      "id": "gdlotto_official",
+      "url": "https://www.gdlotto.com/results/past/",
+      "role": "official_historical_results",
+      "priority": 0,
+      "claimed_coverage": "Official Grand Dragon Past Results endpoint; direct automated fetch returned HTTP 403 during inspection on 2026-11-02, so date coverage remains unverified",
+      "lineage": "official",
+      "notes": "Operator-owned source. Use browser-backed retrieval or manual transcription when direct automation is blocked. A 403 is not evidence that a draw did not occur."
+    },
+    {
+      "id": "live4d_org",
+      "url": "https://live4d.org/history/2017-06-08",
+      "role": "historical_date_archive",
+      "priority": 1,
+      "claimed_coverage": "A complete 23-number Grand Dragon result was found for 2017-06-08; additional date-specific pages were found in 2017 and 2019; full archive depth is not established",
+      "lineage": "unknown",
+      "notes": "Third-party archive. Upstream lineage is not disclosed; cross-check every transcribed draw before promotion."
+    },
+    {
+      "id": "4dgpt",
+      "url": "https://4dgpt.com/en/dragon-4d/2026-04-23",
+      "role": "historical_date_archive",
+      "priority": 1,
+      "claimed_coverage": "Date-specific Grand Dragon historical pages found for 2023-09-06, 2023-11-16, 2024-08-31, 2024-09-30 and 2026-04-23; site labels some records as official draw data",
+      "lineage": "claims_official",
+      "notes": "Third-party archive claims official draw data and names gdlotto.com as the operator site. Treat the lineage as a claim until independently verified."
     }
   ],
   "validation_policy": {
