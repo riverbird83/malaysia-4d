@@ -156,6 +156,33 @@
       "claimed_coverage": "Number-level Grand Dragon history with Draw IDs",
       "lineage": "unknown",
       "notes": "Useful for checking draw IDs and prize tiers for a specific number; not a full-draw source."
+    },
+    {
+      "id": "tiok4d",
+      "url": "https://tiok4d.com/results/grand-dragon-4d/2026/11/3611-2026",
+      "role": "date_specific_full_draw_archive",
+      "priority": 1,
+      "claimed_coverage": "Published full 23-number Grand Dragon result for draw 3611/2026 on 2026-11-02; historical depth not established",
+      "lineage": "unknown",
+      "notes": "The page labels the result Published and displays First/Second/Third plus 10 Special and 10 Consolation numbers. Upstream lineage is not disclosed. Treat as unverified until independently corroborated or checked against the operator feed."
+    },
+    {
+      "id": "4dnumber",
+      "url": "https://4dnumber.net/",
+      "role": "recent_full_draw_archive",
+      "priority": 2,
+      "claimed_coverage": "Displays the 2026-11-02 Grand Dragon draw 3611/2026 with all 23 numbers; historical depth not established",
+      "lineage": "unknown",
+      "notes": "Recent full-tier cross-check candidate. No upstream lineage disclosure established; do not count as independent until lineage is confirmed."
+    },
+    {
+      "id": "4dno",
+      "url": "https://4dno.org/keputusan-lotto",
+      "role": "recent_full_draw_archive",
+      "priority": 2,
+      "claimed_coverage": "Displays the 2026-11-02 Grand Dragon draw 3611/2026 with all 23 numbers; historical depth not established",
+      "lineage": "unknown",
+      "notes": "Recent full-tier cross-check candidate. No upstream lineage disclosure established; do not count as independent until lineage is confirmed."
     }
   ],
   "validation_policy": {
