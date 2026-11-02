@@ -102,6 +102,33 @@
       "claimed_coverage": "recent verified draws",
       "lineage": "references_4dmoon_per_site_statement",
       "notes": "Site identifies 4DMoon as trusted-community reference; not independent unless lineage is established."
+    },
+    {
+      "id": "check4d",
+      "url": "https://www.check4d.org/past-results/2020-09-09",
+      "role": "historical_archive",
+      "priority": 1,
+      "claimed_coverage": "Historical Cambodia 4D result pages evidenced from 2020; exact Grand Dragon date coverage to be measured",
+      "lineage": "used_by_4dlivetoday_for_older_gd_history_per_site_disclosure",
+      "notes": "Pages expose all 23 prize numbers. 4D Live Today says its older GD archive mainly comes from check4d.org, so these are the same lineage when compared with that source."
+    },
+    {
+      "id": "live4d2u",
+      "url": "https://www.live4d2u.net/past-results/2020-07-11",
+      "role": "historical_archive",
+      "priority": 2,
+      "claimed_coverage": "Grand Dragon 4D result pages evidenced in July 2020; exact date coverage to be measured",
+      "lineage": "unknown",
+      "notes": "Historical page exposes First/Second/Third, Special and Consolation; compare record-by-record before counting as independent."
+    },
+    {
+      "id": "4dcheck",
+      "url": "https://www.4dcheck.com/operators/granddragon",
+      "role": "recent_archive",
+      "priority": 2,
+      "claimed_coverage": "Current daily feed and recent Grand Dragon history",
+      "lineage": "unknown",
+      "notes": "Recent page shows all 23 prize numbers and daily schedule; test historical depth before using for older backfill."
     }
   ],
   "validation_policy": {
