@@ -37,7 +37,12 @@ ALIASES = {
     "gdllotto": "haolong",
 }
 PRIZE_FIELDS = ("prize_1", "prize_2", "prize_3")
-START_DATE = date(2006, 1, 1)
+START_DATES = {
+    "magnum": date(2006, 1, 1),
+    "sportstoto": date(2006, 1, 1),
+    "damacai": date(2006, 1, 1),
+    "haolong": date(2017, 1, 1),
+}
 
 
 def normalize_operator(operator: str) -> str:
@@ -66,7 +71,7 @@ def read_draws(operator: str, cutoff=None):
                 draw_date = date.fromisoformat(row["date"])
             except (KeyError, ValueError):
                 continue
-            if draw_date < START_DATE or (cutoff and draw_date >= cutoff):
+            if draw_date < START_DATES[slug] or (cutoff and draw_date >= cutoff):
                 continue
             prizes = [row.get(field, "").strip() for field in PRIZE_FIELDS]
             if not all(len(number) == 4 and number.isdigit() for number in prizes):
