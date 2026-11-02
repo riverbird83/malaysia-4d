@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "operator_id": "grand_dragon",
+  "display_name": "Grand Dragon 4D",
+  "legacy_ids": [
+    "haolong"
+  ],
+  "prize_schema": {
+    "top": 3,
+    "special": 10,
+    "consolation": 10,
+    "number_width": 4
+  },
+  "sources": [
+    {
+      "id": "4dresultsnow",
+      "url": "https://4dresultsnow.com/history?date=&month=all&page=1&provider=grand-dragon&year=all",
+      "role": "historical_archive",
+      "priority": 1,
+      "claimed_coverage": "2016-present",
+      "lineage": "unknown",
+      "notes": "Site describes records as Verified; coverage varies by provider/date. Verify independently."
+    },
+    {
+      "id": "keputusan4d",
+      "url": "https://keputusan4d.com/4d-operators/grand-dragon/",
+      "role": "historical_archive",
+      "priority": 1,
+      "claimed_coverage": "2024-07-02 to 2026-10-31 (site claim: 852 dates)",
+      "lineage": "unknown",
+      "notes": "Independent archive; claimed count is not treated as verified coverage."
+    },
+    {
+      "id": "4dlotto",
+      "url": "https://4dlotto.my/grand-dragon-4d",
+      "role": "recent_archive",
+      "priority": 2,
+      "claimed_coverage": "recent 30 draws",
+      "lineage": "aggregates_loto4d_per_site_statement",
+      "notes": "Site states its results are aggregated from loto4d.com; do not count as independent from that upstream."
+    },
+    {
+      "id": "4dlotto_results",
+      "url": "https://4dlotto.my/results/gd-lotto",
+      "role": "recent_archive",
+      "priority": 2,
+      "claimed_coverage": "recent 30 draws",
+      "lineage": "aggregates_loto4d_per_site_statement",
+      "notes": "Separate endpoint on same site; not an independent source."
+    },
+    {
+      "id": "4dmalaya",
+      "url": "https://4dmalaya.com/en/dragon-4d/",
+      "role": "recent_archive",
+      "priority": 2,
+      "claimed_coverage": "35 draws (site claim)",
+      "lineage": "unknown",
+      "notes": "Top three prizes visible; inspect detail pages for Special/Consolation."
+    },
+    {
+      "id": "hoseh4d",
+      "url": "https://hoseh4d.com/results/grand-dragon-4d/2026",
+      "role": "year_archive",
+      "priority": 2,
+      "claimed_coverage": "2026 archive; page snapshot reports 122 matching draws",
+      "lineage": "unknown",
+      "notes": "Page states snapshot coverage 2026-07-01 to 2026-10-30; confirm all prize tiers."
+    },
+    {
+      "id": "lucky4dnow",
+      "url": "https://lucky4dnow.com/",
+      "role": "recent_archive",
+      "priority": 3,
+      "claimed_coverage": "recent results feed",
+      "lineage": "unknown",
+      "notes": "Grand Dragon listed as GDLOTTO; verify source attribution and historical depth."
+    },
+    {
+      "id": "4dlatestresult",
+      "url": "https://www.4dlatestresult.com/results/",
+      "role": "recent_archive",
+      "priority": 3,
+      "claimed_coverage": "7 recent records (site claim)",
+      "lineage": "unknown",
+      "notes": "Useful cross-check only; not sufficient as primary archive."
+    },
+    {
+      "id": "my4drecorder",
+      "url": "https://4d.tshausdigital.com/results/grand-dragon-4d",
+      "role": "recent_archive",
+      "priority": 3,
+      "claimed_coverage": "recent verified draws",
+      "lineage": "references_4dmoon_per_site_statement",
+      "notes": "Site identifies 4DMoon as trusted-community reference; not independent unless lineage is established."
+    }
+  ],
+  "validation_policy": {
+    "merge_key": [
+      "operator_id",
+      "draw_date"
+    ],
+    "required_fields": [
+      "first",
+      "second",
+      "third"
+    ],
+    "full_prize_fields": [
+      "special_1..special_10",
+      "consolation_1..consolation_10"
+    ],
+    "source_independence": "Do not count mirrors or sites sharing an upstream feed as independent corroboration.",
+    "conflict_policy": "Never overwrite silently; preserve each source candidate and require resolution.",
+    "missing_date_policy": "Classify as confirmed_no_draw, confirmed_draw_missing_source, fetch_failed, parser_failed, or unverified.",
+    "model_gate": "Only normalized grand_dragon records may enter the Grand Dragon model; never mix with other operators."
+  }
+}
