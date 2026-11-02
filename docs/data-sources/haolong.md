@@ -1,36 +1,45 @@
 # Haolong (Grand Dragon) 4D source inventory
 
-Scope: 4D only. This operator must have its own raw dataset, normalized dataset, model, walk-forward backtest, and report. Never merge its training rows with Magnum, Sports Toto, or Da Ma Cai.
+## Scope
+- Operator: Grand Dragon 4D / GD Lotto / Haolong (豪龙).
+- This operator has its own raw dataset, normalized dataset, model, walk-forward backtest, and reports.
+- Never merge Haolong training rows with Magnum, Sports Toto, or Da Ma Cai.
+- Current phase: 4D only. Exclude 6D.
 
-## Candidate sources
+## Primary source
+- User's preferred result site: https://live4dresult.net/
+- Latest result page: https://live4dresult.net/lotto-4d/
+- Date archive pattern: https://live4dresult.net/past-results/YYYY-MM-DD/
+- Example verified historical pages: 2022-09-23, 2023-08-11, 2025-07-04, 2026-08-14, 2026-11-01.
+- These examples prove records exist on those dates; they do not prove uninterrupted coverage or the operator's founding date.
 
-- User's preferred source: https://live4dresult.net/
-- User-supplied historical archive candidate: https://live4dresult.net/grand-dragon-4d-all
-- Historical sample pages independently discovered: https://live4d.org/history/2017-02-09, https://live4d.org/history/2017-03-27, https://live4d.org/history/2017-06-06, https://live4d.org/history/2017-08-18
-- Recent cross-check candidate: https://keputusan4d.com/4d-operators/grand-dragon/
+## Prize schema
+- Main prizes: First, Second, Third (required for a model-training row).
+- Special section: up to 15 visible cells (3 rows x 5 columns on some dates); some cells are explicit `----` placeholders and must be stored as blank while preserving their slot positions.
+- Consolation section: up to 10 visible cells (2 rows x 5 columns on some dates); some historical pages may expose fewer cells. Preserve the observed count in the audit manifest.
+- Every 4D value is stored as a four-character string, including leading zeroes.
+- Draw sequence is blank unless the source publishes a verified draw number.
 
-## Confirmed evidence and limitations
+## Audit policy
+- Raw rows: `data/haolong_draws.csv`.
+- Normalized rows: `data/normalized/haolong_draws.csv`.
+- Date-level source audit: `data/audit/haolong_coverage.csv`.
+- Audit includes status, HTTP status, URL, retrieval time, content SHA-256, parser version, observed Special/Consolation slot counts, and notes.
+- A 404 is `page_not_found`, not automatically a non-draw day.
+- A loaded page without the operator is `operator_not_found`.
+- A page with the operator but missing main prizes is `parse_incomplete`.
+- Network/HTTP errors are `fetch_failed`.
+- A conflicting re-scrape never silently overwrites an existing record.
+- Do not call the historical range complete until every expected date is accounted for, source gaps are cross-checked, all conflicts are resolved, and the normalized file validates.
 
-Historical Grand Dragon 4D result pages exist for dates in February, March, June, and August 2017. This establishes that records are available by 2017, not that the operator began in 2017. A third-party archive reports 852 distinct dates from 2024-07-02 through 2026-10-31; this is a source claim and requires independent verification. No complete daily coverage claim is made yet.
+## Historical boundary
+- Verified examples exist in 2022, 2023, 2025, and 2026.
+- A prior source search found 2017 examples, but the oldest available date and founding year are still unverified.
+- Begin the first backfill at 2017-02-01 as a provisional crawl boundary. Keep every date's result status so earlier history can be tested separately and gaps are not hidden.
 
-## Data rules
-
-- Import 4D only: First, Second, Third, Special, Consolation.
-- Preserve numbers as four-character strings, including leading zeroes.
-- Treat `----` and blank cells as missing values, never as numbers.
-- Keep raw source HTML or a reproducible source snapshot plus source URL, retrieval timestamp, and parser version in an audit log.
-- Do not invent draw IDs or dates.
-- Detect duplicate dates and conflicting records. Do not silently overwrite conflicts.
-- A record with missing main prizes is excluded from model training and retained in the audit report.
-- Special and Consolation may be incomplete; preserve missing slots and completeness counts.
-
-## Next implementation sequence
-
-1. Probe the user-preferred site and its archive pagination; determine the oldest retrievable date and page structure.
-2. Build a date-level coverage manifest distinguishing verified draw, no record found, non-draw day, fetch failure, and conflicting source.
-3. Import all retrievable dates into `data/haolong_draws.csv` without changing the three existing operators' files.
-4. Normalize into `data/normalized/haolong_draws.csv` using the shared four-digit normalization rules.
-5. Cross-check a sample and all conflicts against a second archive.
-6. Only after coverage and data quality are measured, build the independent Haolong 4D baseline and walk-forward tests.
-
-Daily draw frequency gives more observations over calendar time; it does not establish higher predictability or guarantee returns.
+## Model policy
+- Train and evaluate Haolong independently.
+- Use chronological walk-forward evaluation with strictly prior dates only.
+- Compare model and ensemble Top-3 results with a random baseline.
+- Report First/Second/Third hit rates separately, with sample size and uncertainty.
+- More daily observations do not prove higher per-draw predictability. Ranking scores are not winning probabilities and do not guarantee returns.
