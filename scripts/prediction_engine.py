@@ -28,12 +28,13 @@ DISPLAY_NAMES = {
 ALIASES = {
     "magnum": "magnum",
     "sportstoto": "sportstoto",
+    "sporttoto": "sportstoto",
     "toto": "sportstoto",
     "damacai": "damacai",
     "haolong": "haolong",
     "granddragon": "haolong",
     "granddragonlotto": "haolong",
-    "gdl lotto": "haolong",
+    "gdllotto": "haolong",
 }
 PRIZE_FIELDS = ("prize_1", "prize_2", "prize_3")
 START_DATE = date(2006, 1, 1)
