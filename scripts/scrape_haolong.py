@@ -61,7 +61,7 @@ def make_session() -> requests.Session:
 
 
 def _tokenize_cell(value: str) -> list[str]:
-    value = (value or "").replace("\\xa0", " ").strip()
+    value = (value or "").replace("\xa0", " ").strip()
     if not value:
         return [""]
     raw_tokens = value.split("|") if "|" in value else value.split()
@@ -70,7 +70,7 @@ def _tokenize_cell(value: str) -> list[str]:
         token = token.strip()
         if not token or token == "----":
             result.append("")
-        elif re.fullmatch(r"\\d{4}", token):
+        elif re.fullmatch(r"\d{4}", token):
             result.append(token)
         else:
             continue
@@ -98,10 +98,10 @@ def _section_slots(soup: BeautifulSoup, start_label: str, stop_label: str,
                 row_values.extend(_tokenize_cell(cell.get_text(" ", strip=True)))
             # An empty cell is meaningful only on a row containing a visible
             # number or explicit placeholder. Ignore blank layout/ad rows.
-            if row_values and re.search(r"(?:\\d{4}|----)", row_text):
+            if row_values and re.search(r"(?:\d{4}|----)", row_text):
                 values.extend(row_values)
     else:
-        lines = soup.get_text("\\n", strip=False).splitlines()
+        lines = soup.get_text("\n", strip=False).splitlines()
         active = False
         for line in lines:
             if re.search(start_label, line, flags=re.I):
