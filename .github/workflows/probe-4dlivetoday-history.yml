@@ -1,0 +1,66 @@
+name: Probe 4D Live Today Historical API
+
+on:
+  workflow_dispatch:
+    inputs:
+      dates:
+        description: "Comma-separated ISO dates; blank uses the built-in historical sample"
+        required: false
+        type: string
+      delay:
+        description: "Delay between requests in seconds"
+        required: false
+        default: "0.5"
+        type: string
+  push:
+    branches:
+      - data-quality-foundation
+    paths:
+      - "scripts/probe_4dlivetoday_history.py"
+      - ".github/workflows/probe-4dlivetoday-history.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: 4dlivetoday-history-probe
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout development branch
+        uses: actions/checkout@v4
+        with:
+          ref: data-quality-foundation
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Probe historical dates for all operators
+        run: |
+          DATES="${{ inputs.dates }}"
+          if [ -z "$DATES" ]; then
+            python scripts/probe_4dlivetoday_history.py --delay "${{ inputs.delay || '0.5' }}"
+          else
+            python scripts/probe_4dlivetoday_history.py --dates "$DATES" --delay "${{ inputs.delay || '0.5' }}"
+          fi
+
+      - name: Commit API coverage audit and source snapshots
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/audit/4dlivetoday_probe.csv data/source_snapshots/4dlivetoday/
+          if git diff --cached --quiet; then
+            echo "No API probe changes to commit."
+          else
+            git commit -m "audit: probe 4D Live Today historical API coverage"
+            git push origin data-quality-foundation
+          fi
