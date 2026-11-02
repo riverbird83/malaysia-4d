@@ -28,6 +28,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Install scraper parser dependencies
+        run: pip install requests beautifulsoup4 urllib3
       - name: Run prediction and backtest tests
         run: |
           python -m unittest discover -s tests -p "test_*engine.py" -v
