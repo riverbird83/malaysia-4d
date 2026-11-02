@@ -16,6 +16,16 @@ on:
     # Cambodia daily draw is around 7pm local; run after results should be posted.
     - cron: "0 14 * * *"
   workflow_dispatch:
+    inputs:
+      start_date:
+        description: "Historical backfill start date (default 2016-01-01)"
+        required: false
+        default: "2016-01-01"
+        type: string
+      end_date:
+        description: "Backfill end date (blank means yesterday UTC)"
+        required: false
+        type: string
 
 permissions:
   contents: write
@@ -70,11 +80,14 @@ jobs:
       - name: Resolve import range
         id: range
         run: |
-          END_DATE=$(date -u -d "yesterday" +%F)
-          if [ "${{ github.event_name }}" = "schedule" ]; then
-            START_DATE="$END_DATE"
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            START_DATE="${{ inputs.start_date }}"
+            END_DATE="${{ inputs.end_date }}"
+            if [ -z "$START_DATE" ]; then START_DATE="2016-01-01"; fi
+            if [ -z "$END_DATE" ]; then END_DATE=$(date -u -d "yesterday" +%F); fi
           else
-            START_DATE="2016-01-01"
+            END_DATE=$(date -u -d "yesterday" +%F)
+            START_DATE="$END_DATE"
           fi
           echo "start=$START_DATE" >> "$GITHUB_OUTPUT"
           echo "end=$END_DATE" >> "$GITHUB_OUTPUT"
