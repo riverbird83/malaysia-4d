@@ -2,8 +2,6 @@ name: Grand Dragon multi-source archive audit
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "23 12 * * *"
 
 permissions:
   contents: write
