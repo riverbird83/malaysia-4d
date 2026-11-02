@@ -45,3 +45,26 @@
 - Compare model and ensemble Top-3 results with a random baseline.
 - Report First/Second/Third hit rates separately, with sample size and uncertainty.
 - More daily observations do not prove higher per-draw predictability. Ranking scores are not winning probabilities and do not guarantee returns.
+
+
+## Verified secondary archive evidence (snapshot: 2026-11-02)
+
+- `live4d.org/history/YYYY-MM-DD` has a Grand Dragon record at least as early as 2017-01-21. This is a confirmed archive sample, not a confirmed founding date.
+- `4d2ulive.com/grand-dragon-4d-all/page/388/` shows records for 2020-06-16 and 2020-06-17; page 379 shows consecutive records for 2020-08-04 through 2020-08-09.
+- Keputusan4D reports 852 distinct Grand Dragon dates from 2024-07-02 through 2026-10-31. The current primary-source CSV contains 469 records in that same date window, so 383 dates require reconciliation against secondary sources. Treat this as a coverage discrepancy until each date is matched; do not auto-label dates as non-draw days.
+
+## Current primary-source import snapshot
+
+- Raw and normalized files: 891 unique records, 2022-04-21 through 2026-10-30.
+- First/Second/Third: 891/891 rows complete (100%).
+- Special: every row contains 10 valid prize numbers in a 15-cell visual layout (891/891 draws complete).
+- Consolation: every row contains 10 valid prize numbers (891/891 draws complete).
+- Date audit: 3,592 calendar dates have audit rows; 891 are parsed and 2,701 are `operator_not_found`. There are zero confirmed non-draw days. These 2,701 dates remain unresolved, not cleared.
+- No duplicate raw dates or same-source conflicting records were found in this snapshot.
+- The strict completion gate remains false until source gaps are reconciled and all expected draw dates are accounted for.
+
+## Independent model boundary
+
+- Prediction CLI requires one explicit operator: `--operator magnum|sportstoto|damacai|haolong`.
+- Backtest rejects rows containing more than one operator.
+- Each operator's normalized file is loaded independently. Do not train a pooled cross-operator model.
