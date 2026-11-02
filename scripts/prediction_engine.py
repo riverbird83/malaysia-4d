@@ -1,7 +1,7 @@
-"""Transparent baseline ranking engine for Malaysia 4D.
+"""Operator-isolated 4D ranking engine.
 
-This module ranks all 0000-9999 combinations from historical First/Second/Third
-Prize observations. Scores are ranking scores, not calibrated probabilities.
+Exactly one operator dataset is loaded per prediction run. Scores are ranking
+scores, not calibrated probabilities.
 """
 from __future__ import annotations
 
@@ -14,39 +14,73 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DATASETS = {
-    "Magnum": ROOT / "data" / "normalized" / "magnum_draws.csv",
-    "Sport Toto": ROOT / "data" / "normalized" / "sportstoto_draws.csv",
-    "Da Ma Cai": ROOT / "data" / "normalized" / "damacai_draws.csv",
+    "magnum": ROOT / "data" / "normalized" / "magnum_draws.csv",
+    "sportstoto": ROOT / "data" / "normalized" / "sportstoto_draws.csv",
+    "damacai": ROOT / "data" / "normalized" / "damacai_draws.csv",
+    "haolong": ROOT / "data" / "normalized" / "haolong_draws.csv",
+}
+DISPLAY_NAMES = {
+    "magnum": "Magnum",
+    "sportstoto": "Sport Toto",
+    "damacai": "Da Ma Cai",
+    "haolong": "Haolong",
+}
+ALIASES = {
+    "magnum": "magnum",
+    "sportstoto": "sportstoto",
+    "toto": "sportstoto",
+    "damacai": "damacai",
+    "haolong": "haolong",
+    "granddragon": "haolong",
+    "granddragonlotto": "haolong",
+    "gdl lotto": "haolong",
 }
 PRIZE_FIELDS = ("prize_1", "prize_2", "prize_3")
 START_DATE = date(2006, 1, 1)
-WINDOW_WEIGHTS = ((3, 0.60), (10, 0.25), (20, 0.15))
 
 
-def read_draws(paths=None, cutoff=None):
-    """Read normalized draw rows; retain only valid 4-digit main prizes."""
-    paths = paths or DATASETS
+def normalize_operator(operator: str) -> str:
+    key = "".join(ch for ch in operator.lower() if ch.isalnum())
+    # Keep common aliases explicit and deterministic.
+    key = {
+        "sportstoto": "sportstoto",
+        "granddragon": "granddragon",
+        "granddragonlotto": "granddragonlotto",
+    }.get(key, key)
+    if key not in ALIASES:
+        raise ValueError(
+            f"Unknown operator {operator!r}; choose one of: {', '.join(DATASETS)}"
+        )
+    return ALIASES[key]
+
+
+def read_draws(operator: str, cutoff=None):
+    """Read one operator's normalized rows only; cross-operator pooling is forbidden."""
+    slug = normalize_operator(operator)
+    path = DATASETS[slug]
     rows = []
-    for operator, path in paths.items():
-        with Path(path).open(newline="", encoding="utf-8-sig") as handle:
-            for row in csv.DictReader(handle):
-                try:
-                    draw_date = date.fromisoformat(row["date"])
-                except (KeyError, ValueError):
-                    continue
-                if draw_date < START_DATE or (cutoff and draw_date >= cutoff):
-                    continue
-                prizes = [row.get(field, "").strip() for field in PRIZE_FIELDS]
-                if not all(len(n) == 4 and n.isdigit() for n in prizes):
-                    continue
-                rows.append({"operator": operator, "date": draw_date, "prizes": prizes})
-    return sorted(rows, key=lambda item: (item["date"], item["operator"]))
+    with Path(path).open(newline="", encoding="utf-8-sig") as handle:
+        for row in csv.DictReader(handle):
+            try:
+                draw_date = date.fromisoformat(row["date"])
+            except (KeyError, ValueError):
+                continue
+            if draw_date < START_DATE or (cutoff and draw_date >= cutoff):
+                continue
+            prizes = [row.get(field, "").strip() for field in PRIZE_FIELDS]
+            if not all(len(number) == 4 and number.isdigit() for number in prizes):
+                continue
+            rows.append({
+                "operator": DISPLAY_NAMES[slug],
+                "date": draw_date,
+                "prizes": prizes,
+            })
+    return sorted(rows, key=lambda item: item["date"])
 
 
 def _age_weight(draw_date, as_of):
     age_days = max(0, (as_of - draw_date).days)
     age_years = age_days / 365.2425
-    # Explicit non-overlapping bands: 0-3y, 4-10y, and 11-20y.
     if age_years < 3:
         return 0.60
     if age_years <= 10:
@@ -61,7 +95,6 @@ def rank_numbers(history, as_of=None, limit=3):
     if as_of is None:
         as_of = max((row["date"] for row in history), default=date.today()) + timedelta(days=1)
     position_counts = [Counter() for _ in range(4)]
-    total_weight = 0.0
     for row in history:
         if row["date"] >= as_of:
             continue
@@ -69,11 +102,9 @@ def rank_numbers(history, as_of=None, limit=3):
         if not weight:
             continue
         for number in row["prizes"]:
-            total_weight += weight
             for pos, digit in enumerate(number):
                 position_counts[pos][digit] += weight
 
-    # Laplace smoothing avoids zero-probability combinations.
     denominators = [sum(counts.values()) + 10.0 for counts in position_counts]
     ranked = []
     for value in range(10000):
@@ -91,13 +122,16 @@ def rank_numbers(history, as_of=None, limit=3):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Rank Malaysia 4D number combinations")
+    parser = argparse.ArgumentParser(description="Rank one Malaysia 4D operator")
+    parser.add_argument("--operator", required=True, choices=sorted(DATASETS),
+                        help="Select exactly one independent operator dataset")
     parser.add_argument("--as-of", help="Prediction date YYYY-MM-DD; only earlier draws are used")
     parser.add_argument("--top", type=int, default=3)
     args = parser.parse_args()
     as_of = date.fromisoformat(args.as_of) if args.as_of else None
-    history = read_draws(cutoff=as_of)
+    history = read_draws(args.operator, cutoff=as_of)
     results = rank_numbers(history, as_of=as_of, limit=args.top)
+    print(f"Operator: {DISPLAY_NAMES[args.operator]}")
     print(f"Historical draws used: {len(history)}")
     print("Ranking scores are not winning probabilities.")
     for item in results:
