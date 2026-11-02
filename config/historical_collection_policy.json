@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "effective_date": "2026-11-02",
+  "historical_targets": {
+    "magnum": {
+      "operator_id": "magnum",
+      "start_date": "2006-01-01",
+      "end_date": "latest_available"
+    },
+    "sportstoto": {
+      "operator_id": "sportstoto",
+      "start_date": "2006-01-01",
+      "end_date": "latest_available"
+    },
+    "damacai": {
+      "operator_id": "damacai",
+      "start_date": "2006-01-01",
+      "end_date": "latest_available"
+    },
+    "grand_dragon": {
+      "operator_id": "grand_dragon",
+      "legacy_ids": [
+        "haolong"
+      ],
+      "start_date": "2016-01-01",
+      "end_date": "latest_available"
+    }
+  },
+  "delivery_strategy": {
+    "priority_order": [
+      "grand_dragon",
+      "magnum",
+      "sportstoto",
+      "damacai"
+    ],
+    "independent_operator_datasets": true,
+    "independent_release": true,
+    "rule": "Do not block a platform release because another platform is incomplete. Release a platform or a clearly labeled date-range tranche when its own validation gates pass.",
+    "tranche_policy": "Publish validated yearly or monthly tranches with explicit coverage and unresolved-date counts; do not label a partial tranche as a complete historical database."
+  },
+  "source_policy": {
+    "accepted_source_types": [
+      "official",
+      "third_party_archive",
+      "community_archive",
+      "manual_transcription"
+    ],
+    "official_source_required": false,
+    "minimum_provenance_per_record": [
+      "operator_id",
+      "draw_date",
+      "source_type",
+      "source_name",
+      "source_url_or_evidence_ref",
+      "captured_at_utc",
+      "verification_status"
+    ],
+    "lineage_rule": "Websites that mirror the same upstream feed count as one source lineage, not independent corroboration.",
+    "conflict_rule": "Never silently overwrite. Preserve each candidate and resolve field-by-field; unresolved conflicts remain quarantined.",
+    "missing_data_rule": "Never invent or statistically fill winning numbers. Keep unknown dates/fields explicitly missing until evidence is found."
+  },
+  "manual_import": {
+    "enabled": true,
+    "staging_path": "data/manual_import/",
+    "canonical_number_width": 4,
+    "required_prize_fields": {
+      "first": 1,
+      "second": 1,
+      "third": 1,
+      "special": 10,
+      "consolation": 10
+    },
+    "required_evidence": "A source URL, archived page, screenshot, scan, or other retrievable evidence reference must accompany each manually transcribed draw.",
+    "verification_statuses": [
+      "candidate",
+      "single_source_checked",
+      "corroborated",
+      "conflict",
+      "rejected"
+    ],
+    "promotion_rule": "Only structurally valid, provenance-complete records with no unresolved conflict may be promoted to the operator's canonical CSV. Single-source records must remain visibly labeled as single-source checked."
+  },
+  "validation_gates": {
+    "structural": "All 23 winning numbers must be present and four digits; leading zeroes must be preserved.",
+    "date": "Draw date must fall within that operator's configured historical target. Do not assume every calendar day is a draw day; use operator-specific schedules and special-draw evidence.",
+    "duplicate": "Check operator_id + draw_date and, when available, draw_seq. Same-date candidates with differing numbers require conflict review.",
+    "provenance": "Every imported row must retain source lineage and evidence reference in an audit/staging record.",
+    "normalization": "Canonical output must contain prize_1..3, special_1..10, consolation_1..10 and must be independently readable by that operator's model.",
+    "release": "A platform may be developed/released independently once its declared tranche passes structural, provenance, duplicate, conflict, and model-read tests. Full-history completion requires all dates in its declared historical scope to be accounted for."
+  }
+}
