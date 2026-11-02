@@ -9,7 +9,7 @@ from collections import defaultdict
 from datetime import date
 from pathlib import Path
 
-from prediction_engine import DATASETS, DISPLAY_NAMES, START_DATE, rank_numbers, read_draws
+from prediction_engine import DATASETS, DISPLAY_NAMES, START_DATES, normalize_operator, rank_numbers, read_draws
 
 ROOT = Path(__file__).resolve().parents[1]
 PRIZE_FIELDS = ("prize_1", "prize_2", "prize_3")
@@ -22,11 +22,15 @@ def run_backtest(rows, *, sample_every=30, max_draws=None, random_trials=1000,
     if len(operators) > 1:
         raise ValueError(f"Mixed operator rows are forbidden: {sorted(operators)}")
     operator = next(iter(operators), None)
+    slug = normalize_operator(operator) if operator else None
+    start_date = START_DATES[slug] if slug else date.min
     ordered = sorted(
-        (row for row in rows if row["date"] >= START_DATE),
+        (row for row in rows if row["date"] >= start_date),
         key=lambda row: row["date"],
     )
-    targets = ordered[::max(1, sample_every)]
+    unique_dates = sorted({row["date"] for row in ordered})
+    selected_dates = set(unique_dates[::max(1, sample_every)])
+    targets = [row for row in ordered if row["date"] in selected_dates]
     if max_draws is not None:
         targets = targets[:max_draws]
 
