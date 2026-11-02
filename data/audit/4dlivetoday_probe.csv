@@ -19,10 +19,22 @@ date,operator_id,operator_name,api_status,http_status,draw_no,first,second,third
 2020-04-11,sportstoto,Sports Toto 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2020-04-11.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
 2020-04-11,damacai,Da Ma Cai 1+3D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2020-04-11.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
 2020-04-11,grand_dragon,Grand Dragon 4D,history,200,,0950,3313,6529,10,10,https://4dlivetoday.com/en/results/2020-04-11,data/source_snapshots/4dlivetoday/2020-04-11.json,
+2020-09-09,magnum,Magnum 4D,checked,200,403/20,0735,8740,4518,10,10,https://4dlivetoday.com/en/results/2020-09-09,data/source_snapshots/4dlivetoday/2020-09-09.json,
+2020-09-09,sportstoto,Sports Toto 4D,checked,200,5167/20,8959,7147,7727,10,10,https://4dlivetoday.com/en/results/2020-09-09,data/source_snapshots/4dlivetoday/2020-09-09.json,
+2020-09-09,damacai,Da Ma Cai 1+3D,checked,200,5114/20,2423,9118,9970,10,10,https://4dlivetoday.com/en/results/2020-09-09,data/source_snapshots/4dlivetoday/2020-09-09.json,
+2020-09-09,grand_dragon,Grand Dragon 4D,history,200,,8397,4851,3343,10,10,https://4dlivetoday.com/en/results/2020-09-09,data/source_snapshots/4dlivetoday/2020-09-09.json,
+2020-11-07,magnum,Magnum 4D,checked,200,430/20,9191,2982,7172,10,10,https://4dlivetoday.com/en/results/2020-11-07,data/source_snapshots/4dlivetoday/2020-11-07.json,
+2020-11-07,sportstoto,Sports Toto 4D,checked,200,5194/20,4783,2949,7915,10,10,https://4dlivetoday.com/en/results/2020-11-07,data/source_snapshots/4dlivetoday/2020-11-07.json,
+2020-11-07,damacai,Da Ma Cai 1+3D,history,200,5141/20,7682,6212,2993,10,10,https://4dlivetoday.com/en/results/2020-11-07,data/source_snapshots/4dlivetoday/2020-11-07.json,
+2020-11-07,grand_dragon,Grand Dragon 4D,history,200,,5963,0716,9182,10,10,https://4dlivetoday.com/en/results/2020-11-07,data/source_snapshots/4dlivetoday/2020-11-07.json,
 2021-01-01,magnum,Magnum 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2021-01-01.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
 2021-01-01,sportstoto,Sports Toto 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2021-01-01.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
 2021-01-01,damacai,Da Ma Cai 1+3D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2021-01-01.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
 2021-01-01,grand_dragon,Grand Dragon 4D,history,200,,6940,8457,9258,10,10,https://4dlivetoday.com/en/results/2021-01-01,data/source_snapshots/4dlivetoday/2021-01-01.json,
+2021-12-31,magnum,Magnum 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2021-12-31.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2021-12-31,sportstoto,Sports Toto 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2021-12-31.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2021-12-31,damacai,Da Ma Cai 1+3D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2021-12-31.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2021-12-31,grand_dragon,Grand Dragon 4D,checked,200,,5941,6326,4169,10,10,https://4dlivetoday.com/en/results/2021-12-31,data/source_snapshots/4dlivetoday/2021-12-31.json,
 2022-04-21,magnum,Magnum 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2022-04-21.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
 2022-04-21,sportstoto,Sports Toto 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2022-04-21.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
 2022-04-21,damacai,Da Ma Cai 1+3D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2022-04-21.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
