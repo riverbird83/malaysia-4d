@@ -35,7 +35,9 @@ jobs:
           git add data/audit/grand_dragon_source_health.csv data/source_snapshots/grand_dragon
           if ! git diff --cached --quiet; then
             git commit -m "Audit expanded Grand Dragon historical sources"
-            git push
+            git fetch origin data-quality-foundation
+            git rebase origin/data-quality-foundation
+            git push origin HEAD:data-quality-foundation
           else
             echo "No source audit changes."
           fi
