@@ -1,0 +1,35 @@
+name: Grand Dragon multi-source archive audit
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "23 12 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  audit-sources:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: data-quality-foundation
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install audit dependencies
+        run: python -m pip install requests beautifulsoup4
+      - name: Check candidate archives and save snapshots
+        run: python scripts/audit_grand_dragon_sources.py
+      - name: Commit source audit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/audit/grand_dragon_source_health.csv data/source_snapshots/grand_dragon
+          if ! git diff --cached --quiet; then
+            git commit -m "Audit expanded Grand Dragon historical sources"
+            git push
+          else
+            echo "No source audit changes."
+          fi
