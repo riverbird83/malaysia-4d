@@ -57,88 +57,105 @@ def get_session():
 # Official site parser (sportstoto.com.my)
 # ---------------------------------------------------------------------------
 
-def parse_month_official(year: int, month: int) -> list[dict]:
-    """Fetch and parse all 4D draws for a given month/year from official site."""
-    session = get_session()
-    url = f"{BASE_URL}?date={month}/15/{year}"
-    try:
-        r = session.get(url, headers={"Referer": "https://www.sportstoto.com.my/"}, timeout=15)
-        if r.status_code != 200:
-            return None  # return None to signal "blocked", [] means "no draws"
-    except requests.RequestException:
-        return None
-
-    soup = BeautifulSoup(r.text, "html.parser")
-    tables = soup.find_all("table")
-    if len(tables) < 2:
-        return []
-
-    full_text = tables[1].get_text("\n")
-    blocks = re.split(r"(\d+/\d{2}\s*Draw Date\s*:\s*\d+/\d+/\d+)", full_text)
-
+def parse_official_page(html: str, year: int, month: int) -> list[dict]:
+    """Parse official Past Results pages by semantic labels, not table position."""
+    soup = BeautifulSoup(html, "html.parser")
+    full_text = re.sub(r"\s+", " ", soup.get_text(" ", strip=True)).strip()
+    blocks = re.split(r"(?=\bDraw Date\s*:)", full_text, flags=re.IGNORECASE)
     draws = []
-    i = 1
-    while i < len(blocks) - 1:
-        header = blocks[i]
-        body = blocks[i + 1]
-        i += 2
 
-        m_no = re.search(r"(\d+)/(\d{2})", header)
-        m_date = re.search(r"Draw Date\s*:\s*(\d+)/(\d+)/(\d+)", header)
-        if not m_no or not m_date:
+    for block in blocks:
+        date_match = re.search(
+            r"\bDraw Date\s*:\s*(\d{1,2})/(\d{1,2})/(\d{4})",
+            block,
+            re.IGNORECASE,
+        )
+        draw_match = re.search(
+            r"\bDraw No\.\s*:\s*(\d+)\s*/\s*(\d{2})",
+            block,
+            re.IGNORECASE,
+        )
+        if not date_match or not draw_match:
             continue
 
-        draw_seq = int(m_no.group(1))
-        day_v = int(m_date.group(1))
-        mon_v = int(m_date.group(2))
-        yr_v = int(m_date.group(3))
+        day_v, mon_v, yr_v = map(int, date_match.groups())
+        if yr_v != int(year) or mon_v != int(month):
+            continue
 
-        p_m = re.search(
+        first_match = re.search(
             r"First Prize\s+Second Prize\s+Third Prize\s+(\d{4})\s+(\d{4})\s+(\d{4})",
-            body,
+            block,
+            re.IGNORECASE,
         )
-        if not p_m:
-            continue
-        p1, p2, p3 = p_m.group(1), p_m.group(2), p_m.group(3)
-
-        # Older archive pages (e.g. 1992) place "Toto lotto games"
-        # immediately after the Consolation list. Newer pages may place
-        # "TOTO 4D JACKPOT" there. Stop at either heading.
-        sp_m = re.search(
+        special_match = re.search(
             r"Special Prize\s+(.*?)(?=Consolation Prize)",
-            body,
-            flags=re.IGNORECASE | re.DOTALL,
+            block,
+            re.IGNORECASE | re.DOTALL,
         )
-        cp_m = re.search(
-            r"Consolation Prize\s+(.*?)(?=TOTO 4D JACKPOT|Toto lotto games|TOTO 5D|$)",
-            body,
-            flags=re.IGNORECASE | re.DOTALL,
+        consolation_match = re.search(
+            r"Consolation Prize\s+(.*?)(?=TOTO 4D JACKPOT|Toto lotto games|TOTO 5D|TOTO 6D|Draw Date\s*:|$)",
+            block,
+            re.IGNORECASE | re.DOTALL,
         )
-        specials = re.findall(r"(?<!\d)\d{4}(?!\d)", sp_m.group(1)) if sp_m else []
-        consols = re.findall(r"(?<!\d)\d{4}(?!\d)", cp_m.group(1)) if cp_m else []
+        if not first_match or not special_match or not consolation_match:
+            print(f"  [WARN] Official page missing prize section for {yr_v:04d}-{mon_v:02d}-{day_v:02d}")
+            continue
 
-        # Do not silently save a partial draw. Each section must contain
-        # exactly ten four-digit numbers before it can enter the dataset.
+        specials = re.findall(r"(?<!\d)\d{4}(?!\d)", special_match.group(1))
+        consols = re.findall(r"(?<!\d)\d{4}(?!\d)", consolation_match.group(1))
         if len(specials) != 10 or len(consols) != 10:
             print(
-                f"  [WARN] Incomplete prize sections for {yr_v:04d}-{mon_v:02d}-{day_v:02d}: "
+                f"  [WARN] Official incomplete prize sections for {yr_v:04d}-{mon_v:02d}-{day_v:02d}: "
                 f"special={len(specials)}, consolation={len(consols)}"
             )
             continue
 
         record = {
-            "draw_seq": draw_seq,
+            "draw_seq": int(draw_match.group(1)),
             "date": f"{yr_v:04d}-{mon_v:02d}-{day_v:02d}",
-            "year": yr_v, "month": mon_v, "day": day_v,
-            "prize_1": p1, "prize_2": p2, "prize_3": p3,
+            "year": yr_v,
+            "month": mon_v,
+            "day": day_v,
+            "prize_1": first_match.group(1),
+            "prize_2": first_match.group(2),
+            "prize_3": first_match.group(3),
         }
-        for idx, s in enumerate(specials):
-            record[f"special_{idx + 1}"] = s
-        for idx, c in enumerate(consols):
-            record[f"consol_{idx + 1}"] = c
-
+        for idx, value in enumerate(specials, 1):
+            record[f"special_{idx}"] = value
+        for idx, value in enumerate(consols, 1):
+            record[f"consol_{idx}"] = value
         draws.append(record)
 
+    return draws
+
+
+def parse_month_official(year: int, month: int) -> list[dict]:
+    """Fetch and parse all 4D draws for a given month/year from official site."""
+    session = get_session()
+    url = f"{BASE_URL}?date={month}/15/{year}"
+    try:
+        response = session.get(
+            url,
+            headers={"Referer": "https://www.sportstoto.com.my/"},
+            timeout=20,
+        )
+        if response.status_code != 200:
+            print(f"  [WARN] Official archive HTTP {response.status_code} for {year}-{month:02d}")
+            return None
+    except requests.RequestException as exc:
+        print(f"  [WARN] Official archive request failed for {year}-{month:02d}: {exc}")
+        return None
+
+    draws = parse_official_page(response.text, year, month)
+    if not draws:
+        soup = BeautifulSoup(response.text, "html.parser")
+        title = soup.title.get_text(" ", strip=True) if soup.title else "(no title)"
+        print(
+            f"  [WARN] Official archive returned 0 parsed draws for {year}-{month:02d}; "
+            f"title={title!r}; bytes={len(response.content)}"
+        )
+    else:
+        print(f"  [INFO] Official archive parsed {len(draws)} draws for {year}-{month:02d}")
     return draws
 
 
