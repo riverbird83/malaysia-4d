@@ -16,6 +16,7 @@ on:
       - "data/*.csv"
       - "data/**/*.csv"
       - "config/**"
+      - ".github/workflows/test-prediction-engine.yml"
   workflow_dispatch:
 
 permissions:
