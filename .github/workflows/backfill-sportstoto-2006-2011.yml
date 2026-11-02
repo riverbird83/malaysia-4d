@@ -7,7 +7,9 @@ on:
       - recovery/sportstoto-consolation-2006-2011
     paths:
       - scripts/backfill_sportstoto_consolation.py
+      - scraper_sportstoto.py
       - tests/test_4d2u_parser.py
+      - tests/test_official_parser.py
       - .github/workflows/backfill-sportstoto-2006-2011.yml
 
 permissions:
@@ -31,8 +33,10 @@ jobs:
       - name: Install dependencies
         run: pip install requests beautifulsoup4 pandas lxml
 
-      - name: Validate 4D2U parser against known historical draw
-        run: python -m unittest discover -s tests -p "test_4d2u_parser.py" -v
+      - name: Validate official and 4D2U historical parsers
+        run: |
+          python -m unittest discover -s tests -p "test_official_parser.py" -v
+          python -m unittest discover -s tests -p "test_4d2u_parser.py" -v
 
       - name: Run multi-source historical backfill
         run: python scripts/backfill_sportstoto_consolation.py
