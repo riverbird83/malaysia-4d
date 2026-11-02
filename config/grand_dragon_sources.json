@@ -129,6 +129,33 @@
       "claimed_coverage": "Current daily feed and recent Grand Dragon history",
       "lineage": "unknown",
       "notes": "Recent page shows all 23 prize numbers and daily schedule; test historical depth before using for older backfill."
+    },
+    {
+      "id": "4d2ulive",
+      "url": "https://4d2ulive.com/grand-dragon-4d-all/page/358/",
+      "role": "historical_archive",
+      "priority": 1,
+      "claimed_coverage": "Grand Dragon 4D full-tier archive with 2020 pages and paginated history",
+      "lineage": "unknown",
+      "notes": "Search-indexed pages show all 23 winning numbers for individual dates. Establish earliest/latest pagination and compare sample dates against Check4D and 4D Live Today."
+    },
+    {
+      "id": "gd4d_number_history",
+      "url": "https://gd4d.co/en/4d-history/0950",
+      "role": "number_history_crosscheck",
+      "priority": 3,
+      "claimed_coverage": "Number-level win history, including Grand Dragon icon-labelled hits from 2020 onward",
+      "lineage": "unknown",
+      "notes": "Useful to verify individual number/date/prize hits only; it is a multi-operator number history page and must filter by the Grand Dragon operator icon. Not a full-draw source."
+    },
+    {
+      "id": "fast4dking",
+      "url": "https://mobile.fast4dking.com/v2/searchnumber.php?GD=on&n=3313",
+      "role": "number_history_crosscheck",
+      "priority": 3,
+      "claimed_coverage": "Number-level Grand Dragon history with Draw IDs",
+      "lineage": "unknown",
+      "notes": "Useful for checking draw IDs and prize tiers for a specific number; not a full-draw source."
     }
   ],
   "validation_policy": {
