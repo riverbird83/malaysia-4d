@@ -4,7 +4,7 @@
 - Magnum: 2006-01-01 through latest verifiable draw.
 - Sports Toto: 2006-01-01 through latest verifiable draw.
 - Da Ma Cai: 2006-01-01 through latest verifiable draw.
-- Grand Dragon (Haolong): 2016-01-01 through latest verifiable draw.
+- Grand Dragon (Haolong): 2017-01-01 through latest verifiable draw (include earlier records only when independently verified).
 
 All four operators are independent datasets, feature pipelines, model runs, Top-3 outputs, and walk-forward backtests. Do not pool training records across operators. This phase is 4D only; defer 6D and other products.
 
