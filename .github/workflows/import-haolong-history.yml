@@ -9,6 +9,8 @@ on:
       - "scripts/validate_haolong.py"
       - "tests/test_haolong_scraper.py"
       - "scripts/normalize_data.py"
+      - "config/historical_collection_policy.json"
+      - "tests/test_validate_haolong.py"
       - ".github/workflows/import-haolong-history.yml"
   schedule:
     # Cambodia daily draw is around 7pm local; run after results should be posted.
@@ -40,8 +42,10 @@ jobs:
       - name: Install scraper dependencies
         run: pip install requests beautifulsoup4
 
-      - name: Run Haolong parser tests
-        run: python -m unittest discover -s tests -p "test_haolong_*.py" -v
+      - name: Run Haolong parser and strict-validation tests
+        run: |
+          python -m unittest discover -s tests -p "test_haolong_*.py" -v
+          python -m unittest discover -s tests -p "test_validate_haolong.py" -v
 
       - name: Smoke-test historical source pages
         run: |
@@ -70,7 +74,7 @@ jobs:
           if [ "${{ github.event_name }}" = "schedule" ]; then
             START_DATE="$END_DATE"
           else
-            START_DATE="2017-01-01"
+            START_DATE="2016-01-01"
           fi
           echo "start=$START_DATE" >> "$GITHUB_OUTPUT"
           echo "end=$END_DATE" >> "$GITHUB_OUTPUT"
@@ -89,7 +93,7 @@ jobs:
       - name: Validate Haolong data and print coverage report
         run: |
           python scripts/validate_haolong.py \
-            --from 2017-01-01 \
+            --from 2016-01-01 \
             --to "${{ steps.range.outputs.end }}"
 
       - name: Commit Haolong raw, audit, and normalized data
