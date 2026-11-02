@@ -210,6 +210,15 @@
       "claimed_coverage": "At least one date-specific historical record exists from 2021-12-17, with additional pages in 2022-2026; continuous day-by-day coverage and earliest archive depth are not established",
       "lineage": "claims_official",
       "notes": "Third-party archive claims official draw data and names gdlotto.com as the operator site. Specific pages have been found for 2021-12-17, 2022-05-17, 2022-09-17 and multiple dates in 2023-2026. Treat the official-lineage statement as a claim until independently verified; use date-by-date checks."
+    },
+    {
+      "id": "4dhuat",
+      "url": "https://4dhuat.com/en/check/7503",
+      "role": "individual_number_history",
+      "priority": 2,
+      "claimed_coverage": "Number-history page lists 7503 as Grand Dragon first prize on 2021-12-17; other historical hits are indexed by operator, date and prize",
+      "lineage": "unknown",
+      "notes": "Use only for individual-number/date/prize corroboration. It is not a full-draw source and cannot reconstruct the remaining 22 numbers."
     }
   ],
   "validation_policy": {
