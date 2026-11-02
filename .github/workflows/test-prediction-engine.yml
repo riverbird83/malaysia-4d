@@ -13,6 +13,9 @@ on:
       - "tests/test_backtest_engine.py"
       - "tests/test_normalize_data.py"
       - "tests/test_haolong_scraper.py"
+      - "data/*.csv"
+      - "data/**/*.csv"
+      - "config/**"
   workflow_dispatch:
 
 permissions:
