@@ -61,29 +61,25 @@ def make_session() -> requests.Session:
 
 
 def _tokenize_cell(value: str) -> list[str]:
-    value = (value or "").replace("\xa0", " ").strip()
-    if "|" in value:
-        raw_tokens = value.split("|")
-    else:
-        raw_tokens = value.split()
+    value = (value or "").replace("\\xa0", " ").strip()
+    if not value:
+        return [""]
+    raw_tokens = value.split("|") if "|" in value else value.split()
     result = []
     for token in raw_tokens:
         token = token.strip()
-        if not token:
+        if not token or token == "----":
             result.append("")
-        elif token == "----":
-            result.append("")
-        elif re.fullmatch(r"\d{4}", token):
+        elif re.fullmatch(r"\\d{4}", token):
             result.append(token)
         else:
-            # Ignore labels and non-number text; do not extract digits from it.
             continue
     return result
 
 
 def _section_slots(soup: BeautifulSoup, start_label: str, stop_label: str,
                    expected_slots: int) -> tuple[list[str], int]:
-    """Extract result-table cells while preserving explicit empty table cells."""
+    """Extract result-table cells while preserving empty cells within result rows."""
     rows = soup.find_all("tr")
     start_index = next(
         (i for i, row in enumerate(rows)
@@ -100,13 +96,12 @@ def _section_slots(soup: BeautifulSoup, start_label: str, stop_label: str,
             row_values: list[str] = []
             for cell in cells:
                 row_values.extend(_tokenize_cell(cell.get_text(" ", strip=True)))
-            # Skip layout/ad rows that contain no result token at all.
-            if any(v == "" or re.fullmatch(r"\d{4}", v) for v in row_values) and row_values:
+            # An empty cell is meaningful only on a row containing a visible
+            # number or explicit placeholder. Ignore blank layout/ad rows.
+            if row_values and re.search(r"(?:\\d{4}|----)", row_text):
                 values.extend(row_values)
     else:
-        # Text fallback for markup that does not use table rows. Pipe-delimited
-        # lines preserve empty first/last cells, unlike get_text(strip=True).
-        lines = soup.get_text("\n", strip=False).splitlines()
+        lines = soup.get_text("\\n", strip=False).splitlines()
         active = False
         for line in lines:
             if re.search(start_label, line, flags=re.I):
