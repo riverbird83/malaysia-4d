@@ -225,14 +225,14 @@
       "url": "https://4ds.asia/",
       "role": "recent_full_draw_cross_check",
       "lineage": "unknown",
-      "notes": "Full 2026-11-02 Grand Dragon 3+10+10 result observed; historical depth not established; source-lineage independence from other mirrors is unproven."
+      "notes": "Accessible page snapshot showed last update 2025-08-02, not current 2026 results. GitHub Actions health probe returned 403. Do not use as a current-results source until freshness and GD-specific history are established."
     },
     {
       "id": "4dresult_me",
       "url": "https://4dresult.me/past_result/?d=2010-12-19",
       "role": "recent_full_draw_cross_check",
       "lineage": "unknown",
-      "notes": "Full 2026-11-02 Grand Dragon 3+10+10 result observed; query URL is the site's date-results page; historical depth and upstream lineage are unproven."
+      "notes": "Date-specific GD pages were retrieved for 2017-01-04, 2017-03-26, 2017-04-24, 2017-04-27, 2022-04-14 and 2026-10-31. Some other dates return inaccessible/internal errors. The site claims a past-results finder since 1986, but GD-specific coverage from 2016 onward is not established. GitHub Actions health probe returned 403; browser retrieval is intermittent. Treat as third-party evidence, not official."
     }
   ],
   "validation_policy": {
