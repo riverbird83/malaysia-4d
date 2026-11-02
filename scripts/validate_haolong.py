@@ -51,13 +51,42 @@ def validate(start: date | None = None, end: date | None = None) -> dict:
             if value and not valid4(value):
                 invalid_number_cells.append(f"{row.get('date')}:{field}={value}")
 
+    def number_count(row: dict, fields: list[str]) -> int:
+        return sum(valid4(row.get(field, "")) for field in fields)
+
+    # The source lays out Special in 15 visual cells, but the prize tier is
+    # 10 numbers. Five cells are placeholders/empty layout positions, not
+    # five missing prizes. Measure against the actual 10-number tier.
+    special_counts = [number_count(row, SPECIAL_FIELDS) for row in raw]
+    consolation_counts = [number_count(row, CONSOL_FIELDS) for row in raw]
+    special_complete_rows = sum(count == 10 for count in special_counts)
+    consolation_complete_rows = sum(count == 10 for count in consolation_counts)
+    special_numbers_found_total = sum(special_counts)
+    consolation_numbers_found_total = sum(consolation_counts)
+    special_expected_numbers = len(raw) * 10
+    consolation_expected_numbers = len(raw) * 10
+
     normalized_dates = [row.get("date", "") for row in normalized]
     normalized_matches_raw = (
         bool(normalized) and len(normalized) == len(raw)
         and normalized_dates == dates
-        and set(required_raw).issubset(set(normalized_fields))
+        and set(raw_fields).issubset(set(normalized_fields))
+        and all(
+            all(normalized_row.get(field, "") == raw_row.get(field, "") for field in raw_fields)
+            for raw_row, normalized_row in zip(raw, normalized)
+        )
     )
+    invalid_normalized_number_cells = []
+    for row in normalized:
+        for field in ["prize_1", "prize_2", "prize_3", *SPECIAL_FIELDS, *CONSOL_FIELDS]:
+            value = row.get(field, "")
+            if value and not valid4(value):
+                invalid_normalized_number_cells.append(f"{row.get('date')}:{field}={value}")
 
+    audit_dates = [row.get("date", "") for row in audit_rows if row.get("date")]
+    audit_duplicate_dates = sorted(
+        d for d, count in Counter(audit_dates).items() if count > 1
+    )
     audit_by_date = {row.get("date", ""): row for row in audit_rows if row.get("date")}
     if start is None and valid_dates:
         start = date.fromisoformat(earliest)
@@ -81,6 +110,9 @@ def validate(start: date | None = None, end: date | None = None) -> dict:
         d for d in expected_dates
         if d in audit_by_date and audit_by_date[d].get("status") in unresolved_statuses
     ]
+    unresolved_status_counts = Counter(
+        audit_by_date[d].get("status", "") for d in unresolved_dates
+    )
     confirmed_non_draw_days = sum(
         audit_by_date[d].get("status") == "confirmed_non_draw_day"
         for d in expected_dates if d in audit_by_date
@@ -92,14 +124,10 @@ def validate(start: date | None = None, end: date | None = None) -> dict:
     record_dates = set(valid_dates)
     missing_record_for_parsed = sorted(parsed_dates - record_dates)
     main_complete = len(raw) - len(invalid_main_rows)
-    special_observed = sum(int(row.get("special_slots_observed") or 0)
-                            for row in audit_rows if row.get("date") in record_dates)
-    special_numbers = sum(int(row.get("special_numbers_found") or 0)
-                          for row in audit_rows if row.get("date") in record_dates)
-    consolation_observed = sum(int(row.get("consolation_slots_observed") or 0)
-                               for row in audit_rows if row.get("date") in record_dates)
-    consolation_numbers = sum(int(row.get("consolation_numbers_found") or 0)
-                              for row in audit_rows if row.get("date") in record_dates)
+    special_layout_cells_observed = sum(int(row.get("special_slots_observed") or 0)
+                                        for row in audit_rows if row.get("date") in record_dates)
+    consolation_layout_cells_observed = sum(int(row.get("consolation_slots_observed") or 0)
+                                            for row in audit_rows if row.get("date") in record_dates)
 
     report = {
         "raw_exists": RAW.exists(),
@@ -108,16 +136,30 @@ def validate(start: date | None = None, end: date | None = None) -> dict:
         "raw_rows": len(raw),
         "unique_raw_dates": len(set(valid_dates)),
         "duplicate_dates": duplicate_dates,
+        "audit_duplicate_dates": audit_duplicate_dates,
         "earliest_date": earliest,
         "latest_date": latest,
         "main_prize_complete_rows": main_complete,
         "main_prize_completeness_rate": round(main_complete / len(raw), 6) if raw else 0,
         "invalid_main_rows": invalid_main_rows,
         "invalid_number_cells": invalid_number_cells[:100],
-        "special_slots_observed": special_observed,
-        "special_numbers_found": special_numbers,
-        "consolation_slots_observed": consolation_observed,
-        "consolation_numbers_found": consolation_numbers,
+        "invalid_normalized_number_cells": invalid_normalized_number_cells[:100],
+        "special_layout_cells_observed": special_layout_cells_observed,
+        "special_expected_numbers": special_expected_numbers,
+        "special_numbers_found": special_numbers_found_total,
+        "special_complete_rows": special_complete_rows,
+        "special_prize_completeness_rate": (
+            round(special_numbers_found_total / special_expected_numbers, 6)
+            if special_expected_numbers else 0
+        ),
+        "consolation_layout_cells_observed": consolation_layout_cells_observed,
+        "consolation_expected_numbers": consolation_expected_numbers,
+        "consolation_numbers_found": consolation_numbers_found_total,
+        "consolation_complete_rows": consolation_complete_rows,
+        "consolation_prize_completeness_rate": (
+            round(consolation_numbers_found_total / consolation_expected_numbers, 6)
+            if consolation_expected_numbers else 0
+        ),
         "normalized_rows": len(normalized),
         "normalized_matches_raw": normalized_matches_raw,
         "audit_rows": len(audit_rows),
@@ -129,6 +171,9 @@ def validate(start: date | None = None, end: date | None = None) -> dict:
         ),
         "unaccounted_dates": unaccounted_dates[:100],
         "unresolved_dates": unresolved_dates[:100],
+        "unresolved_dates_count": len(unresolved_dates),
+        "unresolved_status_counts": dict(unresolved_status_counts),
+        "unaccounted_dates_count": len(unaccounted_dates),
         "confirmed_non_draw_days": confirmed_non_draw_days,
         "parsed_audit_dates_without_raw_record": missing_record_for_parsed,
         "missing_raw_columns": missing_raw_columns,
