@@ -13,22 +13,32 @@
   },
   "sources": [
     {
+      "id": "4dlivetoday",
+      "url": "https://4dlivetoday.com/api/v1/",
+      "role": "historical_and_recent_reference_api",
+      "priority": 1,
+      "claimed_coverage": "Grand Dragon on-record since 2020-04-11; older archive sourced mainly from check4d.org; site reports 101 draws since 2021 checked against Grand Dragon official archive",
+      "lineage": "mixed_official_check4d_archive",
+      "license": "CC-BY-4.0",
+      "notes": "Public keyless JSON API documented at /en/developers. API documents date lookup and recent operator draws; test historical date depth before treating it as a full backfill source. Site source disclosure says GD draw-night source is gdlotto.com; 101 draws since 2021 checked against official archive; remaining older records mainly check4d.org only. Attribute any reused data."
+    },
+    {
       "id": "4dresultsnow",
       "url": "https://4dresultsnow.com/history?date=&month=all&page=1&provider=grand-dragon&year=all",
       "role": "historical_archive",
       "priority": 1,
-      "claimed_coverage": "2016-present",
-      "lineage": "unknown",
-      "notes": "Site describes records as Verified; coverage varies by provider/date. Verify independently."
+      "claimed_coverage": "Site-wide archive advertises 2016-present; Grand Dragon provider-specific earliest date and depth must be established separately",
+      "lineage": "4dmoon_trusted_community_feed_per_site_disclosure",
+      "notes": "Provider-specific source disclosure says Grand Dragon uses the trusted-community 4DMoon feed. Verified status means this site's own gates passed against that feed, not independent operator verification."
     },
     {
       "id": "keputusan4d",
       "url": "https://keputusan4d.com/4d-operators/grand-dragon/",
       "role": "historical_archive",
       "priority": 1,
-      "claimed_coverage": "2024-07-02 to 2026-10-31 (site claim: 852 dates)",
+      "claimed_coverage": "Site currently reports about 853 past draws; daily archive; earliest date must be measured from date links",
       "lineage": "unknown",
-      "notes": "Independent archive; claimed count is not treated as verified coverage."
+      "notes": "Independent results archive; site says it is not official. Claims daily records and all 23 numbers. Collect exact per-date evidence; do not treat stated total as verified coverage."
     },
     {
       "id": "4dlotto",
