@@ -62,5 +62,6 @@ jobs:
             echo "No API probe changes to commit."
           else
             git commit -m "audit: probe 4D Live Today historical API coverage"
+            git pull --rebase origin data-quality-foundation
             git push origin data-quality-foundation
           fi
