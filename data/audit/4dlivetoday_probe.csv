@@ -15,10 +15,22 @@ date,operator_id,operator_name,api_status,http_status,draw_no,first,second,third
 2017-01-01,sportstoto,Sports Toto 4D,checked,200,4529/17,1633,3114,7672,10,10,https://4dlivetoday.com/en/results/2017-01-01,data/source_snapshots/4dlivetoday/2017-01-01.json,
 2017-01-01,damacai,Da Ma Cai 1+3D,history,200,4476/17,0444,5023,4535,10,10,https://4dlivetoday.com/en/results/2017-01-01,data/source_snapshots/4dlivetoday/2017-01-01.json,
 2017-01-01,grand_dragon,Grand Dragon 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2017-01-01.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2019-01-21,magnum,Magnum 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2019-01-21.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2019-01-21,sportstoto,Sports Toto 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2019-01-21.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2019-01-21,damacai,Da Ma Cai 1+3D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2019-01-21.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2019-01-21,grand_dragon,Grand Dragon 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2019-01-21.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2020-03-03,magnum,Magnum 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2020-03-03.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2020-03-03,sportstoto,Sports Toto 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2020-03-03.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2020-03-03,damacai,Da Ma Cai 1+3D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2020-03-03.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2020-03-03,grand_dragon,Grand Dragon 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2020-03-03.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
 2020-04-11,magnum,Magnum 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2020-04-11.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
 2020-04-11,sportstoto,Sports Toto 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2020-04-11.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
 2020-04-11,damacai,Da Ma Cai 1+3D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2020-04-11.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
 2020-04-11,grand_dragon,Grand Dragon 4D,history,200,,0950,3313,6529,10,10,https://4dlivetoday.com/en/results/2020-04-11,data/source_snapshots/4dlivetoday/2020-04-11.json,
+2020-07-11,magnum,Magnum 4D,checked,200,376/20,1306,3325,0599,10,10,https://4dlivetoday.com/en/results/2020-07-11,data/source_snapshots/4dlivetoday/2020-07-11.json,
+2020-07-11,sportstoto,Sports Toto 4D,checked,200,5140/20,8655,6222,1269,10,10,https://4dlivetoday.com/en/results/2020-07-11,data/source_snapshots/4dlivetoday/2020-07-11.json,
+2020-07-11,damacai,Da Ma Cai 1+3D,history,200,5087/20,2899,0557,4757,10,10,https://4dlivetoday.com/en/results/2020-07-11,data/source_snapshots/4dlivetoday/2020-07-11.json,
+2020-07-11,grand_dragon,Grand Dragon 4D,history,200,,3340,9704,3793,10,10,https://4dlivetoday.com/en/results/2020-07-11,data/source_snapshots/4dlivetoday/2020-07-11.json,
 2020-09-09,magnum,Magnum 4D,checked,200,403/20,0735,8740,4518,10,10,https://4dlivetoday.com/en/results/2020-09-09,data/source_snapshots/4dlivetoday/2020-09-09.json,
 2020-09-09,sportstoto,Sports Toto 4D,checked,200,5167/20,8959,7147,7727,10,10,https://4dlivetoday.com/en/results/2020-09-09,data/source_snapshots/4dlivetoday/2020-09-09.json,
 2020-09-09,damacai,Da Ma Cai 1+3D,checked,200,5114/20,2423,9118,9970,10,10,https://4dlivetoday.com/en/results/2020-09-09,data/source_snapshots/4dlivetoday/2020-09-09.json,
@@ -27,6 +39,10 @@ date,operator_id,operator_name,api_status,http_status,draw_no,first,second,third
 2020-11-07,sportstoto,Sports Toto 4D,checked,200,5194/20,4783,2949,7915,10,10,https://4dlivetoday.com/en/results/2020-11-07,data/source_snapshots/4dlivetoday/2020-11-07.json,
 2020-11-07,damacai,Da Ma Cai 1+3D,history,200,5141/20,7682,6212,2993,10,10,https://4dlivetoday.com/en/results/2020-11-07,data/source_snapshots/4dlivetoday/2020-11-07.json,
 2020-11-07,grand_dragon,Grand Dragon 4D,history,200,,5963,0716,9182,10,10,https://4dlivetoday.com/en/results/2020-11-07,data/source_snapshots/4dlivetoday/2020-11-07.json,
+2020-12-13,magnum,Magnum 4D,checked,200,447/20,7656,1311,2205,10,10,https://4dlivetoday.com/en/results/2020-12-13,data/source_snapshots/4dlivetoday/2020-12-13.json,
+2020-12-13,sportstoto,Sports Toto 4D,checked,200,5211/20,1356,7794,9844,10,10,https://4dlivetoday.com/en/results/2020-12-13,data/source_snapshots/4dlivetoday/2020-12-13.json,
+2020-12-13,damacai,Da Ma Cai 1+3D,history,200,5158/20,0677,5412,3065,10,10,https://4dlivetoday.com/en/results/2020-12-13,data/source_snapshots/4dlivetoday/2020-12-13.json,
+2020-12-13,grand_dragon,Grand Dragon 4D,history,200,,5685,2967,1114,10,10,https://4dlivetoday.com/en/results/2020-12-13,data/source_snapshots/4dlivetoday/2020-12-13.json,
 2021-01-01,magnum,Magnum 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2021-01-01.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
 2021-01-01,sportstoto,Sports Toto 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2021-01-01.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
 2021-01-01,damacai,Da Ma Cai 1+3D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2021-01-01.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
