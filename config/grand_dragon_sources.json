@@ -17,10 +17,10 @@
       "url": "https://4dlivetoday.com/api/v1/",
       "role": "historical_and_recent_reference_api",
       "priority": 1,
-      "claimed_coverage": "Grand Dragon on-record since 2020-04-11; older archive sourced mainly from check4d.org; site reports 101 draws since 2021 checked against Grand Dragon official archive",
+      "claimed_coverage": "API returns complete 23-number Grand Dragon rows from 2020-04-11 onward in tested samples; site says its archive is on record since 2020-04-11, but this is not proven operator inception and another GD-filtered number-history source suggests a 2019 hit",
       "lineage": "mixed_official_check4d_archive",
       "license": "CC-BY-4.0",
-      "notes": "Public keyless JSON API documented at /en/developers. API documents date lookup and recent operator draws; test historical date depth before treating it as a full backfill source. Site source disclosure says GD draw-night source is gdlotto.com; 101 draws since 2021 checked against official archive; remaining older records mainly check4d.org only. Attribute any reused data."
+      "notes": "Public keyless JSON API documented at /en/developers. Test historical date depth before treating it as a full backfill source. Site source disclosure says GD draw-night source is gdlotto.com; older records mainly check4d.org; 101 draws since 2021 checked against official archive. Attribute reused data and retain lineage."
     },
     {
       "id": "4dresultsnow",
