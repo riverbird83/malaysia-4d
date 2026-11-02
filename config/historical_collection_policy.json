@@ -120,6 +120,24 @@
         "url": "https://hoseh4d.com/results/grand-dragon-4d/2026",
         "evidence": "Lists 122 Grand Dragon 4D draws from 2026-07-01 to 2026-10-30 with draw IDs and top-three numbers.",
         "assessment": "Recent date/Draw ID cross-check; inspect detail pages for full tiers."
+      },
+      {
+        "source": "Check4D",
+        "url": "https://www.check4d.org/past-results/2020-09-09",
+        "evidence": "Searchable 2020 Cambodia 4D date pages display all 23 Grand Dragon prize numbers; sample pages found for 2020-09-09, 2020-11-07 and other dates.",
+        "assessment": "Historical recovery source. Same lineage as older Grand Dragon rows in 4D Live Today where that site says it imports check4d.org."
+      },
+      {
+        "source": "Live4D2U",
+        "url": "https://www.live4d2u.net/past-results/2020-07-11",
+        "evidence": "Historical 2020 page shows Grand Dragon 4D with First/Second/Third and full Special/Consolation lists.",
+        "assessment": "Potential additional archive; independence from Check4D and 4DMoon not yet established."
+      },
+      {
+        "source": "4DCheck",
+        "url": "https://www.4dcheck.com/operators/granddragon",
+        "evidence": "Current Grand Dragon daily feed shows all 23 numbers and recent draw history.",
+        "assessment": "Recent full-tier cross-check candidate; older archive depth not yet established."
       }
     ],
     "magnum": [
