@@ -51,8 +51,8 @@ FIELDS = [
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--dates", default=",".join(DEFAULT_DATES),
-                        help="Comma-separated ISO dates to probe")
+    parser.add_argument("--dates", default="",
+                        help="Comma-separated ISO dates; blank probes the built-in sample plus dates in data/manual_import/*.csv")
     parser.add_argument("--delay", type=float, default=0.5)
     parser.add_argument("--output", type=Path,
                         default=ROOT / "data" / "audit" / "4dlivetoday_probe.csv")
@@ -60,8 +60,33 @@ def main() -> None:
                         default=ROOT / "data" / "source_snapshots" / "4dlivetoday")
     args = parser.parse_args()
 
-    dates = [date.fromisoformat(value.strip()).isoformat()
-             for value in args.dates.split(",") if value.strip()]
+    if args.dates.strip():
+        date_values = [value.strip() for value in args.dates.split(",") if value.strip()]
+    else:
+        date_values = list(DEFAULT_DATES)
+        candidate_dir = ROOT / "data" / "manual_import"
+        candidate_files = sorted(candidate_dir.glob("*.csv"))
+        for candidate_file in candidate_files:
+            try:
+                with candidate_file.open("r", newline="", encoding="utf-8-sig") as handle:
+                    for candidate in csv.DictReader(handle):
+                        value = (candidate.get("draw_date") or candidate.get("date") or "").strip()
+                        if value:
+                            date_values.append(value)
+            except (OSError, csv.Error) as exc:
+                print(f"Skipping unreadable candidate file {candidate_file}: {exc}")
+
+    valid_dates = set()
+    invalid_dates = []
+    for value in date_values:
+        try:
+            valid_dates.add(date.fromisoformat(value).isoformat())
+        except ValueError:
+            invalid_dates.append(value)
+    dates = sorted(valid_dates)
+    if invalid_dates:
+        print(f"Skipped {len(invalid_dates)} invalid candidate date values: {invalid_dates[:10]}")
+    print(f"Probing {len(dates)} unique dates (built-in sample plus manual-import candidates).")
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.snapshot_dir.mkdir(parents=True, exist_ok=True)
     session = requests.Session()
