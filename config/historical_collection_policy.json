@@ -186,6 +186,24 @@
         "url": "https://mobile.fast4dking.com/v2/searchnumber.php?GD=on&n=3313",
         "evidence": "GD-filtered number history lists 3313 as a Grand Dragon Special hit on 2019-01-21 (draw 766/2019), plus 2020 and later hits. This is an individual-number hit only, not a full draw.",
         "assessment": "Unresolved single-number lead. The GD4D number-history page for 3313 lists Grand Dragon hits from 2020-03-03 onward and does not show 2019-01-21; the 4D Huat number-history page also does not show a 2019 Grand Dragon hit. The sources may have different coverage, so this is not a confirmed contradiction or a proven inception date. Do not infer a full 23-number draw; seek the original draw page or another date-specific source."
+      },
+      {
+        "source": "GDLotto Official Past Results",
+        "url": "https://gdlotto.com/results/past/",
+        "evidence": "The operator's official Past Results page provides a date selector and the full 4D prize board. Direct automated access returned HTTP 403 during this audit, so no historical records were extracted from it.",
+        "assessment": "Highest-priority authoritative source for date-by-date recovery. Direct access is currently blocked; do not infer any missing result from the public page shell."
+      },
+      {
+        "source": "GDLotto Official Tech Partner Program",
+        "url": "https://www.gdlotto.com/community/partner/",
+        "evidence": "The operator states that approved tech partners can obtain full access to all results history from day one through its result API.",
+        "assessment": "Potentially the strongest recovery route for 2016-2021 and any dates absent from public mirrors. Access requires operator approval/credentials; availability and historical start date must be confirmed with GDLotto."
+      },
+      {
+        "source": "GDLotto Official Result Feed API announcement",
+        "url": "https://blog.gdlotto.com/2017/12/launched-of-gdlotto-lottery-result-feed-api.html",
+        "evidence": "Official blog announcement dated 2017-12-30 says GDLotto launched a result-feed API for live 4D positions A-W.",
+        "assessment": "Earliest official operational/API evidence found in this audit. It proves the API existed by 2017-12-30, not that the operator began then; it does not establish whether 2016 draws existed."
       }
     ],
     "magnum": [
