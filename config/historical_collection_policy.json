@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "effective_date": "2026-11-02",
+  "effective_date": "2026-11-04",
   "historical_targets": {
     "magnum": {
       "operator_id": "magnum",
@@ -130,8 +130,8 @@
       {
         "source": "Keputusan4D",
         "url": "https://keputusan4d.com/4d-operators/grand-dragon/",
-        "evidence": "Operator-specific page declares 853 distinct archived Grand Dragon draw dates, 2024-07-02 through 2026-11-01, with all 23 prize positions. Its methodology says results are taken from official operator publishers and the operator's own result is decisive. The general history index gives a slightly different overall archive boundary (2024-07-03 through 2026-11-02); the 2026-11-02 date page also contains a complete 23-number Grand Dragon result.",
-        "assessment": "High-priority full-draw cross-check source for the 2024-07-02..2026-11-01 overlap. Exact date-by-date and 23-field comparison against the canonical Grand Dragon CSV is still required; do not promote records solely from the archive's own claim. The 2026-11-01 and 2026-11-02 pages each match the current candidate 23/23, with draw IDs 3610/2026 and 3611/2026 respectively."
+        "evidence": "Current operator-specific page reports 855 distinct draw dates from 2024-07-02 through 2026-11-03. The 2026-11-03 date page lists draw 3612/2026 and all 23 prize numbers; its full board matches the staged 2026-11-03 candidate.",
+        "assessment": "High-priority full-draw cross-check source. The 855-date archive still requires date-by-date and 23-field comparison against the canonical Grand Dragon CSV; do not promote records solely from the archive's own source claim."
       },
       {
         "source": "4D Malaya",
@@ -148,8 +148,8 @@
       {
         "source": "Check4D",
         "url": "https://www.check4d.org/past-results/2020-09-09",
-        "evidence": "Searchable 2020 Cambodia 4D date pages display all 23 Grand Dragon prize numbers; sample pages found for 2020-09-09, 2020-11-07 and other dates.",
-        "assessment": "Historical recovery source. Same lineage as older Grand Dragon rows in 4D Live Today where that site says it imports check4d.org."
+        "evidence": "Searchable Cambodia date pages expose complete 23-number Grand Dragon results, including 2020-09-09 and 2022-01-02/02-05/03-02/03-06/04-02/04-03/04-06. The 2022-04-02, 2022-04-03 and 2022-04-06 full boards match corresponding 4D2ULive pages and have been staged as candidates.",
+        "assessment": "Historical recovery source. Some older records may share lineage with 4D Live Today, which discloses Check4D as an upstream source. Treat matching pages as corroboration evidence only; these three staged 2022 candidates remain unverified until source lineage independence is established."
       },
       {
         "source": "Live4D2U",
@@ -166,8 +166,8 @@
       {
         "source": "4D2ULive",
         "url": "https://4d2ulive.com/grand-dragon-4d-all/page/358/",
-        "evidence": "Paginated archive search results expose complete 23-number Grand Dragon draws in December 2020 and other 2020–2021 pages.",
-        "assessment": "Full-draw historical recovery candidate; lineage must be compared with Check4D before treating as independent."
+        "evidence": "Date-specific and paginated Cambodia archives expose full 23-number Grand Dragon draws in 2020 (including 2020-07-03, 2020-08-04, 2020-09-11, 2020-09-21, 2020-10-22 and December 2020) and 2022 (2022-03-04, 2022-04-02, 2022-04-03, 2022-04-06). Its 2026-11-03 page also displays the full 23-number draw 3612/2026. The 2022-04-02/03/06 boards match Check4D field-for-field.",
+        "assessment": "High-priority historical recovery archive. Upstream lineage relative to Check4D and 4D Live Today is not proven. The three matching 2022-04 candidates remain staged as unverified and must not be promoted solely because two websites display the same board."
       },
       {
         "source": "GD4D number history",
