@@ -233,6 +233,12 @@
         "source": "4D Live Today REST API / MCP",
         "url": "https://4dlivetoday.com/en/developers",
         "evidence": "The published API documents GET /api/v1/results/{date} for all operators on a specific draw date and GET /api/v1/operators/{operator}?limit=1-30 for recent draws. Responses include source, CC BY 4.0 license, generated_at and a matching result-page URL. Use the date endpoint to cross-check specific historical candidates. API coverage does not establish 2016 inception or independently validate the 2017 Like4D rows; those remain unverified until full-board corroboration."
+      },
+      {
+        "source": "4D 万字迷 (Like4D) Grand Dragon archive page 350 — oldest page",
+        "url": "https://blog.like4d.com/tag/%E8%B1%B9%E9%BE%994d%E6%88%90%E7%BB%A9/page/350/",
+        "evidence": "The oldest pagination page currently exposed by this Grand Dragon tag archive contains draws 001/2017, 002/2017 and 003/2017 dated 2017-01-01 to 2017-01-03. These three complete 23-number boards were manually transcribed into data/manual_import/grand_dragon_candidates_2017-01-01_to_2017-01-03_like4d.csv. This is the earliest date currently found in this archive, not proof of the operator's inception date.",
+        "assessment": "Single third-party archive only. No independent full-board cross-check or official evidence ruling out 2016 draws has been established. All three rows remain unverified and quarantined."
       }
     ],
     "magnum": [
