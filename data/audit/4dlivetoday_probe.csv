@@ -15,51 +15,407 @@ date,operator_id,operator_name,api_status,http_status,draw_no,first,second,third
 2017-01-01,sportstoto,Sports Toto 4D,checked,200,4529/17,1633,3114,7672,10,10,https://4dlivetoday.com/en/results/2017-01-01,data/source_snapshots/4dlivetoday/2017-01-01.json,
 2017-01-01,damacai,Da Ma Cai 1+3D,history,200,4476/17,0444,5023,4535,10,10,https://4dlivetoday.com/en/results/2017-01-01,data/source_snapshots/4dlivetoday/2017-01-01.json,
 2017-01-01,grand_dragon,Grand Dragon 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2017-01-01.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
-2019-01-21,magnum,Magnum 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2019-01-21.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
-2019-01-21,sportstoto,Sports Toto 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2019-01-21.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
-2019-01-21,damacai,Da Ma Cai 1+3D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2019-01-21.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
-2019-01-21,grand_dragon,Grand Dragon 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2019-01-21.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
-2020-03-03,magnum,Magnum 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2020-03-03.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
-2020-03-03,sportstoto,Sports Toto 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2020-03-03.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
-2020-03-03,damacai,Da Ma Cai 1+3D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2020-03-03.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
-2020-03-03,grand_dragon,Grand Dragon 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2020-03-03.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
-2020-04-11,magnum,Magnum 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2020-04-11.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
-2020-04-11,sportstoto,Sports Toto 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2020-04-11.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
-2020-04-11,damacai,Da Ma Cai 1+3D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2020-04-11.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
-2020-04-11,grand_dragon,Grand Dragon 4D,history,200,,0950,3313,6529,10,10,https://4dlivetoday.com/en/results/2020-04-11,data/source_snapshots/4dlivetoday/2020-04-11.json,
-2020-07-11,magnum,Magnum 4D,checked,200,376/20,1306,3325,0599,10,10,https://4dlivetoday.com/en/results/2020-07-11,data/source_snapshots/4dlivetoday/2020-07-11.json,
-2020-07-11,sportstoto,Sports Toto 4D,checked,200,5140/20,8655,6222,1269,10,10,https://4dlivetoday.com/en/results/2020-07-11,data/source_snapshots/4dlivetoday/2020-07-11.json,
-2020-07-11,damacai,Da Ma Cai 1+3D,history,200,5087/20,2899,0557,4757,10,10,https://4dlivetoday.com/en/results/2020-07-11,data/source_snapshots/4dlivetoday/2020-07-11.json,
-2020-07-11,grand_dragon,Grand Dragon 4D,history,200,,3340,9704,3793,10,10,https://4dlivetoday.com/en/results/2020-07-11,data/source_snapshots/4dlivetoday/2020-07-11.json,
-2020-09-09,magnum,Magnum 4D,checked,200,403/20,0735,8740,4518,10,10,https://4dlivetoday.com/en/results/2020-09-09,data/source_snapshots/4dlivetoday/2020-09-09.json,
-2020-09-09,sportstoto,Sports Toto 4D,checked,200,5167/20,8959,7147,7727,10,10,https://4dlivetoday.com/en/results/2020-09-09,data/source_snapshots/4dlivetoday/2020-09-09.json,
-2020-09-09,damacai,Da Ma Cai 1+3D,checked,200,5114/20,2423,9118,9970,10,10,https://4dlivetoday.com/en/results/2020-09-09,data/source_snapshots/4dlivetoday/2020-09-09.json,
-2020-09-09,grand_dragon,Grand Dragon 4D,history,200,,8397,4851,3343,10,10,https://4dlivetoday.com/en/results/2020-09-09,data/source_snapshots/4dlivetoday/2020-09-09.json,
-2020-11-07,magnum,Magnum 4D,checked,200,430/20,9191,2982,7172,10,10,https://4dlivetoday.com/en/results/2020-11-07,data/source_snapshots/4dlivetoday/2020-11-07.json,
-2020-11-07,sportstoto,Sports Toto 4D,checked,200,5194/20,4783,2949,7915,10,10,https://4dlivetoday.com/en/results/2020-11-07,data/source_snapshots/4dlivetoday/2020-11-07.json,
-2020-11-07,damacai,Da Ma Cai 1+3D,history,200,5141/20,7682,6212,2993,10,10,https://4dlivetoday.com/en/results/2020-11-07,data/source_snapshots/4dlivetoday/2020-11-07.json,
-2020-11-07,grand_dragon,Grand Dragon 4D,history,200,,5963,0716,9182,10,10,https://4dlivetoday.com/en/results/2020-11-07,data/source_snapshots/4dlivetoday/2020-11-07.json,
-2020-12-13,magnum,Magnum 4D,checked,200,447/20,7656,1311,2205,10,10,https://4dlivetoday.com/en/results/2020-12-13,data/source_snapshots/4dlivetoday/2020-12-13.json,
-2020-12-13,sportstoto,Sports Toto 4D,checked,200,5211/20,1356,7794,9844,10,10,https://4dlivetoday.com/en/results/2020-12-13,data/source_snapshots/4dlivetoday/2020-12-13.json,
-2020-12-13,damacai,Da Ma Cai 1+3D,history,200,5158/20,0677,5412,3065,10,10,https://4dlivetoday.com/en/results/2020-12-13,data/source_snapshots/4dlivetoday/2020-12-13.json,
-2020-12-13,grand_dragon,Grand Dragon 4D,history,200,,5685,2967,1114,10,10,https://4dlivetoday.com/en/results/2020-12-13,data/source_snapshots/4dlivetoday/2020-12-13.json,
-2021-01-01,magnum,Magnum 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2021-01-01.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
-2021-01-01,sportstoto,Sports Toto 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2021-01-01.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
-2021-01-01,damacai,Da Ma Cai 1+3D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2021-01-01.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
-2021-01-01,grand_dragon,Grand Dragon 4D,history,200,,6940,8457,9258,10,10,https://4dlivetoday.com/en/results/2021-01-01,data/source_snapshots/4dlivetoday/2021-01-01.json,
-2021-12-31,magnum,Magnum 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2021-12-31.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
-2021-12-31,sportstoto,Sports Toto 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2021-12-31.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
-2021-12-31,damacai,Da Ma Cai 1+3D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2021-12-31.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
-2021-12-31,grand_dragon,Grand Dragon 4D,checked,200,,5941,6326,4169,10,10,https://4dlivetoday.com/en/results/2021-12-31,data/source_snapshots/4dlivetoday/2021-12-31.json,
-2022-04-21,magnum,Magnum 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2022-04-21.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
-2022-04-21,sportstoto,Sports Toto 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2022-04-21.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
-2022-04-21,damacai,Da Ma Cai 1+3D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2022-04-21.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
-2022-04-21,grand_dragon,Grand Dragon 4D,history,200,,6141,2273,5109,10,10,https://4dlivetoday.com/en/results/2022-04-21,data/source_snapshots/4dlivetoday/2022-04-21.json,
-2026-10-30,magnum,Magnum 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2026-10-30.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
-2026-10-30,sportstoto,Sports Toto 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2026-10-30.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
-2026-10-30,damacai,Da Ma Cai 1+3D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2026-10-30.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
-2026-10-30,grand_dragon,Grand Dragon 4D,checked,200,,8463,0698,7182,10,10,https://4dlivetoday.com/en/results/2026-10-30,data/source_snapshots/4dlivetoday/2026-10-30.json,
-2026-11-01,magnum,Magnum 4D,checked,200,444/26,5060,8133,3762,10,10,https://4dlivetoday.com/en/results/2026-11-01,data/source_snapshots/4dlivetoday/2026-11-01.json,
-2026-11-01,sportstoto,Sports Toto 4D,checked,200,6207/26,2270,9276,4275,10,10,https://4dlivetoday.com/en/results/2026-11-01,data/source_snapshots/4dlivetoday/2026-11-01.json,
-2026-11-01,damacai,Da Ma Cai 1+3D,checked,200,6154/26,4863,0700,5201,10,10,https://4dlivetoday.com/en/results/2026-11-01,data/source_snapshots/4dlivetoday/2026-11-01.json,
-2026-11-01,grand_dragon,Grand Dragon 4D,history,200,,0140,7264,6867,10,10,https://4dlivetoday.com/en/results/2026-11-01,data/source_snapshots/4dlivetoday/2026-11-01.json,
+2017-01-02,magnum,Magnum 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2017-01-02.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2017-01-02,sportstoto,Sports Toto 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2017-01-02.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2017-01-02,damacai,Da Ma Cai 1+3D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2017-01-02.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2017-01-02,grand_dragon,Grand Dragon 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2017-01-02.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2017-01-03,magnum,Magnum 4D,checked,200,758/17,8383,3600,0817,10,10,https://4dlivetoday.com/en/results/2017-01-03,data/source_snapshots/4dlivetoday/2017-01-03.json,
+2017-01-03,sportstoto,Sports Toto 4D,checked,200,4530/17,9121,0418,3275,10,10,https://4dlivetoday.com/en/results/2017-01-03,data/source_snapshots/4dlivetoday/2017-01-03.json,
+2017-01-03,damacai,Da Ma Cai 1+3D,history,200,4477/17,2077,7059,7349,10,10,https://4dlivetoday.com/en/results/2017-01-03,data/source_snapshots/4dlivetoday/2017-01-03.json,
+2017-01-03,grand_dragon,Grand Dragon 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2017-01-03.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2017-01-04,magnum,Magnum 4D,checked,200,759/17,0300,5667,4046,10,10,https://4dlivetoday.com/en/results/2017-01-04,data/source_snapshots/4dlivetoday/2017-01-04.json,
+2017-01-04,sportstoto,Sports Toto 4D,checked,200,4531/17,5780,8932,0137,10,10,https://4dlivetoday.com/en/results/2017-01-04,data/source_snapshots/4dlivetoday/2017-01-04.json,
+2017-01-04,damacai,Da Ma Cai 1+3D,history,200,4478/17,6850,3698,4178,10,10,https://4dlivetoday.com/en/results/2017-01-04,data/source_snapshots/4dlivetoday/2017-01-04.json,
+2017-01-04,grand_dragon,Grand Dragon 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2017-01-04.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2017-01-05,magnum,Magnum 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2017-01-05.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2017-01-05,sportstoto,Sports Toto 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2017-01-05.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2017-01-05,damacai,Da Ma Cai 1+3D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2017-01-05.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2017-01-05,grand_dragon,Grand Dragon 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2017-01-05.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2017-01-08,magnum,Magnum 4D,checked,200,761/17,6176,8024,4291,10,10,https://4dlivetoday.com/en/results/2017-01-08,data/source_snapshots/4dlivetoday/2017-01-08.json,
+2017-01-08,sportstoto,Sports Toto 4D,checked,200,4533/17,0340,2508,8466,10,10,https://4dlivetoday.com/en/results/2017-01-08,data/source_snapshots/4dlivetoday/2017-01-08.json,
+2017-01-08,damacai,Da Ma Cai 1+3D,history,200,4480/17,4258,9295,5153,10,10,https://4dlivetoday.com/en/results/2017-01-08,data/source_snapshots/4dlivetoday/2017-01-08.json,
+2017-01-08,grand_dragon,Grand Dragon 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2017-01-08.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2017-01-21,magnum,Magnum 4D,checked,200,767/17,9125,6631,5773,10,10,https://4dlivetoday.com/en/results/2017-01-21,data/source_snapshots/4dlivetoday/2017-01-21.json,
+2017-01-21,sportstoto,Sports Toto 4D,checked,200,4539/17,1480,1747,2832,10,10,https://4dlivetoday.com/en/results/2017-01-21,data/source_snapshots/4dlivetoday/2017-01-21.json,
+2017-01-21,damacai,Da Ma Cai 1+3D,history,200,4486/17,8359,0639,1871,10,10,https://4dlivetoday.com/en/results/2017-01-21,data/source_snapshots/4dlivetoday/2017-01-21.json,
+2017-01-21,grand_dragon,Grand Dragon 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2017-01-21.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2017-02-09,magnum,Magnum 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2017-02-09.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2017-02-09,sportstoto,Sports Toto 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2017-02-09.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2017-02-09,damacai,Da Ma Cai 1+3D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2017-02-09.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2017-02-09,grand_dragon,Grand Dragon 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2017-02-09.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2017-02-11,magnum,Magnum 4D,checked,200,779/17,6595,9902,5638,10,10,https://4dlivetoday.com/en/results/2017-02-11,data/source_snapshots/4dlivetoday/2017-02-11.json,
+2017-02-11,sportstoto,Sports Toto 4D,checked,200,4551/17,8986,9535,6399,10,10,https://4dlivetoday.com/en/results/2017-02-11,data/source_snapshots/4dlivetoday/2017-02-11.json,
+2017-02-11,damacai,Da Ma Cai 1+3D,history,200,4498/17,0368,7212,8136,10,10,https://4dlivetoday.com/en/results/2017-02-11,data/source_snapshots/4dlivetoday/2017-02-11.json,
+2017-02-11,grand_dragon,Grand Dragon 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2017-02-11.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2017-02-18,magnum,Magnum 4D,checked,200,782/17,9599,8109,3833,10,10,https://4dlivetoday.com/en/results/2017-02-18,data/source_snapshots/4dlivetoday/2017-02-18.json,
+2017-02-18,sportstoto,Sports Toto 4D,checked,200,4554/17,9801,5324,8235,10,10,https://4dlivetoday.com/en/results/2017-02-18,data/source_snapshots/4dlivetoday/2017-02-18.json,
+2017-02-18,damacai,Da Ma Cai 1+3D,history,200,4501/17,5585,3477,6510,10,10,https://4dlivetoday.com/en/results/2017-02-18,data/source_snapshots/4dlivetoday/2017-02-18.json,
+2017-02-18,grand_dragon,Grand Dragon 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2017-02-18.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2017-03-26,magnum,Magnum 4D,checked,200,800/17,7160,6280,1903,10,10,https://4dlivetoday.com/en/results/2017-03-26,data/source_snapshots/4dlivetoday/2017-03-26.json,
+2017-03-26,sportstoto,Sports Toto 4D,checked,200,4571/17,2848,9297,0170,10,10,https://4dlivetoday.com/en/results/2017-03-26,data/source_snapshots/4dlivetoday/2017-03-26.json,
+2017-03-26,damacai,Da Ma Cai 1+3D,history,200,4518/17,3719,5049,1660,10,10,https://4dlivetoday.com/en/results/2017-03-26,data/source_snapshots/4dlivetoday/2017-03-26.json,
+2017-03-26,grand_dragon,Grand Dragon 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2017-03-26.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2017-03-27,magnum,Magnum 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2017-03-27.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2017-03-27,sportstoto,Sports Toto 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2017-03-27.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2017-03-27,damacai,Da Ma Cai 1+3D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2017-03-27.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2017-03-27,grand_dragon,Grand Dragon 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2017-03-27.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2017-03-28,magnum,Magnum 4D,checked,200,801/17,6696,9959,5294,10,10,https://4dlivetoday.com/en/results/2017-03-28,data/source_snapshots/4dlivetoday/2017-03-28.json,
+2017-03-28,sportstoto,Sports Toto 4D,checked,200,4572/17,7004,6971,5458,10,10,https://4dlivetoday.com/en/results/2017-03-28,data/source_snapshots/4dlivetoday/2017-03-28.json,
+2017-03-28,damacai,Da Ma Cai 1+3D,history,200,4519/17,0935,4329,2588,10,10,https://4dlivetoday.com/en/results/2017-03-28,data/source_snapshots/4dlivetoday/2017-03-28.json,
+2017-03-28,grand_dragon,Grand Dragon 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2017-03-28.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2017-03-29,magnum,Magnum 4D,checked,200,802/17,2742,9660,1792,10,10,https://4dlivetoday.com/en/results/2017-03-29,data/source_snapshots/4dlivetoday/2017-03-29.json,
+2017-03-29,sportstoto,Sports Toto 4D,checked,200,4573/17,3963,5293,7268,10,10,https://4dlivetoday.com/en/results/2017-03-29,data/source_snapshots/4dlivetoday/2017-03-29.json,
+2017-03-29,damacai,Da Ma Cai 1+3D,history,200,4520/17,8336,6001,1444,10,10,https://4dlivetoday.com/en/results/2017-03-29,data/source_snapshots/4dlivetoday/2017-03-29.json,
+2017-03-29,grand_dragon,Grand Dragon 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2017-03-29.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2017-03-30,magnum,Magnum 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2017-03-30.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2017-03-30,sportstoto,Sports Toto 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2017-03-30.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2017-03-30,damacai,Da Ma Cai 1+3D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2017-03-30.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2017-03-30,grand_dragon,Grand Dragon 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2017-03-30.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2017-03-31,magnum,Magnum 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2017-03-31.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2017-03-31,sportstoto,Sports Toto 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2017-03-31.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2017-03-31,damacai,Da Ma Cai 1+3D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2017-03-31.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2017-03-31,grand_dragon,Grand Dragon 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2017-03-31.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2017-04-01,magnum,Magnum 4D,checked,200,803/17,0803,3761,1654,10,10,https://4dlivetoday.com/en/results/2017-04-01,data/source_snapshots/4dlivetoday/2017-04-01.json,
+2017-04-01,sportstoto,Sports Toto 4D,checked,200,4574/17,0570,3843,1609,10,10,https://4dlivetoday.com/en/results/2017-04-01,data/source_snapshots/4dlivetoday/2017-04-01.json,
+2017-04-01,damacai,Da Ma Cai 1+3D,history,200,4521/17,3060,6458,5020,10,10,https://4dlivetoday.com/en/results/2017-04-01,data/source_snapshots/4dlivetoday/2017-04-01.json,
+2017-04-01,grand_dragon,Grand Dragon 4D,no_record_in_api,200,,,,,0,0,,data/source_snapshots/4dlivetoday/2017-04-01.json,No row returned by this API for this operator/date; this is not proof of a non-draw day.
+2017-04-02,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-04-02
+2017-04-02,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-04-02
+2017-04-02,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-04-02
+2017-04-02,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-04-02
+2017-04-03,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-04-03
+2017-04-03,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-04-03
+2017-04-03,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-04-03
+2017-04-03,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-04-03
+2017-04-04,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-04-04
+2017-04-04,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-04-04
+2017-04-04,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-04-04
+2017-04-04,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-04-04
+2017-04-24,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-04-24
+2017-04-24,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-04-24
+2017-04-24,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-04-24
+2017-04-24,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-04-24
+2017-04-27,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-04-27
+2017-04-27,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-04-27
+2017-04-27,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-04-27
+2017-04-27,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-04-27
+2017-05-25,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-05-25
+2017-05-25,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-05-25
+2017-05-25,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-05-25
+2017-05-25,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-05-25
+2017-05-26,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-05-26
+2017-05-26,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-05-26
+2017-05-26,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-05-26
+2017-05-26,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-05-26
+2017-05-27,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-05-27
+2017-05-27,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-05-27
+2017-05-27,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-05-27
+2017-05-27,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-05-27
+2017-05-28,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-05-28
+2017-05-28,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-05-28
+2017-05-28,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-05-28
+2017-05-28,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-05-28
+2017-05-29,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-05-29
+2017-05-29,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-05-29
+2017-05-29,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-05-29
+2017-05-29,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-05-29
+2017-05-30,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-05-30
+2017-05-30,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-05-30
+2017-05-30,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-05-30
+2017-05-30,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-05-30
+2017-05-31,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-05-31
+2017-05-31,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-05-31
+2017-05-31,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-05-31
+2017-05-31,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-05-31
+2017-06-01,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-06-01
+2017-06-01,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-06-01
+2017-06-01,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-06-01
+2017-06-01,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-06-01
+2017-06-02,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-06-02
+2017-06-02,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-06-02
+2017-06-02,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-06-02
+2017-06-02,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-06-02
+2017-06-03,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-06-03
+2017-06-03,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-06-03
+2017-06-03,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-06-03
+2017-06-03,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-06-03
+2017-06-06,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-06-06
+2017-06-06,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-06-06
+2017-06-06,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-06-06
+2017-06-06,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-06-06
+2017-06-07,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-06-07
+2017-06-07,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-06-07
+2017-06-07,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-06-07
+2017-06-07,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-06-07
+2017-06-08,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-06-08
+2017-06-08,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-06-08
+2017-06-08,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-06-08
+2017-06-08,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-06-08
+2017-08-20,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-08-20
+2017-08-20,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-08-20
+2017-08-20,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-08-20
+2017-08-20,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-08-20
+2017-11-20,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-20
+2017-11-20,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-20
+2017-11-20,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-20
+2017-11-20,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-20
+2017-11-21,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-21
+2017-11-21,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-21
+2017-11-21,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-21
+2017-11-21,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-21
+2017-11-22,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-22
+2017-11-22,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-22
+2017-11-22,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-22
+2017-11-22,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-22
+2017-11-23,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-23
+2017-11-23,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-23
+2017-11-23,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-23
+2017-11-23,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-23
+2017-11-24,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-24
+2017-11-24,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-24
+2017-11-24,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-24
+2017-11-24,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-24
+2017-11-25,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-25
+2017-11-25,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-25
+2017-11-25,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-25
+2017-11-25,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-25
+2017-11-26,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-26
+2017-11-26,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-26
+2017-11-26,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-26
+2017-11-26,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-26
+2017-11-27,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-27
+2017-11-27,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-27
+2017-11-27,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-27
+2017-11-27,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-27
+2017-11-28,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-28
+2017-11-28,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-28
+2017-11-28,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-28
+2017-11-28,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-28
+2017-11-29,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-29
+2017-11-29,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-29
+2017-11-29,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-29
+2017-11-29,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-29
+2017-11-30,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-30
+2017-11-30,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-30
+2017-11-30,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-30
+2017-11-30,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-11-30
+2017-12-01,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-01
+2017-12-01,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-01
+2017-12-01,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-01
+2017-12-01,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-01
+2017-12-02,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-02
+2017-12-02,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-02
+2017-12-02,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-02
+2017-12-02,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-02
+2017-12-03,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-03
+2017-12-03,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-03
+2017-12-03,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-03
+2017-12-03,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-03
+2017-12-04,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-04
+2017-12-04,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-04
+2017-12-04,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-04
+2017-12-04,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-04
+2017-12-05,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-05
+2017-12-05,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-05
+2017-12-05,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-05
+2017-12-05,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-05
+2017-12-06,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-06
+2017-12-06,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-06
+2017-12-06,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-06
+2017-12-06,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-06
+2017-12-07,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-07
+2017-12-07,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-07
+2017-12-07,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-07
+2017-12-07,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-07
+2017-12-08,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-08
+2017-12-08,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-08
+2017-12-08,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-08
+2017-12-08,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-08
+2017-12-09,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-09
+2017-12-09,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-09
+2017-12-09,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-09
+2017-12-09,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-09
+2017-12-10,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-10
+2017-12-10,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-10
+2017-12-10,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-10
+2017-12-10,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-10
+2017-12-11,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-11
+2017-12-11,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-11
+2017-12-11,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-11
+2017-12-11,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-11
+2017-12-12,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-12
+2017-12-12,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-12
+2017-12-12,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-12
+2017-12-12,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-12
+2017-12-13,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-13
+2017-12-13,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-13
+2017-12-13,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-13
+2017-12-13,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-13
+2017-12-14,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-14
+2017-12-14,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-14
+2017-12-14,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-14
+2017-12-14,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-14
+2017-12-15,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-15
+2017-12-15,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-15
+2017-12-15,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-15
+2017-12-15,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-15
+2017-12-16,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-16
+2017-12-16,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-16
+2017-12-16,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-16
+2017-12-16,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-16
+2017-12-17,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-17
+2017-12-17,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-17
+2017-12-17,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-17
+2017-12-17,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-17
+2017-12-18,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-18
+2017-12-18,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-18
+2017-12-18,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-18
+2017-12-18,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-18
+2017-12-19,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-19
+2017-12-19,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-19
+2017-12-19,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-19
+2017-12-19,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-19
+2017-12-20,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-20
+2017-12-20,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-20
+2017-12-20,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-20
+2017-12-20,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-20
+2017-12-21,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-21
+2017-12-21,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-21
+2017-12-21,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-21
+2017-12-21,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-21
+2017-12-22,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-22
+2017-12-22,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-22
+2017-12-22,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-22
+2017-12-22,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-22
+2017-12-23,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-23
+2017-12-23,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-23
+2017-12-23,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-23
+2017-12-23,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-23
+2017-12-24,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-24
+2017-12-24,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-24
+2017-12-24,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-24
+2017-12-24,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-24
+2017-12-25,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-25
+2017-12-25,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-25
+2017-12-25,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-25
+2017-12-25,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-25
+2017-12-26,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-26
+2017-12-26,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-26
+2017-12-26,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-26
+2017-12-26,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-26
+2017-12-27,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-27
+2017-12-27,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-27
+2017-12-27,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-27
+2017-12-27,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-27
+2017-12-28,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-28
+2017-12-28,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-28
+2017-12-28,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-28
+2017-12-28,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-28
+2017-12-29,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-29
+2017-12-29,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-29
+2017-12-29,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-29
+2017-12-29,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-29
+2017-12-30,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-30
+2017-12-30,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-30
+2017-12-30,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-30
+2017-12-30,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-30
+2017-12-31,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-31
+2017-12-31,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-31
+2017-12-31,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-31
+2017-12-31,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2017-12-31
+2018-02-11,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2018-02-11
+2018-02-11,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2018-02-11
+2018-02-11,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2018-02-11
+2018-02-11,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2018-02-11
+2019-01-21,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2019-01-21
+2019-01-21,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2019-01-21
+2019-01-21,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2019-01-21
+2019-01-21,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2019-01-21
+2019-07-04,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2019-07-04
+2019-07-04,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2019-07-04
+2019-07-04,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2019-07-04
+2019-07-04,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2019-07-04
+2019-12-05,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2019-12-05
+2019-12-05,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2019-12-05
+2019-12-05,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2019-12-05
+2019-12-05,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2019-12-05
+2020-03-03,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2020-03-03
+2020-03-03,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2020-03-03
+2020-03-03,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2020-03-03
+2020-03-03,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2020-03-03
+2020-04-11,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2020-04-11
+2020-04-11,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2020-04-11
+2020-04-11,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2020-04-11
+2020-04-11,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2020-04-11
+2020-07-11,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2020-07-11
+2020-07-11,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2020-07-11
+2020-07-11,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2020-07-11
+2020-07-11,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2020-07-11
+2020-09-09,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2020-09-09
+2020-09-09,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2020-09-09
+2020-09-09,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2020-09-09
+2020-09-09,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2020-09-09
+2020-11-07,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2020-11-07
+2020-11-07,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2020-11-07
+2020-11-07,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2020-11-07
+2020-11-07,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2020-11-07
+2020-12-13,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2020-12-13
+2020-12-13,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2020-12-13
+2020-12-13,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2020-12-13
+2020-12-13,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2020-12-13
+2021-01-01,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2021-01-01
+2021-01-01,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2021-01-01
+2021-01-01,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2021-01-01
+2021-01-01,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2021-01-01
+2021-12-17,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2021-12-17
+2021-12-17,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2021-12-17
+2021-12-17,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2021-12-17
+2021-12-17,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2021-12-17
+2021-12-31,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2021-12-31
+2021-12-31,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2021-12-31
+2021-12-31,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2021-12-31
+2021-12-31,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2021-12-31
+2022-04-02,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2022-04-02
+2022-04-02,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2022-04-02
+2022-04-02,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2022-04-02
+2022-04-02,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2022-04-02
+2022-04-03,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2022-04-03
+2022-04-03,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2022-04-03
+2022-04-03,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2022-04-03
+2022-04-03,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2022-04-03
+2022-04-06,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2022-04-06
+2022-04-06,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2022-04-06
+2022-04-06,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2022-04-06
+2022-04-06,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2022-04-06
+2022-04-14,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2022-04-14
+2022-04-14,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2022-04-14
+2022-04-14,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2022-04-14
+2022-04-14,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2022-04-14
+2022-04-21,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2022-04-21
+2022-04-21,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2022-04-21
+2022-04-21,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2022-04-21
+2022-04-21,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2022-04-21
+2026-10-27,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2026-10-27
+2026-10-27,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2026-10-27
+2026-10-27,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2026-10-27
+2026-10-27,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2026-10-27
+2026-10-30,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2026-10-30
+2026-10-30,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2026-10-30
+2026-10-30,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2026-10-30
+2026-10-30,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2026-10-30
+2026-10-31,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2026-10-31
+2026-10-31,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2026-10-31
+2026-10-31,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2026-10-31
+2026-10-31,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2026-10-31
+2026-11-01,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2026-11-01
+2026-11-01,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2026-11-01
+2026-11-01,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2026-11-01
+2026-11-01,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2026-11-01
+2026-11-02,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2026-11-02
+2026-11-02,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2026-11-02
+2026-11-02,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2026-11-02
+2026-11-02,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2026-11-02
+2026-11-03,magnum,Magnum 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2026-11-03
+2026-11-03,sportstoto,Sports Toto 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2026-11-03
+2026-11-03,damacai,Da Ma Cai 1+3D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2026-11-03
+2026-11-03,grand_dragon,Grand Dragon 4D,fetch_or_parse_failed,429,,,,,0,0,,,429 Client Error: Too Many Requests for url: https://4dlivetoday.com/api/v1/results/2026-11-03
