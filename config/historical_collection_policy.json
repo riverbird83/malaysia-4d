@@ -130,8 +130,8 @@
       {
         "source": "Keputusan4D",
         "url": "https://keputusan4d.com/4d-operators/grand-dragon/",
-        "evidence": "Claims daily draw archive and about 853 past draws, with all 23 prize positions.",
-        "assessment": "Useful full-tier archive candidate; must measure exact date coverage and compare numbers."
+        "evidence": "Operator-specific page declares 853 distinct archived Grand Dragon draw dates, 2024-07-02 through 2026-11-01, with all 23 prize positions. Its methodology says results are taken from official operator publishers and the operator's own result is decisive. The general history index gives a slightly different overall archive boundary (2024-07-03 through 2026-11-02); the 2026-11-02 date page also contains a complete 23-number Grand Dragon result.",
+        "assessment": "High-priority full-draw cross-check source for the 2024-07-02..2026-11-01 overlap. Exact date-by-date and 23-field comparison against the canonical Grand Dragon CSV is still required; do not promote records solely from the archive's own claim. The 2026-11-01 and 2026-11-02 pages each match the current candidate 23/23, with draw IDs 3610/2026 and 3611/2026 respectively."
       },
       {
         "source": "4D Malaya",
@@ -184,8 +184,8 @@
       {
         "source": "Fast4DKing GD-filtered number history",
         "url": "https://mobile.fast4dking.com/v2/searchnumber.php?GD=on&n=3313",
-        "evidence": "The GD-filtered search result lists number 3313 as a Grand Dragon prize hit on 2019-01-21 (draw 766/2019), plus 2020 and later hits.",
-        "assessment": "2019 is an earlier-history candidate requiring a full-draw page or second source; do not promote this single-number hit as a full draw."
+        "evidence": "GD-filtered number history lists 3313 as a Grand Dragon Special hit on 2019-01-21 (draw 766/2019), plus 2020 and later hits. This is an individual-number hit only, not a full draw.",
+        "assessment": "Unresolved single-number lead. The GD4D number-history page for 3313 lists Grand Dragon hits from 2020-03-03 onward and does not show 2019-01-21; the 4D Huat number-history page also does not show a 2019 Grand Dragon hit. The sources may have different coverage, so this is not a confirmed contradiction or a proven inception date. Do not infer a full 23-number draw; seek the original draw page or another date-specific source."
       }
     ],
     "magnum": [
