@@ -204,6 +204,12 @@
         "url": "https://blog.gdlotto.com/2017/12/launched-of-gdlotto-lottery-result-feed-api.html",
         "evidence": "Official blog announcement dated 2017-12-30 says GDLotto launched a result-feed API for live 4D positions A-W.",
         "assessment": "Earliest official operational/API evidence found in this audit. It proves the API existed by 2017-12-30, not that the operator began then; it does not establish whether 2016 draws existed."
+      },
+      {
+        "source": "4D 万字迷 (Like4D) Grand Dragon Results archive",
+        "url": "https://blog.like4d.com/tag/grand-dragon-results/page/335/",
+        "evidence": "The archive page contains full 23-prize boards and draw IDs 144/2017 through 153/2017 for 2017-05-25 to 2017-06-03. Ten date-specific rows were manually transcribed into data/manual_import/grand_dragon_candidates_2017-05-25_to_2017-06-03_like4d.csv; all 23 numbers per row are structurally complete.",
+        "assessment": "Single third-party publisher only. No independent full-board second source or upstream lineage proof has yet been established. All ten staged rows remain unverified and quarantined; do not promote them to canonical data or training."
       }
     ],
     "magnum": [
