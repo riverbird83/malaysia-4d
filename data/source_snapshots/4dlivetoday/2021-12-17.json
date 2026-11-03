@@ -1,0 +1,83 @@
+{
+  "data": {
+    "date": "2021-12-17",
+    "results": [
+      {
+        "operator": "gd",
+        "operator_name": "Grand Dragon 4D",
+        "date": "2021-12-17",
+        "draw_no": "",
+        "first": "7503",
+        "second": "0319",
+        "third": "9489",
+        "special": [
+          "9623",
+          "8069",
+          "4208",
+          "6451",
+          "2574",
+          "4137",
+          "2645",
+          "2045",
+          "9384",
+          "2758"
+        ],
+        "consolation": [
+          "5461",
+          "6887",
+          "9741",
+          "0207",
+          "5126",
+          "0781",
+          "4943",
+          "1303",
+          "0862",
+          "0754"
+        ],
+        "status": "history",
+        "url": "https://4dlivetoday.com/en/results/2021-12-17"
+      },
+      {
+        "operator": "perdana",
+        "operator_name": "Perdana 4D",
+        "date": "2021-12-17",
+        "draw_no": "",
+        "first": "2146",
+        "second": "9941",
+        "third": "0106",
+        "special": [
+          "4245",
+          "8766",
+          "5665",
+          "1784",
+          "1391",
+          "1492",
+          "9621",
+          "0326",
+          "3145",
+          "2701"
+        ],
+        "consolation": [
+          "6334",
+          "1822",
+          "7776",
+          "1336",
+          "3147",
+          "7462",
+          "8323",
+          "3722",
+          "1182",
+          "9982"
+        ],
+        "status": "history",
+        "url": "https://4dlivetoday.com/en/results/2021-12-17"
+      }
+    ]
+  },
+  "source": "4dlivetoday.com",
+  "license": "CC BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "attribution": "Results from 4dlivetoday.com (https://4dlivetoday.com), compiled from each operator's official site.",
+  "generated_at": "2026-11-03T21:47:02.520Z",
+  "url": "https://4dlivetoday.com/en/results/2021-12-17"
+}

@@ -1,0 +1,223 @@
+{
+  "data": {
+    "date": "2017-12-26",
+    "results": [
+      {
+        "operator": "cashsweep",
+        "operator_name": "Sarawak Cash Sweep",
+        "date": "2017-12-26",
+        "draw_no": "3863",
+        "first": "6323",
+        "second": "5933",
+        "third": "0217",
+        "special": [
+          "7236",
+          "5488",
+          "7561",
+          "8323",
+          "1264",
+          "0453",
+          "8633",
+          "3239",
+          "7269",
+          "7314"
+        ],
+        "consolation": [
+          "1811",
+          "2305",
+          "5080",
+          "3205",
+          "8902",
+          "0901",
+          "9494",
+          "4060",
+          "7627",
+          "1462"
+        ],
+        "status": "history",
+        "url": "https://4dlivetoday.com/en/results/2017-12-26"
+      },
+      {
+        "operator": "damacai",
+        "operator_name": "Da Ma Cai 1+3D",
+        "date": "2017-12-26",
+        "draw_no": "4651/17",
+        "first": "7900",
+        "second": "0702",
+        "third": "9845",
+        "special": [
+          "5345",
+          "3006",
+          "0282",
+          "9748",
+          "5835",
+          "6140",
+          "3203",
+          "3281",
+          "7971",
+          "9262"
+        ],
+        "consolation": [
+          "5728",
+          "5661",
+          "8201",
+          "0309",
+          "9220",
+          "5819",
+          "1270",
+          "2431",
+          "9408",
+          "4502"
+        ],
+        "status": "history",
+        "url": "https://4dlivetoday.com/en/results/2017-12-26"
+      },
+      {
+        "operator": "magnum",
+        "operator_name": "Magnum 4D",
+        "date": "2017-12-26",
+        "draw_no": "936/17",
+        "first": "6929",
+        "second": "0745",
+        "third": "2387",
+        "special": [
+          "8038",
+          "4027",
+          "3725",
+          "6464",
+          "5424",
+          "8446",
+          "2463",
+          "1057",
+          "3594",
+          "2043"
+        ],
+        "consolation": [
+          "6515",
+          "0226",
+          "8249",
+          "2415",
+          "5300",
+          "3822",
+          "0078",
+          "2327",
+          "9478",
+          "5829"
+        ],
+        "status": "checked",
+        "url": "https://4dlivetoday.com/en/results/2017-12-26"
+      },
+      {
+        "operator": "sabah88",
+        "operator_name": "Sabah 88 4D",
+        "date": "2017-12-26",
+        "draw_no": "2770/17",
+        "first": "6349",
+        "second": "0867",
+        "third": "5230",
+        "special": [
+          "3197",
+          "3773",
+          "0529",
+          "9772",
+          "5990",
+          "2420",
+          "1248",
+          "7798",
+          "9412",
+          "3547"
+        ],
+        "consolation": [
+          "7627",
+          "0468",
+          "0984",
+          "5999",
+          "6879",
+          "7585",
+          "4151",
+          "8497",
+          "8705",
+          "5659"
+        ],
+        "status": "history",
+        "url": "https://4dlivetoday.com/en/results/2017-12-26"
+      },
+      {
+        "operator": "stc",
+        "operator_name": "Sandakan STC 4D",
+        "date": "2017-12-26",
+        "draw_no": "176/17",
+        "first": "2176",
+        "second": "9479",
+        "third": "4774",
+        "special": [
+          "3905",
+          "6607",
+          "8338",
+          "7190",
+          "0615",
+          "4092",
+          "1180",
+          "9753",
+          "4911",
+          "7445"
+        ],
+        "consolation": [
+          "8702",
+          "2122",
+          "0342",
+          "9820",
+          "5760",
+          "0616",
+          "9887",
+          "1224",
+          "3463",
+          "4705"
+        ],
+        "status": "history",
+        "url": "https://4dlivetoday.com/en/results/2017-12-26"
+      },
+      {
+        "operator": "toto",
+        "operator_name": "Sports Toto 4D",
+        "date": "2017-12-26",
+        "draw_no": "4704/17",
+        "first": "0410",
+        "second": "5493",
+        "third": "3731",
+        "special": [
+          "8253",
+          "4898",
+          "8398",
+          "1599",
+          "4593",
+          "2349",
+          "7386",
+          "5573",
+          "9549",
+          "0038"
+        ],
+        "consolation": [
+          "8809",
+          "3387",
+          "4303",
+          "9624",
+          "5778",
+          "6407",
+          "6028",
+          "1853",
+          "4564",
+          "0465"
+        ],
+        "status": "checked",
+        "url": "https://4dlivetoday.com/en/results/2017-12-26"
+      }
+    ]
+  },
+  "source": "4dlivetoday.com",
+  "license": "CC BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "attribution": "Results from 4dlivetoday.com (https://4dlivetoday.com), compiled from each operator's official site.",
+  "generated_at": "2026-11-03T21:46:24.733Z",
+  "url": "https://4dlivetoday.com/en/results/2017-12-26"
+}

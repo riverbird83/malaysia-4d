@@ -1,0 +1,153 @@
+{
+  "data": {
+    "date": "2026-11-02",
+    "results": [
+      {
+        "operator": "perdana",
+        "operator_name": "Perdana 4D",
+        "date": "2026-11-02",
+        "draw_no": "",
+        "first": "0462",
+        "second": "6256",
+        "third": "0327",
+        "special": [
+          "5451",
+          "5710",
+          "7751",
+          "9515",
+          "4489",
+          "8588",
+          "7300",
+          "8046",
+          "7747",
+          "4089"
+        ],
+        "consolation": [
+          "0382",
+          "8690",
+          "8442",
+          "9545",
+          "7171",
+          "4434",
+          "4354",
+          "9873",
+          "7429",
+          "4478"
+        ],
+        "status": "single_source",
+        "url": "https://4dlivetoday.com/en/results/2026-11-02"
+      },
+      {
+        "operator": "9lotto",
+        "operator_name": "9 Lotto 4D",
+        "date": "2026-11-02",
+        "draw_no": "",
+        "first": "6263",
+        "second": "5592",
+        "third": "6702",
+        "special": [
+          "0566",
+          "7872",
+          "8853",
+          "3772",
+          "3914",
+          "3423",
+          "7022",
+          "8400",
+          "4850",
+          "3233"
+        ],
+        "consolation": [
+          "6537",
+          "2032",
+          "9876",
+          "7213",
+          "5882",
+          "8406",
+          "2286",
+          "6927",
+          "6062",
+          "0496"
+        ],
+        "status": "single_source",
+        "url": "https://4dlivetoday.com/en/results/2026-11-02"
+      },
+      {
+        "operator": "gd",
+        "operator_name": "Grand Dragon 4D",
+        "date": "2026-11-02",
+        "draw_no": "",
+        "first": "9062",
+        "second": "6983",
+        "third": "5079",
+        "special": [
+          "1485",
+          "9668",
+          "0844",
+          "2041",
+          "1725",
+          "5620",
+          "5396",
+          "3558",
+          "3186",
+          "5768"
+        ],
+        "consolation": [
+          "5447",
+          "0451",
+          "0019",
+          "8716",
+          "7460",
+          "7910",
+          "6791",
+          "6963",
+          "6715",
+          "5434"
+        ],
+        "status": "history",
+        "url": "https://4dlivetoday.com/en/results/2026-11-02"
+      },
+      {
+        "operator": "perdana3pm",
+        "operator_name": "Perdana 4D (afternoon)",
+        "date": "2026-11-02",
+        "draw_no": "",
+        "first": "0521",
+        "second": "1395",
+        "third": "6054",
+        "special": [
+          "4642",
+          "2436",
+          "5554",
+          "5481",
+          "7787",
+          "9888",
+          "1555",
+          "1749",
+          "6720",
+          "3090"
+        ],
+        "consolation": [
+          "9617",
+          "6298",
+          "4972",
+          "6107",
+          "2159",
+          "3790",
+          "2551",
+          "7863",
+          "8879",
+          "2138"
+        ],
+        "status": "single_source",
+        "url": "https://4dlivetoday.com/en/results/2026-11-02"
+      }
+    ]
+  },
+  "source": "4dlivetoday.com",
+  "license": "CC BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "attribution": "Results from 4dlivetoday.com (https://4dlivetoday.com), compiled from each operator's official site.",
+  "generated_at": "2026-11-03T21:47:40.171Z",
+  "url": "https://4dlivetoday.com/en/results/2026-11-02"
+}
