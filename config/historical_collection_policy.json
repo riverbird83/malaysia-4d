@@ -222,6 +222,12 @@
         "url": "https://blog.like4d.com/tag/5831/page/3/",
         "evidence": "Archive page shows Grand Dragon draw 008/2017 on 2017-01-08 with all 23 prize numbers. The full board was manually transcribed to data/manual_import/grand_dragon_candidates_2017-01-05_and_2017-01-08_like4d.csv.",
         "assessment": "Single third-party page only. No independent full-board cross-check has been established; staged row remains unverified and quarantined."
+      },
+      {
+        "source": "4D 万字迷 (Like4D) Grand Dragon archive page 341",
+        "url": "https://blog.like4d.com/tag/%E8%B1%B9%E9%BE%994d%E6%88%90%E7%BB%A9/page/341/",
+        "evidence": "Archive page contains full 23-prize boards and draw IDs 084/2017 through 093/2017 for 2017-03-26 to 2017-04-04. Ten date-specific rows were manually transcribed into data/manual_import/grand_dragon_candidates_2017-03-26_to_2017-04-04_like4d.csv.",
+        "assessment": "Single third-party archive page only. No independent full-board second source or upstream lineage proof has been established; all ten staged rows remain unverified and quarantined."
       }
     ],
     "magnum": [
