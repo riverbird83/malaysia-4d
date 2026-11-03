@@ -210,6 +210,18 @@
         "url": "https://blog.like4d.com/tag/grand-dragon-results/page/335/",
         "evidence": "The archive page contains full 23-prize boards and draw IDs 144/2017 through 153/2017 for 2017-05-25 to 2017-06-03. Ten date-specific rows were manually transcribed into data/manual_import/grand_dragon_candidates_2017-05-25_to_2017-06-03_like4d.csv; all 23 numbers per row are structurally complete.",
         "assessment": "Single third-party publisher only. No independent full-board second source or upstream lineage proof has yet been established. All ten staged rows remain unverified and quarantined; do not promote them to canonical data or training."
+      },
+      {
+        "source": "4D 万字迷 (Like4D) Grand Dragon draw 005/2017",
+        "url": "https://blog.like4d.com/%E8%B1%AA%E9%BE%994D%E6%88%90%E7%BB%A9-005-2017/amp/",
+        "evidence": "Date-specific archive page shows Grand Dragon draw 005/2017 on 2017-01-05 with all 23 prize numbers. The full board was manually transcribed to data/manual_import/grand_dragon_candidates_2017-01-05_and_2017-01-08_like4d.csv.",
+        "assessment": "Single third-party page only. No independent full-board cross-check has been established; staged row remains unverified and quarantined."
+      },
+      {
+        "source": "4D 万字迷 (Like4D) Grand Dragon draw 008/2017",
+        "url": "https://blog.like4d.com/tag/5831/page/3/",
+        "evidence": "Archive page shows Grand Dragon draw 008/2017 on 2017-01-08 with all 23 prize numbers. The full board was manually transcribed to data/manual_import/grand_dragon_candidates_2017-01-05_and_2017-01-08_like4d.csv.",
+        "assessment": "Single third-party page only. No independent full-board cross-check has been established; staged row remains unverified and quarantined."
       }
     ],
     "magnum": [
