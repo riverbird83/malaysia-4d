@@ -228,6 +228,11 @@
         "url": "https://blog.like4d.com/tag/%E8%B1%B9%E9%BE%994d%E6%88%90%E7%BB%A9/page/341/",
         "evidence": "Archive page contains full 23-prize boards and draw IDs 084/2017 through 093/2017 for 2017-03-26 to 2017-04-04. Ten date-specific rows were manually transcribed into data/manual_import/grand_dragon_candidates_2017-03-26_to_2017-04-04_like4d.csv.",
         "assessment": "Single third-party archive page only. No independent full-board second source or upstream lineage proof has been established; all ten staged rows remain unverified and quarantined."
+      },
+      {
+        "source": "4D Live Today REST API / MCP",
+        "url": "https://4dlivetoday.com/en/developers",
+        "evidence": "The published API documents GET /api/v1/results/{date} for all operators on a specific draw date and GET /api/v1/operators/{operator}?limit=1-30 for recent draws. Responses include source, CC BY 4.0 license, generated_at and a matching result-page URL. Use the date endpoint to cross-check specific historical candidates. API coverage does not establish 2016 inception or independently validate the 2017 Like4D rows; those remain unverified until full-board corroboration."
       }
     ],
     "magnum": [
@@ -242,6 +247,11 @@
         "url": "https://www.lotterymalaysia.com/zh/past-results/",
         "evidence": "Publishes all 23 prize fields and exposes year/month archive navigation back to 1985; discloses upstream data from 4dlivetoday.com.",
         "assessment": "Convenient manual/source mirror; same lineage as 4D Live Today, not independent."
+      },
+      {
+        "source": "4D Live Today REST API / MCP",
+        "url": "https://4dlivetoday.com/en/developers",
+        "evidence": "The published API documents GET /api/v1/results/{date} for all operators on a specific draw date and GET /api/v1/operators/{operator}?limit=1-30 for recent draws. Responses include source, CC BY 4.0 license, generated_at and a matching result-page URL. Useful independent cross-check route for the 2006-present target, but this repository's 3,519 target rows have not yet been compared date-by-date against the API. Do not promote solely on the provider-level coverage statement."
       }
     ],
     "sportstoto": [
@@ -250,6 +260,11 @@
         "url": "https://4dlivetoday.com/en/sources",
         "evidence": "Reports older Sports Toto records from check4d.org and 4dmoon archives agreeing; explicitly identifies missing periods in 2008 and 2009 (49 and 84 draws on record versus about 157 in a normal year).",
         "assessment": "Strong source for backfill, but known historical gaps must remain explicit."
+      },
+      {
+        "source": "4D Live Today REST API / MCP",
+        "url": "https://4dlivetoday.com/en/developers",
+        "evidence": "The published API documents GET /api/v1/results/{date} for all operators on a specific draw date and GET /api/v1/operators/{operator}?limit=1-30 for recent draws. Responses include source, CC BY 4.0 license, generated_at and a matching result-page URL. Useful per-date cross-check route, but the 930 missing Consolation rows and repository-to-API comparison remain unresolved."
       }
     ],
     "damacai": [
@@ -264,6 +279,11 @@
         "url": "https://www.lotterymalaysia.com/zh/past-results/",
         "evidence": "Publishes full 23-number result rows and year/month archive navigation; discloses upstream data from 4dlivetoday.com.",
         "assessment": "Convenient mirror; same lineage as 4D Live Today."
+      },
+      {
+        "source": "4D Live Today REST API / MCP",
+        "url": "https://4dlivetoday.com/en/developers",
+        "evidence": "The published API documents GET /api/v1/results/{date} for all operators on a specific draw date and GET /api/v1/operators/{operator}?limit=1-30 for recent draws. Responses include source, CC BY 4.0 license, generated_at and a matching result-page URL. Useful per-date cross-check route; only the disclosed 414-draw tranche has operator-archive confirmation. Repository rows still require explicit comparison and provenance status updates."
       }
     ]
   }
