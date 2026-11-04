@@ -249,6 +249,15 @@
       "coverage": "Page 341 contains full 23-number Grand Dragon records for 2017-03-27 through 2017-04-04; full pagination depth and earlier/later coverage remain unmeasured.",
       "notes": "Third-party archive. Full 23-number boards for 2017-03-27, 2017-03-28, 2017-03-29 and 2017-03-30 were compared against live4d.org and match. Upstream lineage is not independently established; use for corroboration, not as operator-authenticated source.",
       "priority": 1
+    },
+    {
+      "id": "4dpredict_app",
+      "url": "https://cambodia.4dpredict.app/gdlotto/?d=2017-04-30",
+      "role": "date_specific_full_draw_archive",
+      "priority": 1,
+      "claimed_coverage": "A full 23-number Grand Dragon board is available for 2017-04-30. Operator-filtered number-history pages show additional Grand Dragon hits back to 2017-04-25 and 2017-04-30; full archive coverage is not yet measured.",
+      "lineage": "unknown",
+      "notes": "Third-party independent information platform; its page states it is not affiliated with operators. The 2017-04-30 date page exposes all 23 numbers; its own number-history page independently lists 7656 as Consolation on that date, but this is same-publisher evidence, not an independent second source. Keep the staged 2017-04-30 candidate unverified until a separate full-board source is found."
     }
   ],
   "validation_policy": {
