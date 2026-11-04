@@ -233,6 +233,22 @@
       "role": "recent_full_draw_cross_check",
       "lineage": "unknown",
       "notes": "Date-specific GD pages were retrieved for 2017-01-04, 2017-03-26, 2017-04-24, 2017-04-27, 2022-04-14 and 2026-10-31. Some other dates return inaccessible/internal errors. The site claims a past-results finder since 1986, but GD-specific coverage from 2016 onward is not established. GitHub Actions health probe returned 403; browser retrieval is intermittent. Treat as third-party evidence, not official."
+    },
+    {
+      "id": "gdlotto_tech_partner",
+      "url": "https://gdlotto.co/community/partner/",
+      "role": "official_historical_access_program",
+      "coverage": "Operator page states approved Tech Partners receive full access to all GD Lotto result history from day one; application and partner activation are required. No credentials or feed access have been obtained yet.",
+      "notes": "Official operator-owned API access route, not a public downloadable archive. The page invites 4D app/site owners to email app or website details. Do not mark any historical date verified until partner feed access is obtained and records are compared.",
+      "priority": 0
+    },
+    {
+      "id": "like4d_blog_archive",
+      "url": "https://blog.like4d.com/tag/%E8%B1%AA%E9%BE%994d%E6%88%90%E7%BB%A9/page/341/",
+      "role": "historical_date_archive",
+      "coverage": "Page 341 contains full 23-number Grand Dragon records for 2017-03-27 through 2017-04-04; full pagination depth and earlier/later coverage remain unmeasured.",
+      "notes": "Third-party archive. Full 23-number boards for 2017-03-27, 2017-03-28, 2017-03-29 and 2017-03-30 were compared against live4d.org and match. Upstream lineage is not independently established; use for corroboration, not as operator-authenticated source.",
+      "priority": 1
     }
   ],
   "validation_policy": {
