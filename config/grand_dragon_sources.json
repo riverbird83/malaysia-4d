@@ -275,6 +275,14 @@
       "lineage": "unknown",
       "priority": 3,
       "coverage_note": "Source health audit returned HTTP 200. The saved 2026-11-04 page snapshot sets the date picker minimum to 2026-09-07 and maximum to 2026-11-04; it exposes a GD Lotto operator filter and CSV export, but provider-specific history before 2026-09-07 is not demonstrated. Treat as recent cross-check only, not 2016-2021 backfill, until date-specific older queries are proven."
+    },
+    {
+      "id": "4d_caishen_granddragon",
+      "url": "https://4dcaishen.com/granddragon-result",
+      "role": "recent_result_page_with_archive_claim",
+      "lineage": "unknown",
+      "priority": 2,
+      "coverage_note": "HTTP 200 page displays a full 23-number Grand Dragon result for 2026-10-31 and claims every past draw has a permanent page. No pre-2022 date page or year-indexed Grand Dragon archive has been retrieved yet; use as recent corroboration only until older coverage is demonstrated."
     }
   ],
   "validation_policy": {
