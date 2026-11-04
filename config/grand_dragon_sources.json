@@ -267,6 +267,14 @@
       "claimed_coverage": "The public GDLotto forecast-history page exposes 50 full 23-number draws from 2026-09-11 through 2026-10-31; it is not a long-history backfill source.",
       "lineage": "unknown",
       "notes": "Independent statistics site that explicitly disclaims affiliation with Grand Dragon. Used only as a recent-results cross-check, not as a prediction source. The 2026-10-31 full 23-number board matches the current canonical raw row field-for-field. Upstream data lineage is not disclosed; retain third_party classification and do not treat as operator-authenticated."
+    },
+    {
+      "id": "4d_lotto_club",
+      "url": "https://4d-lotto.club/en-my/past-results/",
+      "role": "historical_date_archive_with_csv_export",
+      "lineage": "unknown",
+      "priority": 1,
+      "coverage_note": "Public archive exposes a GD Lotto filter, date picker, month/year search and CSV export. Provider-specific earliest date and source lineage are not established. Discovery-only until date-specific 23-number records are compared."
     }
   ],
   "validation_policy": {
