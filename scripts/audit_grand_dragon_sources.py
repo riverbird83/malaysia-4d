@@ -87,7 +87,7 @@ def main() -> int:
         writer.writerows(rows)
     failures = sum(1 for row in rows if not row["http_status"] or int(row["http_status"]) >= 400)
     print(f"Wrote {OUT.relative_to(ROOT)}; {len(rows)} sources checked; {failures} unavailable.")
-    return 1 if failures else 0
+    # Source outages (403, timeouts, missing archives) are audit findings, not a\n    # pipeline failure. Keep the workflow green so snapshots and health rows are\n    # committed; parser/programming errors still fail naturally before this point.\n    return 0
 
 
 if __name__ == "__main__":
