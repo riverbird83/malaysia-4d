@@ -271,10 +271,10 @@
     {
       "id": "4d_lotto_club",
       "url": "https://4d-lotto.club/en-my/past-results/",
-      "role": "historical_date_archive_with_csv_export",
+      "role": "recent_archive_date_search_csv",
       "lineage": "unknown",
-      "priority": 1,
-      "coverage_note": "Public archive exposes a GD Lotto filter, date picker, month/year search and CSV export. Provider-specific earliest date and source lineage are not established. Discovery-only until date-specific 23-number records are compared."
+      "priority": 3,
+      "coverage_note": "Source health audit returned HTTP 200. The saved 2026-11-04 page snapshot sets the date picker minimum to 2026-09-07 and maximum to 2026-11-04; it exposes a GD Lotto operator filter and CSV export, but provider-specific history before 2026-09-07 is not demonstrated. Treat as recent cross-check only, not 2016-2021 backfill, until date-specific older queries are proven."
     }
   ],
   "validation_policy": {
