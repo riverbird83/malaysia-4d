@@ -258,6 +258,15 @@
       "claimed_coverage": "Full 23-number Grand Dragon date pages verified for 2017-01-24, 2017-03-27, 2017-04-25 and 2017-04-30. Operator-filtered number-history pages show additional GD hits back to 2017-01-24; full archive coverage and draw-day completeness are not yet measured.",
       "lineage": "unknown",
       "notes": "Third-party independent information platform; its page states it is not affiliated with operators. Four date-specific pages expose full 23-number boards. The 2017-03-27 board matches the staged Like4D candidate and live4d.org page field-for-field; upstream lineage independence is not proven. The 2017-01-24 full board has partial independent 4DKing confirmation for 2ND prize 7831 and Draw 024/2017. The 2017-04-25 and 2017-04-30 boards currently have same-publisher number-history consistency only. Keep staged rows unverified until a separate full-board source or lineage review supports promotion."
+    },
+    {
+      "id": "4dforecast",
+      "url": "https://4dforecast.my/forecast/gdlotto",
+      "role": "recent_results_reference",
+      "priority": 2,
+      "claimed_coverage": "The public GDLotto forecast-history page exposes 50 full 23-number draws from 2026-09-11 through 2026-10-31; it is not a long-history backfill source.",
+      "lineage": "unknown",
+      "notes": "Independent statistics site that explicitly disclaims affiliation with Grand Dragon. Used only as a recent-results cross-check, not as a prediction source. The 2026-10-31 full 23-number board matches the current canonical raw row field-for-field. Upstream data lineage is not disclosed; retain third_party classification and do not treat as operator-authenticated."
     }
   ],
   "validation_policy": {
