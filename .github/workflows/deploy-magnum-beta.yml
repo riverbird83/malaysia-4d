@@ -1,0 +1,45 @@
+name: Deploy Magnum Prediction Beta to GitHub Pages
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [data-quality-foundation]
+    paths:
+      - prediction.html
+      - data/normalized/magnum_draws.csv
+      - .github/workflows/deploy-magnum-beta.yml
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: magnum-beta-pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+      - name: Prepare minimal static site
+        run: |
+          mkdir -p public/data/normalized
+          cp prediction.html public/index.html
+          cp data/normalized/magnum_draws.csv public/data/normalized/magnum_draws.csv
+          test -s public/index.html
+          test -s public/data/normalized/magnum_draws.csv
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
