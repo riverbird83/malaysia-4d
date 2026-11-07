@@ -1,9 +1,15 @@
 <!doctype html>
 <html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Malaysia 4D AI · Magnum Beta</title>
-<style>:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#0b1020;color:#e8edf8;font:16px system-ui,-apple-system,sans-serif}main{max-width:760px;margin:auto;padding:24px 16px}h1{font-size:26px;margin:8px 0}small,.muted{color:#a2aec6}.panel{background:#172138;border:1px solid #2b3a56;border-radius:16px;padding:18px;margin:16px 0}.nums{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.num{text-align:center;background:#263552;border-radius:12px;padding:18px 5px;font-size:clamp(23px,7vw,36px);font-weight:800;color:#ffd36b;font-variant-numeric:tabular-nums}.num small{display:block;font-size:12px;font-weight:400;color:#b3bfd6}button{background:#ffd36b;color:#131b2b;border:0;border-radius:10px;padding:10px 16px;font-weight:700;cursor:pointer}button:disabled{opacity:.5}#status{line-height:1.6}.table-scroll{overflow-x:auto}.table-scroll table{min-width:360px}table{border-collapse:collapse;width:100%}td,th{padding:9px 5px;border-bottom:1px solid #34425a;text-align:left}footer{font-size:13px;color:#a2aec6;line-height:1.6}</style></head>
+<style>:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#0b1020;color:#e8edf8;font:16px system-ui,-apple-system,sans-serif}main{max-width:760px;margin:auto;padding:24px 16px}h1{font-size:26px;margin:8px 0}small,.muted{color:#a2aec6}.panel{background:#172138;border:1px solid #2b3a56;border-radius:16px;padding:18px;margin:16px 0}.nums{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.num{text-align:center;background:#263552;border-radius:12px;padding:18px 5px;font-size:clamp(23px,7vw,36px);font-weight:800;color:#ffd36b;font-variant-numeric:tabular-nums}.num small{display:block;font-size:12px;font-weight:400;color:#b3bfd6}button{background:#ffd36b;color:#131b2b;border:0;border-radius:10px;padding:10px 16px;font-weight:700;cursor:pointer}button:disabled{opacity:.5}#status{line-height:1.6}.table-scroll{overflow-x:auto}.table-scroll table{min-width:360px}table{border-collapse:collapse;width:100%}td,th{padding:9px 5px;border-bottom:1px solid #34425a;text-align:left}footer{font-size:13px;color:#a2aec6;line-height:1.6}.rates{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0}.rate{margin:0;padding:10px;background:#263552;border-radius:12px}.rate strong{display:block;color:#ffd36b;font-size:1.4rem;font-variant-numeric:tabular-nums}#rate-sample{margin:12px 0 0}</style></head>
 <body><main><small>INDEPENDENT OPERATOR MODEL · BETA</small><h1>Magnum 4D · Top 3</h1><p class="muted">马来西亚4D预测测试版 · 仅使用 Magnum 历史开奖数据</p>
 <div class="panel"><div id="status" role="status">正在加载真实历史数据…</div><p><button id="refresh" disabled>重新计算</button></p></div>
-<div class="panel"><h2>Top 3 排名号码</h2><div class="nums" id="numbers"><div class="num">----</div><div class="num">----</div><div class="num">----</div></div><p class="muted" id="method"></p></div>
+<div class="panel"><h2>Top 3 排名号码</h2><div class="nums" id="numbers"><div class="num">----</div><div class="num">----</div><div class="num">----</div></div><p class="muted" id="rate-sample">历史样本外回测 · 等待载入</p>
+<div class="rates" role="group" aria-label="Top 3 历史匹配率">
+  <p class="rate">顺序全中率<strong id="exact-rate">—</strong></p>
+  <p class="rate">四码同组率<strong id="reordered-rate">—</strong></p>
+</div>
+<small>按期统计，比较 Top 3 与当期前三奖。历史表现不代表下一期中奖概率。</small>
+<p class="muted" id="method"></p></div>
 <div class="panel"><h2>历史样本外回测</h2><p class="muted">逐期只使用当期开奖之前的数据；仅对照第一、第二、第三奖。四码同组要求数字及出现次数相同，排列不同。同一期若出现两类匹配，两项各计一次。</p><p><button id="backtest" disabled>回测最近30期</button></p><div id="backtest-status" class="muted">尚未运行</div><div class="table-scroll"><table><thead><tr><th>日期</th><th>预测Top 3</th><th>实际前三奖</th><th>结果</th></tr></thead><tbody id="backtest-rows"></tbody></table></div></div><div class="panel"><h2>最近一期历史开奖</h2><table><tbody id="latest"><tr><td>加载中…</td></tr></tbody></table></div>
 <footer>号码为统计模型排序，不是中奖概率或收益保证。模型只使用指定截止日期之前的数据；本页不提供投注服务。数据源：项目内 data/normalized/magnum_draws.csv。</footer>
 </main><script>
@@ -55,6 +61,7 @@ async function backtest() {
   const table = $('backtest-rows');
   button.disabled = true;
   status.textContent = '正在计算…';
+  $('rate-sample').textContent = '历史样本外回测 · 正在计算…';
   table.innerHTML = '';
 
   let exactDraws = 0;
@@ -78,13 +85,17 @@ async function backtest() {
   }
 
   table.innerHTML = output.reverse().join('');
-  const exactRate = (exactDraws / output.length * 100).toFixed(2);
-  status.textContent = '回测 ' + output.length + ' 期｜顺序全中 ' + exactDraws +
-    ' 期（' + exactRate + '%）｜四码同组 ' + reorderedDraws +
-    ' 期。仅为历史表现，不代表未来中奖概率。';
+  const total = output.length;
+  const percent = count => (count / total * 100).toFixed(2) + '%';
+  $('exact-rate').textContent = percent(exactDraws);
+  $('reordered-rate').textContent = percent(reorderedDraws);
+  $('rate-sample').textContent = '历史样本外回测 · 最近 ' + total + ' 期';
+  status.textContent = '回测 ' + total + ' 期｜顺序全中 ' + exactDraws +
+    ' 期（' + percent(exactDraws) + '）｜四码同组 ' + reorderedDraws +
+    ' 期（' + percent(reorderedDraws) + '）。';
   button.disabled = false;
 }
 function render(){if(!rows.length)return;const last=rows[rows.length-1];const next=new Date(last.date+'T00:00:00Z');next.setUTCDate(next.getUTCDate()+1);const asOf=next.toISOString().slice(0,10);const top=rank(rows,asOf);$('numbers').innerHTML=top.map((r,i)=>'<div class="num"><small>#'+(i+1)+'</small>'+r.n+'</div>').join('');$('status').textContent='已读取 '+rows.length.toLocaleString()+' 期有效记录｜数据截至 '+last.date+'｜排名基准 '+asOf;$('method').textContent='按数字位置频率加权排序（近3年 0.60、3–10年 0.25、10–20年 0.15）；不混用其他运营商数据。';$('latest').innerHTML='<tr><th>开奖日期</th><td>'+last.date+'</td></tr>'+last.prizes.map((n,i)=>'<tr><th>'+(i+1)+'奖</th><td>'+n+'</td></tr>').join('')}
-async function init(){try{const res=await fetch(URL+'?v='+Date.now(),{cache:'no-store'});if(!res.ok)throw Error('HTTP '+res.status);rows=loadCsv(await res.text());if(!rows.length)throw Error('没有符合要求的记录');render();$('refresh').disabled=false;$('backtest').disabled=rows.length<2;if(rows.length<2)$('backtest-status').textContent='至少需要两期开奖记录';}catch(e){$('status').textContent='数据加载失败：'+e.message+'。请通过已部署的网站访问，或在仓库根目录启动静态服务器。'}}
+async function init(){try{const res=await fetch(URL+'?v='+Date.now(),{cache:'no-store'});if(!res.ok)throw Error('HTTP '+res.status);rows=loadCsv(await res.text());if(!rows.length)throw Error('没有符合要求的记录');render();$('refresh').disabled=false;$('backtest').disabled=rows.length<2;if(rows.length<2){$('backtest-status').textContent='至少需要两期开奖记录';$('rate-sample').textContent='历史样本外回测 · 样本不足';}else{await backtest();}}catch(e){$('rate-sample').textContent='历史样本外回测 · 暂不可用';$('status').textContent='数据加载失败：'+e.message+'。请通过已部署的网站访问，或在仓库根目录启动静态服务器。'}}
 $('refresh').addEventListener('click',render);$('backtest').addEventListener('click',backtest);init();
 </script></body></html>
