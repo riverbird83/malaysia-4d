@@ -3,9 +3,54 @@ import argparse
 import calendar
 import json
 from datetime import timedelta
+from itertools import permutations
+from math import comb
 from pathlib import Path
 
 from prediction_engine import rank_numbers, read_draws
+
+
+def years_before(day, years):
+    year = day.year - years
+    return day.replace(year=year, day=min(day.day, calendar.monthrange(year, day.month)[1]))
+
+
+def random_comparison(draws):
+    """Compare against three distinct uniformly chosen numbers per draw."""
+    total_combinations = comb(10_000, 3)
+    metrics = {}
+    for key in ("exact", "reordered"):
+        probabilities = []
+        observed = 0
+        for draw in draws:
+            prizes = set(draw["prizes"])
+            targets = prizes if key == "exact" else {
+                "".join(order)
+                for prize in prizes
+                for order in permutations(prize)
+                if "".join(order) != prize
+            }
+            observed += bool(targets.intersection(draw["predicted"]))
+            probabilities.append(1 - comb(10_000 - len(targets), 3) / total_combinations)
+
+        # Probability that independent random picks match or exceed the model's count.
+        distribution = [1.0] + [0.0] * observed
+        if observed:
+            for probability in probabilities:
+                distribution[observed] += distribution[observed - 1] * probability
+                for count in range(observed - 1, 0, -1):
+                    distribution[count] = (
+                        distribution[count] * (1 - probability)
+                        + distribution[count - 1] * probability
+                    )
+                distribution[0] *= 1 - probability
+        expected = sum(probabilities)
+        metrics[key] = {
+            "expected_draws": expected,
+            "rate": expected / len(draws) if draws else None,
+            "chance_at_least_observed": distribution[observed],
+        }
+    return metrics
 
 
 def build_report(rows):
@@ -13,11 +58,8 @@ def build_report(rows):
         raise ValueError("No usable Magnum draws")
     latest = rows[-1]
     end = latest["date"]
-    previous_year = end.year - 1
-    cutoff = end.replace(
-        year=previous_year,
-        day=min(end.day, calendar.monthrange(previous_year, end.month)[1]),
-    )
+    cutoff = years_before(end, 1)
+    three_year_cutoff = years_before(end, 3)
 
     def top3(as_of):
         return [item["number"] for item in rank_numbers(rows, as_of=as_of)]
@@ -28,7 +70,7 @@ def build_report(rows):
         {"date": row["date"].isoformat(), "prizes": row["prizes"],
          "predicted": top3(row["date"])}
         for index, row in reversed(list(enumerate(rows)))
-        if row["date"] > rows[0]["date"] and (row["date"] > cutoff or index >= recent_start)
+        if row["date"] > rows[0]["date"] and (row["date"] > three_year_cutoff or index >= recent_start)
     ]
     as_of = end + timedelta(days=1)
     return {
@@ -37,6 +79,10 @@ def build_report(rows):
         "as_of": as_of.isoformat(),
         "top3": top3(as_of),
         "year_cutoff": cutoff.isoformat(),
+        "three_year_cutoff": three_year_cutoff.isoformat(),
+        "random_baseline": random_comparison([
+            draw for draw in backtest if draw["date"] > three_year_cutoff.isoformat()
+        ]),
         "backtest": backtest,
     }
 

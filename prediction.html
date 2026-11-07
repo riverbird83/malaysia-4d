@@ -4,7 +4,7 @@
 <body><main><small>INDEPENDENT OPERATOR MODEL · BETA</small><h1>Magnum 4D · Top 3</h1><p class="muted">马来西亚4D预测测试版 · 仅使用 Magnum 历史开奖数据</p>
 <div class="panel"><div id="status" role="status">正在加载真实历史数据…</div><p><button id="refresh" disabled>重新载入</button></p></div>
 <div class="panel"><h2>Top 3 排名号码</h2><div class="nums" id="numbers"><div class="num">----</div><div class="num">----</div><div class="num">----</div></div><p class="muted" id="rate-sample">历史样本外回测 · 等待载入</p>
-<label for="backtest-range">回测范围</label> <select id="backtest-range" disabled><option value="year">最近 12 个月</option><option value="recent">最近 30 期</option></select>
+<label for="backtest-range">回测范围</label> <select id="backtest-range" disabled><option value="year">最近 12 个月</option><option value="recent">最近 30 期</option><option value="three-years">最近 3 年</option></select>
 <div class="rates" role="group" aria-label="Top 3 历史匹配率">
   <p class="rate">顺序全中率<strong id="exact-rate">—</strong></p>
   <p class="rate">四码同组率<strong id="reordered-rate">—</strong></p>
@@ -12,6 +12,7 @@
 <small>按期统计，比较 Top 3 与当期前三奖。历史表现不代表下一期中奖概率。</small>
 <p class="muted" id="method"></p></div>
 <div class="panel"><h2>历史样本外回测</h2><p class="muted">逐期只使用当期开奖之前的数据；仅对照第一、第二、第三奖。四码同组要求数字及出现次数相同，排列不同。同一期若出现两类匹配，两项各计一次。</p><div id="backtest-status" class="muted">尚未运行</div>
+<p id="random-baseline" class="muted" hidden></p>
 <div id="backtest-pagination" class="pagination" role="group" aria-label="回测明细分页" hidden>
   <button id="backtest-prev" type="button">上一页</button>
   <select id="backtest-page" aria-label="回测明细页"></select>
@@ -43,9 +44,12 @@ function comparePrizes(predicted, prizes) {
 }
 
 function renderBacktest() {
-  const recent = $('backtest-range').value === 'recent';
+  const range = $('backtest-range').value;
+  const recent = range === 'recent';
+  const threeYears = range === 'three-years';
+  const cutoff = threeYears ? report.three_year_cutoff : report.year_cutoff;
   const draws = recent ? report.backtest.slice(0, 30) :
-    report.backtest.filter(draw => draw.date > report.year_cutoff);
+    report.backtest.filter(draw => draw.date > cutoff);
   let exactDraws = 0;
   let reorderedDraws = 0;
 
@@ -71,11 +75,20 @@ function renderBacktest() {
   $('exact-rate').textContent = percent(exactDraws);
   $('reordered-rate').textContent = percent(reorderedDraws);
   $('rate-sample').textContent = '历史样本外回测 · ' +
-    (recent ? '最近 30 期' : '最近 12 个月') + '（实际 ' + total + ' 期）';
+    (recent ? '最近 30 期' : threeYears ? '最近 3 年' : '最近 12 个月') + '（实际 ' + total + ' 期）';
   $('backtest-status').textContent = total ?
     draws[total - 1].date + ' 至 ' + draws[0].date +
     '｜顺序全中 ' + exactDraws + '/' + total + ' 期｜四码同组 ' + reorderedDraws + '/' + total + ' 期' :
     '样本不足';
+  const baseline = $('random-baseline');
+  baseline.hidden = !threeYears || !total || !report.random_baseline;
+  if (!baseline.hidden) {
+    const {exact, reordered} = report.random_baseline;
+    const percentRate = rate => (rate * 100).toFixed(2) + '%';
+    baseline.textContent = '随机基准（每期均匀选 3 个不同号码）｜顺序全中 ' +
+      percentRate(exact.rate) + '｜四码同组 ' + percentRate(reordered.rate) +
+      '。同一批开奖、同一套匹配规则。';
+  }
 }
 
 function renderBacktestPage(page) {
