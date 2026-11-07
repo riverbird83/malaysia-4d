@@ -1,0 +1,68 @@
+name: Deploy Magnum Prediction Beta to GitHub Pages
+
+on:
+  workflow_dispatch:
+  schedule:
+    # 21:15 in Vietnam, 22:15 in Malaysia.
+    - cron: "15 14 * * *"
+  push:
+    branches: [main, data-quality-foundation]
+    paths:
+      - prediction.html
+      - data/normalized/magnum_draws.csv
+      - .github/workflows/deploy-magnum-beta.yml
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: magnum-beta-pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/data-quality-foundation' || github.ref == 'refs/heads/main'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: data-quality-foundation
+          persist-credentials: ${{ github.ref == 'refs/heads/main' }}
+      - name: Set up Python for data refresh
+        if: github.ref == 'refs/heads/main'
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Fetch and record complete official draws
+        if: github.ref == 'refs/heads/main'
+        run: |
+          python -m pip install requests pandas
+          python scripts/update_magnum_beta.py
+          git add data/magnum_draws.csv data/normalized/magnum_draws.csv data/source_snapshots/magnum_updates.csv
+          if ! git diff --cached --quiet; then
+            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Update Magnum beta draws'
+            git push origin HEAD:refs/heads/data-quality-foundation
+          fi
+      - name: Prepare minimal static site
+        run: |
+          mkdir -p public/data/normalized
+          cp prediction.html public/index.html
+          cp data/normalized/magnum_draws.csv public/data/normalized/magnum_draws.csv
+          test -s public/index.html
+          test -s public/data/normalized/magnum_draws.csv
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
