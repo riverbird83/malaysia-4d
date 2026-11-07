@@ -5,11 +5,14 @@ on:
   schedule:
     # 21:15 in Vietnam, 22:15 in Malaysia.
     - cron: "15 14 * * *"
+    # 09:15 MYT: archive the day’s forecast before the noon cutoff.
+    - cron: "15 1 * * *"
   push:
     branches: [main, data-quality-foundation]
     paths:
       - prediction.html
       - scripts/export_magnum_report.py
+      - scripts/archive_magnum_prediction.py
       - scripts/prediction_engine.py
       - data/normalized/magnum_draws.csv
       - .github/workflows/deploy-magnum-beta.yml
@@ -46,9 +49,10 @@ jobs:
         run: |
           python -m pip install requests pandas
           python scripts/update_magnum_beta.py
-          git add data/magnum_draws.csv data/normalized/magnum_draws.csv data/source_snapshots/magnum_updates.csv
+          python scripts/archive_magnum_prediction.py
+          git add data/magnum_draws.csv data/normalized/magnum_draws.csv data/source_snapshots/magnum_updates.csv data/magnum-live.json
           if ! git diff --cached --quiet; then
-            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Update Magnum beta draws'
+            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Update Magnum draws and live prediction archive'
             git push origin HEAD:refs/heads/data-quality-foundation
           fi
       - name: Prepare minimal static site
