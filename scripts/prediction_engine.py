@@ -120,7 +120,7 @@ def rank_numbers(history, as_of=None, limit=3):
             probability = (position_counts[pos][digit] + 1.0) / denominators[pos]
             log_score += math.log(probability)
         ranked.append((log_score, number))
-    ranked.sort(key=lambda item: (-item[0], item[1]))
+    ranked.sort(key=lambda item: (-round(item[0], 8), item[1]))
     return [
         {"rank": index + 1, "number": number, "score": round(score, 8)}
         for index, (score, number) in enumerate(ranked[:limit])
