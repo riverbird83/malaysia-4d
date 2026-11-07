@@ -1,6 +1,20 @@
 <!doctype html>
 <html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Malaysia 4D AI · Magnum Beta</title>
-<style>:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#0b1020;color:#e8edf8;font:16px system-ui,-apple-system,sans-serif}main{max-width:760px;margin:auto;padding:24px 16px}h1{font-size:26px;margin:8px 0}small,.muted{color:#a2aec6}.panel{background:#172138;border:1px solid #2b3a56;border-radius:16px;padding:18px;margin:16px 0}.nums{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.num{text-align:center;background:#263552;border-radius:12px;padding:18px 5px;font-size:clamp(23px,7vw,36px);font-weight:800;color:#ffd36b;font-variant-numeric:tabular-nums}.num small{display:block;font-size:12px;font-weight:400;color:#b3bfd6}button{background:#ffd36b;color:#131b2b;border:0;border-radius:10px;padding:10px 16px;font-weight:700;cursor:pointer}button:disabled{opacity:.5}#status{line-height:1.6}.table-scroll{overflow-x:auto}.table-scroll table{min-width:360px}table{border-collapse:collapse;width:100%}td,th{padding:9px 5px;border-bottom:1px solid #34425a;text-align:left}footer{font-size:13px;color:#a2aec6;line-height:1.6}.rates{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0}.rate{margin:0;padding:10px;background:#263552;border-radius:12px}.rate strong{display:block;color:#ffd36b;font-size:1.4rem;font-variant-numeric:tabular-nums}#rate-sample{margin:12px 0 0}.pagination{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0}.pagination select{min-height:44px;padding:6px;font:inherit}.pagination button{min-height:44px;padding:8px 12px}.pagination[hidden]{display:none}</style></head>
+<style>:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#0b1020;color:#e8edf8;font:16px system-ui,-apple-system,sans-serif}main{max-width:760px;margin:auto;padding:24px 16px}h1{font-size:26px;margin:8px 0}small,.muted{color:#a2aec6}.panel{background:#172138;border:1px solid #2b3a56;border-radius:16px;padding:18px;margin:16px 0}.nums{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.num{text-align:center;background:#263552;border-radius:12px;padding:18px 5px;font-size:clamp(23px,7vw,36px);font-weight:800;color:#ffd36b;font-variant-numeric:tabular-nums}.num small{display:block;font-size:12px;font-weight:400;color:#b3bfd6}button{background:#ffd36b;color:#131b2b;border:0;border-radius:10px;padding:10px 16px;font-weight:700;cursor:pointer}button:disabled{opacity:.5}#status{line-height:1.6}#backtest-table{table-layout:fixed}
+#backtest-table th,#backtest-table td{vertical-align:top;overflow-wrap:anywhere}
+#backtest-table td{font-variant-numeric:tabular-nums}
+.draw-date,.draw-number{white-space:nowrap}
+.draw-number+.draw-number::before{content:" · "}
+.match-label,.match-prize,.match-numbers{display:block}
+.match-label{color:#ffd36b;font-weight:700}
+.match-result+.match-result{margin-top:6px}
+@media(max-width:560px){
+  .backtest-panel{padding-inline:12px}
+  #backtest-table th,#backtest-table td{padding:8px 4px;font-size:.875rem;line-height:1.25}
+  .draw-date span,.draw-number{display:block}
+  .draw-number+.draw-number::before{content:none}
+  .match-numbers{font-size:.8rem}
+}table{border-collapse:collapse;width:100%}td,th{padding:9px 5px;border-bottom:1px solid #34425a;text-align:left}footer{font-size:13px;color:#a2aec6;line-height:1.6}.rates{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0}.rate{margin:0;padding:10px;background:#263552;border-radius:12px}.rate strong{display:block;color:#ffd36b;font-size:1.4rem;font-variant-numeric:tabular-nums}#rate-sample{margin:12px 0 0}.pagination{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0}.pagination select{min-height:44px;padding:6px;font:inherit}.pagination button{min-height:44px;padding:8px 12px}.pagination[hidden]{display:none}</style></head>
 <body><main><small>INDEPENDENT OPERATOR MODEL · BETA</small><h1>Magnum 4D · Top 3</h1><p class="muted">马来西亚4D预测测试版 · 仅使用 Magnum 历史开奖数据</p>
 <div class="panel"><div id="status" role="status">正在加载真实历史数据…</div><p><button id="refresh" disabled>重新载入</button></p></div>
 <div class="panel"><h2>Top 3 排名号码</h2><div class="nums" id="numbers"><div class="num">----</div><div class="num">----</div><div class="num">----</div></div><p class="muted" id="rate-sample">历史样本外回测 · 等待载入</p>
@@ -11,13 +25,13 @@
 </div>
 <small>按期统计，比较 Top 3 与当期前三奖。历史表现不代表下一期中奖概率。</small>
 <p class="muted" id="method"></p></div>
-<div class="panel"><h2>历史样本外回测</h2><p class="muted">逐期只使用当期开奖之前的数据；仅对照第一、第二、第三奖。四码同组要求数字及出现次数相同，排列不同。同一期若出现两类匹配，两项各计一次。</p><div id="backtest-status" class="muted">尚未运行</div>
+<div class="panel backtest-panel"><h2>历史样本外回测</h2><p class="muted">逐期只使用当期开奖之前的数据；仅对照第一、第二、第三奖。四码同组要求数字及出现次数相同，排列不同。同一期若出现两类匹配，两项各计一次。</p><div id="backtest-status" class="muted">尚未运行</div>
 <p id="random-baseline" class="muted" hidden></p>
 <div id="backtest-pagination" class="pagination" role="group" aria-label="回测明细分页" hidden>
   <button id="backtest-prev" type="button">上一页</button>
   <select id="backtest-page" aria-label="回测明细页"></select>
   <button id="backtest-next" type="button">下一页</button>
-</div><div class="table-scroll"><table><thead><tr><th>日期</th><th>预测Top 3</th><th>实际前三奖</th><th>结果</th></tr></thead><tbody id="backtest-rows"></tbody></table></div></div><div class="panel"><h2>最近一期历史开奖</h2><table><tbody id="latest"><tr><td>加载中…</td></tr></tbody></table></div>
+</div><div><table id="backtest-table"><thead><tr><th scope="col">日期</th><th scope="col">Top 3</th><th scope="col">实际</th><th scope="col">结果</th></tr></thead><tbody id="backtest-rows"></tbody></table></div></div><div class="panel"><h2>最近一期历史开奖</h2><table><tbody id="latest"><tr><td>加载中…</td></tr></tbody></table></div>
 <footer>号码为统计模型排序，不是中奖概率或收益保证。模型只使用指定截止日期之前的数据；本页不提供投注服务。数据源：项目内 data/normalized/magnum_draws.csv。</footer>
 </main><script>
 const $ = id => document.getElementById(id);
@@ -34,13 +48,17 @@ function comparePrizes(predicted, prizes) {
     const prizeKey = digitKey(prize);
     for (const number of predicted) {
       if (number === prize) {
-        exact.push('顺序全中 · ' + label + ' · ' + number);
+        exact.push({label: '顺序全中', prize: label, numbers: number});
       } else if (digitKey(number) === prizeKey) {
-        reordered.push('四码同组 · ' + label + ' · ' + number + ' → ' + prize);
+        reordered.push({label: '四码同组', prize: label, numbers: number + ' → ' + prize});
       }
     }
   }
   return {exact, reordered};
+}
+
+function renderNumbers(numbers) {
+  return numbers.map(number => '<span class="draw-number">' + number + '</span>').join('');
 }
 
 function renderBacktest() {
@@ -57,9 +75,15 @@ function renderBacktest() {
     const {exact, reordered} = comparePrizes(draw.predicted, draw.prizes);
     if (exact.length) exactDraws++;
     if (reordered.length) reorderedDraws++;
-    const details = [...exact, ...reordered].join('<br>') || '未匹配';
-    return '<tr><td>' + draw.date + '</td><td>' + draw.predicted.join(', ') +
-      '</td><td>' + draw.prizes.join(', ') + '</td><td>' + details + '</td></tr>';
+    const details = [...exact, ...reordered].map(match =>
+      '<div class="match-result"><span class="match-label">' + match.label +
+      '</span><span class="match-prize">' + match.prize +
+      '</span><span class="match-numbers">' + match.numbers + '</span></div>'
+    ).join('') || '未匹配';
+    const date = '<time class="draw-date" datetime="' + draw.date + '">' +
+      '<span>' + draw.date.slice(0, 4) + '-</span><span>' + draw.date.slice(5) + '</span></time>';
+    return '<tr><td>' + date + '</td><td>' + renderNumbers(draw.predicted) +
+      '</td><td>' + renderNumbers(draw.prizes) + '</td><td>' + details + '</td></tr>';
   });
 
   const total = draws.length;
