@@ -9,6 +9,8 @@ on:
     branches: [main, data-quality-foundation]
     paths:
       - prediction.html
+      - scripts/export_magnum_report.py
+      - scripts/prediction_engine.py
       - data/normalized/magnum_draws.csv
       - .github/workflows/deploy-magnum-beta.yml
 
@@ -35,8 +37,7 @@ jobs:
         with:
           ref: data-quality-foundation
           persist-credentials: ${{ github.ref == 'refs/heads/main' }}
-      - name: Set up Python for data refresh
-        if: github.ref == 'refs/heads/main'
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -54,6 +55,7 @@ jobs:
         run: |
           mkdir -p public/data/normalized
           cp prediction.html public/index.html
+          python scripts/export_magnum_report.py public/data/magnum-report.json
           cp data/normalized/magnum_draws.csv public/data/normalized/magnum_draws.csv
           test -s public/index.html
           test -s public/data/normalized/magnum_draws.csv
