@@ -7,6 +7,7 @@ from itertools import permutations
 from math import comb
 from pathlib import Path
 
+from archive_magnum_prediction import ARCHIVE
 from prediction_engine import rank_numbers, read_draws
 
 
@@ -53,7 +54,7 @@ def random_comparison(draws):
     return metrics
 
 
-def build_report(rows):
+def build_report(rows, archive=None):
     if not rows:
         raise ValueError("No usable Magnum draws")
     latest = rows[-1]
@@ -73,7 +74,12 @@ def build_report(rows):
         if row["date"] > rows[0]["date"] and (row["date"] > three_year_cutoff or index >= recent_start)
     ]
     as_of = end + timedelta(days=1)
+    prizes_by_date = {row['date'].isoformat(): row['prizes'] for row in rows}
     return {
+        "live_predictions": [
+            {"date": day, **entry, "prizes": prizes_by_date.get(day)}
+            for day, entry in sorted((archive or {}).items(), reverse=True)
+        ],
         "sample_size": len(rows),
         "latest": {"date": end.isoformat(), "prizes": latest["prizes"]},
         "as_of": as_of.isoformat(),
@@ -91,5 +97,5 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("output", type=Path)
     args = parser.parse_args()
-    report = build_report(read_draws("magnum"))
+    report = build_report(read_draws("magnum"), json.loads(ARCHIVE.read_text(encoding="utf-8")))
     args.output.write_text(json.dumps(report, separators=(",", ":")) + "\n", encoding="utf-8")

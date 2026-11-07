@@ -14,7 +14,7 @@
   .draw-date span,.draw-number{display:block}
   .draw-number+.draw-number::before{content:none}
   .match-numbers{font-size:.8rem}
-}table{border-collapse:collapse;width:100%}td,th{padding:9px 5px;border-bottom:1px solid #34425a;text-align:left}footer{font-size:13px;color:#a2aec6;line-height:1.6}.rates{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0}.rate{margin:0;padding:10px;background:#263552;border-radius:12px}.rate strong{display:block;color:#ffd36b;font-size:1.4rem;font-variant-numeric:tabular-nums}#rate-sample{margin:12px 0 0}.pagination{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0}.pagination select{min-height:44px;padding:6px;font:inherit}.pagination button{min-height:44px;padding:8px 12px}.pagination[hidden]{display:none}</style></head>
+}table{border-collapse:collapse;width:100%}td,th{padding:9px 5px;border-bottom:1px solid #34425a;text-align:left}footer{font-size:13px;color:#a2aec6;line-height:1.6}.rates{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0}.rate{margin:0;padding:10px;background:#263552;border-radius:12px}.rate strong{display:block;color:#ffd36b;font-size:1.4rem;font-variant-numeric:tabular-nums}#rate-sample{margin:12px 0 0}.pagination{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0}.pagination select{min-height:44px;padding:6px;font:inherit}.pagination button{min-height:44px;padding:8px 12px}.pagination[hidden]{display:none}.live-entry{border-top:1px solid #34425a;padding:10px 0}.live-entry p{margin:4px 0}.live-entry a{color:#ffd36b}</style></head>
 <body><main><small>INDEPENDENT OPERATOR MODEL · BETA</small><h1>Magnum 4D · Top 3</h1><p class="muted">马来西亚4D预测测试版 · 仅使用 Magnum 历史开奖数据</p>
 <div class="panel"><div id="status" role="status">正在加载真实历史数据…</div><p><button id="refresh" disabled>重新载入</button></p></div>
 <div class="panel"><h2>Top 3 排名号码</h2><div class="nums" id="numbers"><div class="num">----</div><div class="num">----</div><div class="num">----</div></div><p class="muted" id="rate-sample">历史样本外回测 · 等待载入</p>
@@ -25,6 +25,9 @@
 </div>
 <small>按期统计，比较 Top 3 与当期前三奖。历史表现不代表下一期中奖概率。</small>
 <p class="muted" id="method"></p></div>
+<div class="panel"><h2>开奖前 Top 3 存档</h2>
+<p class="muted">每天中午前（马来西亚时间）最多保存一组。只有收到对应日期的正式开奖，才计入实测。</p>
+<p id="live-summary" role="status">等待载入…</p><div id="live-predictions"></div></div>
 <div class="panel backtest-panel"><h2>历史样本外回测</h2><p class="muted">逐期只使用当期开奖之前的数据；仅对照第一、第二、第三奖。四码同组要求数字及出现次数相同，排列不同。同一期若出现两类匹配，两项各计一次。</p><div id="backtest-status" class="muted">尚未运行</div>
 <p id="random-baseline" class="muted" hidden></p>
 <div id="backtest-pagination" class="pagination" role="group" aria-label="回测明细分页" hidden>
@@ -123,6 +126,42 @@ function renderBacktestPage(page) {
   $('backtest-next').disabled = start + PAGE_SIZE >= backtestRows.length;
 }
 
+function renderLive() {
+  const entries = report.live_predictions || [];
+  let settled = 0;
+  let exactDraws = 0;
+  let reorderedDraws = 0;
+  const list = $('live-predictions');
+  list.replaceChildren();
+
+  for (const entry of entries) {
+    let result = '暂无对应开奖结果';
+    if (entry.prizes) {
+      settled++;
+      const {exact, reordered} = comparePrizes(entry.top3, entry.prizes);
+      if (exact.length) exactDraws++;
+      if (reordered.length) reorderedDraws++;
+      result = [...exact, ...reordered].map(match => match.label + ' · ' + match.prize)
+        .join('、') || '未匹配';
+    }
+    if (list.childElementCount >= 10) continue;
+    const item = document.createElement('div');
+    item.className = 'live-entry';
+    const heading = document.createElement('p');
+    heading.textContent = entry.date + ' ｜ ' + entry.top3.join(' · ');
+    const detail = document.createElement('p');
+    detail.textContent = (entry.prizes ? entry.prizes.join(' · ') + ' ｜ ' : '') + result;
+    const evidence = document.createElement('a');
+    evidence.href = 'https://github.com/riverbird83/malaysia-4d/actions/runs/' + entry.run_id;
+    evidence.textContent = '记录于 ' + entry.recorded_at.slice(11, 16) + ' MYT · GitHub 运行';
+    item.append(heading, detail, evidence);
+    list.append(item);
+  }
+  $('live-summary').textContent = entries.length ?
+    '累计对奖 ' + settled + ' 期｜顺序全中 ' + exactDraws + ' 期｜四码同组 ' + reorderedDraws + ' 期' :
+    '暂无开奖前记录';
+}
+
 function render() {
   const {sample_size, latest, as_of, top3} = report;
   $('numbers').innerHTML = top3.map((number, index) =>
@@ -133,6 +172,7 @@ function render() {
   $('latest').innerHTML = '<tr><th>开奖日期</th><td>' + latest.date + '</td></tr>' +
     latest.prizes.map((number, index) => '<tr><th>' + (index + 1) + '奖</th><td>' +
       number + '</td></tr>').join('');
+  renderLive();
   renderBacktest();
 }
 
