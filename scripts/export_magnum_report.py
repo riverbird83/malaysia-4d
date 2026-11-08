@@ -8,7 +8,7 @@ from itertools import permutations
 from math import comb
 from pathlib import Path
 
-from archive_magnum_prediction import ARCHIVE
+from archive_magnum_prediction import OPERATORS, read_archive
 from prediction_engine import rank_numbers, read_draws
 
 
@@ -101,8 +101,8 @@ def build_report(rows, archive=None):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("output", type=Path)
-    parser.add_argument("--operator", choices=("magnum", "haolong", "damacai", "sportstoto"), default="magnum")
+    parser.add_argument("--operator", choices=OPERATORS, default="magnum")
     args = parser.parse_args()
-    archive = json.loads(ARCHIVE.read_text(encoding="utf-8")) if args.operator == "magnum" else None
+    archive = read_archive(args.operator)
     report = build_report(read_draws(args.operator), archive)
     args.output.write_text(json.dumps(report, separators=(",", ":")) + "\n", encoding="utf-8")
