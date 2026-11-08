@@ -1,4 +1,5 @@
 """Record today's operator predictions before noon Malaysia time."""
+import argparse
 import json
 import os
 from datetime import datetime, timedelta, timezone
@@ -41,7 +42,36 @@ def archive_prediction(records, rows, now, run_id, *, operator=None):
     return True
 
 
-if __name__ == "__main__":
+def live_summary():
+    gate_labels = {
+        "collecting": "Collecting",
+        "continue_validation": "Continue validation",
+        "did_not_pass": "Did not pass",
+    }
+    print("### Eight-model live comparison")
+    print()
+    print("| Operator | Settled draws | Baseline exact | Ensemble exact | Baseline reordered | Ensemble reordered | Status |")
+    print("| --- | ---: | ---: | ---: | ---: | ---: | --- |")
+    for operator, name in (("magnum", "Magnum"), ("haolong", "Grand Dragon")):
+        report = evaluate_live(read_draws(operator), read_archive(operator))
+        baseline = report["hits"].get("baseline", {})
+        ensemble = report["hits"].get("ensemble", {})
+        print(
+            f"| {name} | {report['draws']}/10 | "
+            f"{baseline.get('exact', '—')} | {ensemble.get('exact', '—')} | "
+            f"{baseline.get('reordered', '—')} | {ensemble.get('reordered', '—')} | "
+            f"{gate_labels[report['gate']]} |"
+        )
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--summary-only", action="store_true")
+    args = parser.parse_args()
+    if args.summary_only:
+        live_summary()
+        return
+
     now = datetime.now(timezone.utc)
     run_id = int(os.environ["GITHUB_RUN_ID"])
     for operator in OPERATORS:
@@ -52,5 +82,7 @@ if __name__ == "__main__":
             print(f"{operator}: archived today's Top 3 before the Malaysia noon cutoff.")
         else:
             print(f"{operator}: no new pre-draw snapshot.")
-        if operator in EXPERIMENT_OPERATORS:
-            print(f"{operator}: experimental live comparison {json.dumps(evaluate_live(rows, records))}")
+
+
+if __name__ == "__main__":
+    main()
