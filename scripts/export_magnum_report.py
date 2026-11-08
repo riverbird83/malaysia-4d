@@ -79,7 +79,8 @@ def build_report(rows, archive=None):
     prizes_by_date = {row['date'].isoformat(): row['prizes'] for row in rows}
     return {
         "live_predictions": [
-            {"date": day, **entry, "prizes": prizes_by_date.get(day)}
+            {"date": day, "prizes": prizes_by_date.get(day),
+             **{key: value for key, value in entry.items() if key != "experiment"}}
             for day, entry in sorted((archive or {}).items(), reverse=True)
         ],
         "sample_size": len(rows),

@@ -4,6 +4,7 @@ import os
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
+from model_experiment import OPERATORS as EXPERIMENT_OPERATORS, evaluate_live, predict_experiment
 from prediction_engine import rank_numbers, read_draws
 
 ARCHIVE_DIR = Path(__file__).resolve().parents[1] / "data"
@@ -20,7 +21,7 @@ def read_archive(operator):
 MYT = timezone(timedelta(hours=8))
 
 
-def archive_prediction(records, rows, now, run_id):
+def archive_prediction(records, rows, now, run_id, *, operator=None):
     local = now.astimezone(MYT)
     today = local.date()
     if local.hour >= 12 or today.isoformat() in records:
@@ -28,12 +29,15 @@ def archive_prediction(records, rows, now, run_id):
     if not rows or rows[-1]["date"] >= today:
         return False
 
-    records[today.isoformat()] = {
+    entry = {
         "recorded_at": local.isoformat(timespec="seconds"),
         "data_through": rows[-1]["date"].isoformat(),
         "top3": [item["number"] for item in rank_numbers(rows, as_of=today)],
         "run_id": run_id,
     }
+    if operator in EXPERIMENT_OPERATORS:
+        entry["experiment"] = predict_experiment(rows, today)
+    records[today.isoformat()] = entry
     return True
 
 
@@ -42,8 +46,11 @@ if __name__ == "__main__":
     run_id = int(os.environ["GITHUB_RUN_ID"])
     for operator in OPERATORS:
         records = read_archive(operator)
-        if archive_prediction(records, read_draws(operator), now, run_id):
+        rows = read_draws(operator)
+        if archive_prediction(records, rows, now, run_id, operator=operator):
             archive_path(operator).write_text(json.dumps(records, indent=2) + "\n", encoding="utf-8")
             print(f"{operator}: archived today's Top 3 before the Malaysia noon cutoff.")
         else:
             print(f"{operator}: no new pre-draw snapshot.")
+        if operator in EXPERIMENT_OPERATORS:
+            print(f"{operator}: experimental live comparison {json.dumps(evaluate_live(rows, records))}")
