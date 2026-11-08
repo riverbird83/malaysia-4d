@@ -13,6 +13,7 @@ on:
       - prediction.html
       - scripts/export_magnum_report.py
       - scripts/archive_magnum_prediction.py
+      - scripts/model_experiment.py
       - scripts/prediction_engine.py
       - data/normalized/magnum_draws.csv
       - data/normalized/haolong_draws.csv
@@ -50,19 +51,29 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Lock pre-draw predictions
+        if: github.ref == 'refs/heads/main' && (github.event.schedule == '15 1 * * *' || github.event_name == 'workflow_dispatch')
+        run: |
+          python scripts/archive_magnum_prediction.py
+          git add -- 'data/*-live.json'
+          if ! git diff --cached --quiet; then
+            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Lock 4D predictions before the draw'
+            git push origin HEAD:refs/heads/data-quality-foundation
+          fi
       - name: Fetch and record complete official draws
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' && (github.event.schedule == '15 14 * * *' || github.event_name == 'workflow_dispatch')
         run: |
           python -m pip install requests pandas
           python scripts/update_magnum_beta.py
           python scripts/update_other_top3.py
-          python scripts/archive_magnum_prediction.py
-          git add data/magnum_draws.csv data/normalized/magnum_draws.csv data/source_snapshots/magnum_updates.csv data/*-live.json
+          git add data/magnum_draws.csv data/normalized/magnum_draws.csv data/source_snapshots/magnum_updates.csv
           git add -- data/*_top3_supplement.csv
           if ! git diff --cached --quiet; then
-            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Update 4D draws and live prediction archives'
+            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Update official 4D draw results'
             git push origin HEAD:refs/heads/data-quality-foundation
           fi
+      - name: Summarize the live model comparison
+        run: python scripts/archive_magnum_prediction.py --summary-only >> "$GITHUB_STEP_SUMMARY"
       - name: Prepare minimal static site
         run: |
           mkdir -p public/data/normalized
