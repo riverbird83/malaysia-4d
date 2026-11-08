@@ -55,12 +55,12 @@ jobs:
         run: |
           python -m pip install requests pandas
           python scripts/update_magnum_beta.py
-          python scripts/archive_magnum_prediction.py
           python scripts/update_other_top3.py
-          git add data/magnum_draws.csv data/normalized/magnum_draws.csv data/source_snapshots/magnum_updates.csv data/magnum-live.json
+          python scripts/archive_magnum_prediction.py
+          git add data/magnum_draws.csv data/normalized/magnum_draws.csv data/source_snapshots/magnum_updates.csv data/*-live.json
           git add -- data/*_top3_supplement.csv
           if ! git diff --cached --quiet; then
-            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Update 4D draws and Magnum live prediction archive'
+            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Update 4D draws and live prediction archives'
             git push origin HEAD:refs/heads/data-quality-foundation
           fi
       - name: Prepare minimal static site
