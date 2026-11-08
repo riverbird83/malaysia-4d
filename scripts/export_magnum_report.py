@@ -2,6 +2,7 @@
 import argparse
 import calendar
 import json
+import math
 from datetime import timedelta
 from itertools import permutations
 from math import comb
@@ -74,6 +75,7 @@ def build_report(rows, archive=None):
         if row["date"] > rows[0]["date"] and (row["date"] > three_year_cutoff or index >= recent_start)
     ]
     as_of = end + timedelta(days=1)
+    ranked = rank_numbers(rows, as_of=as_of)
     prizes_by_date = {row['date'].isoformat(): row['prizes'] for row in rows}
     return {
         "live_predictions": [
@@ -83,7 +85,10 @@ def build_report(rows, archive=None):
         "sample_size": len(rows),
         "latest": {"date": end.isoformat(), "prizes": latest["prizes"]},
         "as_of": as_of.isoformat(),
-        "top3": top3(as_of),
+        "top3": [item["number"] for item in ranked],
+        # The score is the log of the model's single-prize probability.
+        # This estimate treats the three prize slots as independent.
+        "top3_model_estimates": [1 - (1 - math.exp(item["score"])) ** 3 for item in ranked],
         "year_cutoff": cutoff.isoformat(),
         "three_year_cutoff": three_year_cutoff.isoformat(),
         "random_baseline": random_comparison([
