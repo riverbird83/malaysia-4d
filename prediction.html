@@ -14,27 +14,33 @@
   .draw-date span,.draw-number{display:block}
   .draw-number+.draw-number::before{content:none}
   .match-numbers{font-size:.8rem}
-}table{border-collapse:collapse;width:100%}td,th{padding:9px 5px;border-bottom:1px solid #34425a;text-align:left}footer{font-size:13px;color:#a2aec6;line-height:1.6}.rates{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0}.rate{margin:0;padding:10px;background:#263552;border-radius:12px}.rate strong{display:block;color:#ffd36b;font-size:1.4rem;font-variant-numeric:tabular-nums}#rate-sample{margin:12px 0 0}.pagination{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0}.pagination select{min-height:44px;padding:6px;font:inherit}.pagination button{min-height:44px;padding:8px 12px}.pagination[hidden]{display:none}.live-entry{border-top:1px solid #34425a;padding:10px 0}.live-entry p{margin:4px 0}.live-entry a{color:#ffd36b}.prediction-date{margin:0 0 12px;color:#a2aec6;line-height:1.6}.prediction-date time{color:#ffd36b;font-weight:700;font-variant-numeric:tabular-nums}</style></head>
+}table{border-collapse:collapse;width:100%}td,th{padding:9px 5px;border-bottom:1px solid #34425a;text-align:left}footer{font-size:13px;color:#a2aec6;line-height:1.6}.rates{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0}.rate{margin:0;padding:10px;background:#263552;border-radius:12px}.rate strong{display:block;color:#ffd36b;font-size:1.4rem;font-variant-numeric:tabular-nums}#rate-sample{margin:12px 0 0}.pagination{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0}.pagination select{min-height:44px;padding:6px;font:inherit}.pagination button{min-height:44px;padding:8px 12px}.pagination[hidden]{display:none}.live-entry{border-top:1px solid #34425a;padding:10px 0}.live-entry p{margin:4px 0}.live-entry a{color:#ffd36b}.prediction-date{margin:0 0 12px;color:#a2aec6;line-height:1.6}.prediction-date time{color:#ffd36b;font-weight:700;font-variant-numeric:tabular-nums}.latest-numbers .num{font-size:clamp(20px,5vw,28px);padding:12px 4px;color:#e8edf8}.live-archive{margin-top:14px}.live-archive summary{cursor:pointer;color:#ffd36b}.data-info h2{font-size:1rem}.data-info p{font-size:.875rem}.data-info button{background:#263552;color:#e8edf8}#load-error{color:#ffd36b}</style></head>
 <body><main><nav aria-label="开奖平台"><a href="?operator=magnum" style="color:#ffd36b">Magnum</a> · <a href="?operator=haolong" style="color:#ffd36b">Grand Dragon 豪龙</a></nav><small>INDEPENDENT OPERATOR MODEL · BETA</small><h1 id="operator-title">Magnum 4D · Top 3</h1><p class="muted" id="operator-description">马来西亚4D预测测试版 · 仅使用 Magnum 历史开奖数据</p>
-<div class="panel"><div id="status" role="status">正在加载真实历史数据…</div><p><button id="refresh" disabled>重新载入</button></p></div>
-<div class="panel"><h2>Top 3 排名号码</h2><p class="prediction-date">预测日期 <time id="top3-date">—</time><br><small>开奖数据截至 <time id="top3-data-date">—</time></small></p><div class="nums" id="numbers"><div class="num">----</div><div class="num">----</div><div class="num">----</div></div><p class="muted" id="rate-sample">历史样本外回测 · 等待载入</p>
+<p id="load-error" role="alert" hidden></p>
+<div class="panel"><h2>Top 3 排名号码</h2><p class="prediction-date">预测日期 <time id="top3-date">—</time><br><small>开奖数据截至 <time id="top3-data-date">—</time></small></p><div class="nums" id="numbers"><div class="num">----</div><div class="num">----</div><div class="num">----</div></div></div>
+<div class="panel"><h2>最新开奖</h2><p class="prediction-date">开奖日期 <time id="latest-date">—</time></p>
+<div id="latest" class="nums latest-numbers"><div>加载中…</div></div>
+<details id="live-panel" class="live-archive"><summary>开奖前 Top 3 存档</summary>
+<p class="muted">每天中午前（马来西亚时间）最多保存一组。只有收到对应日期的正式开奖，才计入实测。</p>
+<p id="live-summary" role="status">等待载入…</p><div id="live-predictions"></div></details>
+</div>
+<div class="panel backtest-panel"><h2>历史回测记录</h2><p class="muted" id="rate-sample">历史样本外回测 · 等待载入</p>
 <label for="backtest-range">回测范围</label> <select id="backtest-range" disabled><option value="year">最近 12 个月</option><option value="recent">最近 30 期</option><option value="three-years">最近 3 年</option></select>
 <div class="rates" role="group" aria-label="Top 3 历史匹配率">
   <p class="rate">顺序全中率<strong id="exact-rate">—</strong></p>
   <p class="rate">四码同组率<strong id="reordered-rate">—</strong></p>
 </div>
 <small>按期统计，比较 Top 3 与当期前三奖。历史表现不代表下一期中奖概率。</small>
-<p class="muted" id="method"></p></div>
-<div class="panel" id="live-panel"><h2>开奖前 Top 3 存档</h2>
-<p class="muted">每天中午前（马来西亚时间）最多保存一组。只有收到对应日期的正式开奖，才计入实测。</p>
-<p id="live-summary" role="status">等待载入…</p><div id="live-predictions"></div></div>
-<div class="panel backtest-panel"><h2>历史样本外回测</h2><p class="muted">逐期只使用当期开奖之前的数据；仅对照第一、第二、第三奖。四码同组要求数字及出现次数相同，排列不同。同一期若出现两类匹配，两项各计一次。</p><div id="backtest-status" class="muted">尚未运行</div>
+<p class="muted">逐期只使用当期开奖之前的数据；仅对照第一、第二、第三奖。四码同组要求数字及出现次数相同，排列不同。同一期若出现两类匹配，两项各计一次。</p><div id="backtest-status" class="muted">尚未运行</div>
 <p id="random-baseline" class="muted" hidden></p>
 <div id="backtest-pagination" class="pagination" role="group" aria-label="回测明细分页" hidden>
   <button id="backtest-prev" type="button">上一页</button>
   <select id="backtest-page" aria-label="回测明细页"></select>
   <button id="backtest-next" type="button">下一页</button>
-</div><div><table id="backtest-table"><thead><tr><th scope="col">日期</th><th scope="col">Top 3</th><th scope="col">实际</th><th scope="col">结果</th></tr></thead><tbody id="backtest-rows"></tbody></table></div></div><div class="panel"><h2>最近一期历史开奖</h2><table><tbody id="latest"><tr><td>加载中…</td></tr></tbody></table></div>
+</div><div><table id="backtest-table"><thead><tr><th scope="col">日期</th><th scope="col">Top 3</th><th scope="col">实际</th><th scope="col">结果</th></tr></thead><tbody id="backtest-rows"></tbody></table></div></div><div class="panel data-info"><h2>数据说明</h2>
+<p id="status" role="status">正在加载历史数据…</p>
+<p class="muted">期数表示当前平台可供模型使用的有效历史开奖记录总量。</p>
+<p class="muted" id="method"></p><button id="refresh" disabled>重新载入</button></div>
 <footer id="operator-footer">号码为统计模型排序，不是中奖概率或收益保证。模型只使用指定截止日期之前的数据；本页不提供投注服务。数据源：项目内 data/normalized/magnum_draws.csv。</footer>
 </main><script>
 const $ = id => document.getElementById(id);
@@ -181,9 +187,10 @@ function render() {
   $('status').textContent = '已读取 ' + sample_size.toLocaleString() +
     ' 期有效记录';
   $('method').textContent = '按数字位置频率加权排序（近3年 0.60、3–10年 0.25、10–20年 0.15）；不混用其他运营商数据。';
-  $('latest').innerHTML = '<tr><th>开奖日期</th><td>' + latest.date + '</td></tr>' +
-    latest.prizes.map((number, index) => '<tr><th>' + (index + 1) + '奖</th><td>' +
-      number + '</td></tr>').join('');
+  $('latest-date').textContent = latest.date;
+  $('latest-date').dateTime = latest.date;
+  $('latest').innerHTML = latest.prizes.map((number, index) =>
+    '<div class="num"><small>第' + (index + 1) + '奖</small>' + number + '</div>').join('');
   renderLive();
   renderBacktest();
 }
@@ -195,9 +202,12 @@ async function init() {
     if (!response.ok) throw Error('HTTP ' + response.status);
     report = await response.json();
     render();
+    $('load-error').hidden = true;
     $('backtest-range').disabled = !report.backtest.length;
   } catch (error) {
     $('status').textContent = '数据加载失败：' + error.message;
+    $('load-error').textContent = '数据加载失败，请在页面底部点「重新载入」。';
+    $('load-error').hidden = false;
     if (!report) $('rate-sample').textContent = '历史样本外回测 · 暂不可用';
   } finally {
     $('refresh').disabled = false;
