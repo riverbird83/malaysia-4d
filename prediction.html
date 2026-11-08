@@ -14,10 +14,10 @@
   .draw-date span,.draw-number{display:block}
   .draw-number+.draw-number::before{content:none}
   .match-numbers{font-size:.8rem}
-}table{border-collapse:collapse;width:100%}td,th{padding:9px 5px;border-bottom:1px solid #34425a;text-align:left}footer{font-size:13px;color:#a2aec6;line-height:1.6}.rates{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0}.rate{margin:0;padding:10px;background:#263552;border-radius:12px}.rate strong{display:block;color:#ffd36b;font-size:1.4rem;font-variant-numeric:tabular-nums}#rate-sample{margin:12px 0 0}.pagination{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0}.pagination select{min-height:44px;padding:6px;font:inherit}.pagination button{min-height:44px;padding:8px 12px}.pagination[hidden]{display:none}.live-entry{border-top:1px solid #34425a;padding:10px 0}.live-entry p{margin:4px 0}.live-entry a{color:#ffd36b}</style></head>
+}table{border-collapse:collapse;width:100%}td,th{padding:9px 5px;border-bottom:1px solid #34425a;text-align:left}footer{font-size:13px;color:#a2aec6;line-height:1.6}.rates{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0}.rate{margin:0;padding:10px;background:#263552;border-radius:12px}.rate strong{display:block;color:#ffd36b;font-size:1.4rem;font-variant-numeric:tabular-nums}#rate-sample{margin:12px 0 0}.pagination{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0}.pagination select{min-height:44px;padding:6px;font:inherit}.pagination button{min-height:44px;padding:8px 12px}.pagination[hidden]{display:none}.live-entry{border-top:1px solid #34425a;padding:10px 0}.live-entry p{margin:4px 0}.live-entry a{color:#ffd36b}.prediction-date{margin:0 0 12px;color:#a2aec6;line-height:1.6}.prediction-date time{color:#ffd36b;font-weight:700;font-variant-numeric:tabular-nums}</style></head>
 <body><main><nav aria-label="开奖平台"><a href="?operator=magnum" style="color:#ffd36b">Magnum</a> · <a href="?operator=haolong" style="color:#ffd36b">Grand Dragon 豪龙</a></nav><small>INDEPENDENT OPERATOR MODEL · BETA</small><h1 id="operator-title">Magnum 4D · Top 3</h1><p class="muted" id="operator-description">马来西亚4D预测测试版 · 仅使用 Magnum 历史开奖数据</p>
 <div class="panel"><div id="status" role="status">正在加载真实历史数据…</div><p><button id="refresh" disabled>重新载入</button></p></div>
-<div class="panel"><h2>Top 3 排名号码</h2><div class="nums" id="numbers"><div class="num">----</div><div class="num">----</div><div class="num">----</div></div><p class="muted" id="rate-sample">历史样本外回测 · 等待载入</p>
+<div class="panel"><h2>Top 3 排名号码</h2><p class="prediction-date">预测日期 <time id="top3-date">—</time><br><small>开奖数据截至 <time id="top3-data-date">—</time></small></p><div class="nums" id="numbers"><div class="num">----</div><div class="num">----</div><div class="num">----</div></div><p class="muted" id="rate-sample">历史样本外回测 · 等待载入</p>
 <label for="backtest-range">回测范围</label> <select id="backtest-range" disabled><option value="year">最近 12 个月</option><option value="recent">最近 30 期</option><option value="three-years">最近 3 年</option></select>
 <div class="rates" role="group" aria-label="Top 3 历史匹配率">
   <p class="rate">顺序全中率<strong id="exact-rate">—</strong></p>
@@ -172,10 +172,14 @@ function renderLive() {
 
 function render() {
   const {sample_size, latest, as_of, top3} = report;
+  $('top3-date').textContent = as_of;
+  $('top3-date').dateTime = as_of;
+  $('top3-data-date').textContent = latest.date;
+  $('top3-data-date').dateTime = latest.date;
   $('numbers').innerHTML = top3.map((number, index) =>
     '<div class="num"><small>#' + (index + 1) + '</small>' + number + '</div>').join('');
   $('status').textContent = '已读取 ' + sample_size.toLocaleString() +
-    ' 期有效记录｜数据截至 ' + latest.date + '｜排名基准 ' + as_of;
+    ' 期有效记录';
   $('method').textContent = '按数字位置频率加权排序（近3年 0.60、3–10年 0.25、10–20年 0.15）；不混用其他运营商数据。';
   $('latest').innerHTML = '<tr><th>开奖日期</th><td>' + latest.date + '</td></tr>' +
     latest.prizes.map((number, index) => '<tr><th>' + (index + 1) + '奖</th><td>' +
