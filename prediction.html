@@ -15,7 +15,7 @@
   .draw-number+.draw-number::before{content:none}
   .match-numbers{font-size:.8rem}
 }table{border-collapse:collapse;width:100%}td,th{padding:9px 5px;border-bottom:1px solid #34425a;text-align:left}footer{font-size:13px;color:#a2aec6;line-height:1.6}.rates{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0}.rate{margin:0;padding:10px;background:#263552;border-radius:12px}.rate strong{display:block;color:#ffd36b;font-size:1.4rem;font-variant-numeric:tabular-nums}#rate-sample{margin:12px 0 0}.pagination{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0}.pagination select{min-height:44px;padding:6px;font:inherit}.pagination button{min-height:44px;padding:8px 12px}.pagination[hidden]{display:none}.live-entry{border-top:1px solid #34425a;padding:10px 0}.live-entry p{margin:4px 0}.live-entry a{color:#ffd36b}</style></head>
-<body><main><small>INDEPENDENT OPERATOR MODEL · BETA</small><h1>Magnum 4D · Top 3</h1><p class="muted">马来西亚4D预测测试版 · 仅使用 Magnum 历史开奖数据</p>
+<body><main><nav aria-label="开奖平台"><a href="?operator=magnum" style="color:#ffd36b">Magnum</a> · <a href="?operator=haolong" style="color:#ffd36b">Grand Dragon 豪龙</a></nav><small>INDEPENDENT OPERATOR MODEL · BETA</small><h1 id="operator-title">Magnum 4D · Top 3</h1><p class="muted" id="operator-description">马来西亚4D预测测试版 · 仅使用 Magnum 历史开奖数据</p>
 <div class="panel"><div id="status" role="status">正在加载真实历史数据…</div><p><button id="refresh" disabled>重新载入</button></p></div>
 <div class="panel"><h2>Top 3 排名号码</h2><div class="nums" id="numbers"><div class="num">----</div><div class="num">----</div><div class="num">----</div></div><p class="muted" id="rate-sample">历史样本外回测 · 等待载入</p>
 <label for="backtest-range">回测范围</label> <select id="backtest-range" disabled><option value="year">最近 12 个月</option><option value="recent">最近 30 期</option><option value="three-years">最近 3 年</option></select>
@@ -25,7 +25,7 @@
 </div>
 <small>按期统计，比较 Top 3 与当期前三奖。历史表现不代表下一期中奖概率。</small>
 <p class="muted" id="method"></p></div>
-<div class="panel"><h2>开奖前 Top 3 存档</h2>
+<div class="panel" id="live-panel"><h2>开奖前 Top 3 存档</h2>
 <p class="muted">每天中午前（马来西亚时间）最多保存一组。只有收到对应日期的正式开奖，才计入实测。</p>
 <p id="live-summary" role="status">等待载入…</p><div id="live-predictions"></div></div>
 <div class="panel backtest-panel"><h2>历史样本外回测</h2><p class="muted">逐期只使用当期开奖之前的数据；仅对照第一、第二、第三奖。四码同组要求数字及出现次数相同，排列不同。同一期若出现两类匹配，两项各计一次。</p><div id="backtest-status" class="muted">尚未运行</div>
@@ -35,10 +35,18 @@
   <select id="backtest-page" aria-label="回测明细页"></select>
   <button id="backtest-next" type="button">下一页</button>
 </div><div><table id="backtest-table"><thead><tr><th scope="col">日期</th><th scope="col">Top 3</th><th scope="col">实际</th><th scope="col">结果</th></tr></thead><tbody id="backtest-rows"></tbody></table></div></div><div class="panel"><h2>最近一期历史开奖</h2><table><tbody id="latest"><tr><td>加载中…</td></tr></tbody></table></div>
-<footer>号码为统计模型排序，不是中奖概率或收益保证。模型只使用指定截止日期之前的数据；本页不提供投注服务。数据源：项目内 data/normalized/magnum_draws.csv。</footer>
+<footer id="operator-footer">号码为统计模型排序，不是中奖概率或收益保证。模型只使用指定截止日期之前的数据；本页不提供投注服务。数据源：项目内 data/normalized/magnum_draws.csv。</footer>
 </main><script>
 const $ = id => document.getElementById(id);
 let report;
+const grandDragon = new URLSearchParams(location.search).get('operator') === 'haolong';
+if (grandDragon) {
+  document.title = 'Malaysia 4D AI · Grand Dragon Beta';
+  $('operator-title').textContent = 'Grand Dragon 豪龙 · Top 3';
+  $('operator-description').textContent = '豪龙测试版 · 仅使用已收录的豪龙前三奖，历史日期可能有缺口。';
+  $('live-panel').hidden = true;
+  $('operator-footer').textContent = '号码为统计模型排序。补录的前三奖来自 4D Results Now 和 4D Live Today（CC BY 4.0）。逐期来源见 GitHub 补录数据。';
+}
 let backtestRows = [];
 const PAGE_SIZE = 10;
 
@@ -179,7 +187,7 @@ function render() {
 async function init() {
   $('refresh').disabled = true;
   try {
-    const response = await fetch('data/magnum-report.json', {cache: 'no-cache'});
+    const response = await fetch(grandDragon ? 'data/grand-dragon-report.json' : 'data/magnum-report.json', {cache: 'no-cache'});
     if (!response.ok) throw Error('HTTP ' + response.status);
     report = await response.json();
     render();

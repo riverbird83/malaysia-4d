@@ -81,6 +81,21 @@ def read_draws(operator: str, cutoff=None):
                 "date": draw_date,
                 "prizes": prizes,
             })
+    if slug == "haolong":
+        supplement = ROOT / "data" / "grand_dragon_top3_supplement.csv"
+        if supplement.exists():
+            known_dates = {row["date"] for row in rows}
+            with supplement.open(newline="", encoding="utf-8") as handle:
+                for row in csv.DictReader(handle):
+                    draw_date = date.fromisoformat(row["date"])
+                    prizes = [row[field] for field in PRIZE_FIELDS]
+                    if (draw_date in known_dates or draw_date < START_DATES[slug]
+                            or (cutoff and draw_date >= cutoff)):
+                        continue
+                    if not all(len(number) == 4 and number.isascii() and number.isdigit() for number in prizes):
+                        raise ValueError(f"Invalid Grand Dragon supplementary prizes: {draw_date}")
+                    rows.append({"operator": DISPLAY_NAMES[slug], "date": draw_date, "prizes": prizes})
+                    known_dates.add(draw_date)
     return sorted(rows, key=lambda item: item["date"])
 
 
