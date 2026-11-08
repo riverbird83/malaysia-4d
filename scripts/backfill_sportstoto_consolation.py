@@ -229,22 +229,20 @@ def main() -> int:
         source_counts[source_name] += 1
 
     if unresolved:
-        print("BACKFILL NOT WRITTEN: unresolved or conflicting dates remain.")
+        print("Partial recovery: unresolved or conflicting dates are left unchanged.")
         print(f"Unresolved total: {len(unresolved)}")
         print("Unresolved dates (complete list):")
         for draw_date in unresolved:
             print(f"  {draw_date}")
-        return 2
-
-    final_missing = updated.loc[target_mask, CONSOL_FIELDS].eq("").any(axis=1)
-    if final_missing.any():
-        print(f"BACKFILL NOT WRITTEN: final integrity check found {int(final_missing.sum())} incomplete rows.")
+    remaining = updated.loc[target_mask & updated[CONSOL_FIELDS].eq("").any(axis=1), "date"]
+    if set(remaining) != set(unresolved):
+        print("BACKFILL NOT WRITTEN: unresolved dates do not match the remaining blanks.")
         return 3
 
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     updated.to_csv(OUTPUT, index=False, quoting=csv.QUOTE_MINIMAL)
     print(f"[OK] Candidate saved: {OUTPUT}")
-    print(f"[OK] Recovered dates: {len(target_dates)}")
+    print(f"[OK] Recovered dates: {sum(source_counts.values())}")
     print(f"[OK] Source breakdown: {dict(source_counts)}")
     print("[OK] Original normalized source was not modified.")
     return 0
