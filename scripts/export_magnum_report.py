@@ -101,7 +101,7 @@ def build_report(rows, archive=None):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("output", type=Path)
-    parser.add_argument("--operator", choices=("magnum", "haolong"), default="magnum")
+    parser.add_argument("--operator", choices=("magnum", "haolong", "damacai", "sportstoto"), default="magnum")
     args = parser.parse_args()
     archive = json.loads(ARCHIVE.read_text(encoding="utf-8")) if args.operator == "magnum" else None
     report = build_report(read_draws(args.operator), archive)

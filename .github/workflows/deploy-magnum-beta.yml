@@ -16,6 +16,10 @@ on:
       - scripts/prediction_engine.py
       - data/normalized/magnum_draws.csv
       - data/normalized/haolong_draws.csv
+      - data/normalized/damacai_draws.csv
+      - data/normalized/sportstoto_draws.csv
+      - 'data/*_top3_supplement.csv'
+      - scripts/update_other_top3.py
       - data/grand_dragon_top3_supplement.csv
       - .github/workflows/deploy-magnum-beta.yml
 
@@ -52,9 +56,11 @@ jobs:
           python -m pip install requests pandas
           python scripts/update_magnum_beta.py
           python scripts/archive_magnum_prediction.py
+          python scripts/update_other_top3.py
           git add data/magnum_draws.csv data/normalized/magnum_draws.csv data/source_snapshots/magnum_updates.csv data/magnum-live.json
+          git add -- data/*_top3_supplement.csv
           if ! git diff --cached --quiet; then
-            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Update Magnum draws and live prediction archive'
+            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Update 4D draws and Magnum live prediction archive'
             git push origin HEAD:refs/heads/data-quality-foundation
           fi
       - name: Prepare minimal static site
@@ -63,6 +69,8 @@ jobs:
           cp prediction.html public/index.html
           python scripts/export_magnum_report.py public/data/magnum-report.json
           python scripts/export_magnum_report.py public/data/grand-dragon-report.json --operator haolong
+          python scripts/export_magnum_report.py public/data/damacai-report.json --operator damacai
+          python scripts/export_magnum_report.py public/data/sportstoto-report.json --operator sportstoto
           cp data/normalized/magnum_draws.csv public/data/normalized/magnum_draws.csv
           test -s public/index.html
           test -s public/data/normalized/magnum_draws.csv

@@ -15,7 +15,7 @@
   .draw-number+.draw-number::before{content:none}
   .match-numbers{font-size:.8rem}
 }table{border-collapse:collapse;width:100%}td,th{padding:9px 5px;border-bottom:1px solid #34425a;text-align:left}footer{font-size:13px;color:#a2aec6;line-height:1.6}.rates{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0}.rate{margin:0;padding:10px;background:#263552;border-radius:12px}.rate strong{display:block;color:#ffd36b;font-size:1.4rem;font-variant-numeric:tabular-nums}#rate-sample{margin:12px 0 0}.pagination{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0}.pagination select{min-height:44px;padding:6px;font:inherit}.pagination button{min-height:44px;padding:8px 12px}.pagination[hidden]{display:none}.live-entry{border-top:1px solid #34425a;padding:10px 0}.live-entry p{margin:4px 0}.live-entry a{color:#ffd36b}.prediction-date{margin:0 0 12px;color:#a2aec6;line-height:1.6}.prediction-date time{color:#ffd36b;font-weight:700;font-variant-numeric:tabular-nums}.latest-numbers .num{font-size:clamp(20px,5vw,28px);padding:12px 4px;color:#e8edf8}.live-archive{margin-top:14px}.live-archive summary{cursor:pointer;color:#ffd36b}.data-info h2{font-size:1rem}.data-info p{font-size:.875rem}.data-info button{background:#263552;color:#e8edf8}#load-error{color:#ffd36b}.num .model-estimate{margin-top:4px;font-size:clamp(.75rem,3.4vw,.95rem);font-weight:700;color:#ffd36b}.model-estimate-note{display:block;margin-top:8px}</style></head>
-<body><main><nav aria-label="开奖平台"><a href="?operator=magnum" style="color:#ffd36b">Magnum</a> · <a href="?operator=haolong" style="color:#ffd36b">Grand Dragon 豪龙</a></nav><small>INDEPENDENT OPERATOR MODEL · BETA</small><h1 id="operator-title">Magnum 4D · Top 3</h1><p class="muted" id="operator-description">马来西亚4D预测测试版 · 仅使用 Magnum 历史开奖数据</p>
+<body><main><nav aria-label="开奖平台"><a href="?operator=magnum" style="color:#ffd36b">Magnum</a> · <a href="?operator=haolong" style="color:#ffd36b">Grand Dragon 豪龙</a> · <a href="?operator=damacai" style="color:#ffd36b">Da Ma Cai</a> · <a href="?operator=sportstoto" style="color:#ffd36b">Sports Toto</a></nav><small>INDEPENDENT OPERATOR MODEL · BETA</small><h1 id="operator-title">Magnum 4D · Top 3</h1><p class="muted" id="operator-description">马来西亚4D预测测试版 · 仅使用 Magnum 历史开奖数据</p>
 <p id="load-error" role="alert" hidden></p>
 <div class="panel"><h2>Top 3 排名号码</h2><p class="prediction-date">预测日期 <time id="top3-date">—</time><br><small>开奖数据截至 <time id="top3-data-date">—</time></small></p><div class="nums" id="numbers"><div class="num">----</div><div class="num">----</div><div class="num">----</div></div><small class="model-estimate-note">模型估算进入任一前三奖的概率，按三个奖位独立近似，未经实际开奖校准。</small></div>
 <div class="panel"><h2>最新开奖</h2><p class="prediction-date">开奖日期 <time id="latest-date">—</time></p>
@@ -45,13 +45,19 @@
 </main><script>
 const $ = id => document.getElementById(id);
 let report;
-const grandDragon = new URLSearchParams(location.search).get('operator') === 'haolong';
-if (grandDragon) {
-  document.title = 'Malaysia 4D AI · Grand Dragon Beta';
-  $('operator-title').textContent = 'Grand Dragon 豪龙 · Top 3';
-  $('operator-description').textContent = '豪龙测试版 · 仅使用已收录的豪龙前三奖，历史日期可能有缺口。';
+const operators = new Map([
+  ['magnum', {name: 'Magnum', report: 'magnum'}],
+  ['haolong', {name: 'Grand Dragon 豪龙', report: 'grand-dragon'}],
+  ['damacai', {name: 'Da Ma Cai', report: 'damacai'}],
+  ['sportstoto', {name: 'Sports Toto', report: 'sportstoto'}],
+]);
+const operator = operators.get(new URLSearchParams(location.search).get('operator')) || operators.get('magnum');
+if (operator.report !== 'magnum') {
+  document.title = 'Malaysia 4D AI · ' + operator.name + ' Beta';
+  $('operator-title').textContent = operator.name + ' · Top 3';
+  $('operator-description').textContent = operator.name + ' 测试版 · 仅使用该平台已收录的前三奖。';
   $('live-panel').hidden = true;
-  $('operator-footer').textContent = '号码为统计模型排序。补录的前三奖来自 4D Results Now 和 4D Live Today（CC BY 4.0）。逐期来源见 GitHub 补录数据。';
+  $('operator-footer').textContent = '号码为统计模型排序。补录数据来自第三方档案，包括 4D Live Today（CC BY 4.0），来源见 GitHub 数据记录。';
 }
 let backtestRows = [];
 const PAGE_SIZE = 10;
@@ -202,7 +208,7 @@ function render() {
 async function init() {
   $('refresh').disabled = true;
   try {
-    const response = await fetch(grandDragon ? 'data/grand-dragon-report.json' : 'data/magnum-report.json', {cache: 'no-cache'});
+    const response = await fetch('data/' + operator.report + '-report.json', {cache: 'no-cache'});
     if (!response.ok) throw Error('HTTP ' + response.status);
     report = await response.json();
     render();

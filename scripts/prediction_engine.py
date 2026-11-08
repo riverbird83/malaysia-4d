@@ -36,6 +36,11 @@ ALIASES = {
     "granddragonlotto": "haolong",
     "gdllotto": "haolong",
 }
+TOP3_SUPPLEMENTS = {
+    "haolong": ROOT / "data" / "grand_dragon_top3_supplement.csv",
+    "damacai": ROOT / "data" / "damacai_top3_supplement.csv",
+    "sportstoto": ROOT / "data" / "sportstoto_top3_supplement.csv",
+}
 PRIZE_FIELDS = ("prize_1", "prize_2", "prize_3")
 START_DATES = {
     "magnum": date(2006, 1, 1),
@@ -81,8 +86,8 @@ def read_draws(operator: str, cutoff=None):
                 "date": draw_date,
                 "prizes": prizes,
             })
-    if slug == "haolong":
-        supplement = ROOT / "data" / "grand_dragon_top3_supplement.csv"
+    if slug in TOP3_SUPPLEMENTS:
+        supplement = TOP3_SUPPLEMENTS[slug]
         if supplement.exists():
             known_dates = {row["date"] for row in rows}
             with supplement.open(newline="", encoding="utf-8") as handle:
@@ -93,7 +98,7 @@ def read_draws(operator: str, cutoff=None):
                             or (cutoff and draw_date >= cutoff)):
                         continue
                     if not all(len(number) == 4 and number.isascii() and number.isdigit() for number in prizes):
-                        raise ValueError(f"Invalid Grand Dragon supplementary prizes: {draw_date}")
+                        raise ValueError(f"Invalid {slug} supplementary prizes: {draw_date}")
                     rows.append({"operator": DISPLAY_NAMES[slug], "date": draw_date, "prizes": prizes})
                     known_dates.add(draw_date)
     return sorted(rows, key=lambda item: item["date"])
