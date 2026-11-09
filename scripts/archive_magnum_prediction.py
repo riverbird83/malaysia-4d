@@ -6,7 +6,8 @@ import os
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
-from model_experiment import OPERATORS as EXPERIMENT_OPERATORS, evaluate_live, predict_experiment
+from model_experiment import LEGACY_VERSION, TARGET_DRAWS, evaluate_live, predict_experiment
+from model_experiment import OPERATORS as EXPERIMENT_OPERATORS
 from prediction_engine import rank_numbers, read_draws
 
 ARCHIVE_DIR = Path(__file__).resolve().parents[1] / "data"
@@ -60,20 +61,27 @@ def live_summary():
         "continue_validation": "Continue validation",
         "did_not_pass": "Did not pass",
     }
-    print("### Eight-model live comparison")
+    print("### Twelve-model live comparison")
     print()
     print("| Operator | Settled draws | Baseline exact | Ensemble exact | Baseline reordered | Ensemble reordered | Status |")
     print("| --- | ---: | ---: | ---: | ---: | ---: | --- |")
+    legacy_counts = []
     for operator, name in (("magnum", "Magnum"), ("haolong", "Grand Dragon")):
-        report = evaluate_live(read_draws(operator), read_archive(operator))
+        rows = read_draws(operator)
+        archive = read_archive(operator)
+        report = evaluate_live(rows, archive)
+        legacy = evaluate_live(rows, archive, version=LEGACY_VERSION, target=10)
+        legacy_counts.append(f"{name}: {legacy['draws']}")
         baseline = report["hits"].get("baseline", {})
         ensemble = report["hits"].get("ensemble", {})
         print(
-            f"| {name} | {report['draws']}/10 | "
+            f"| {name} | {report['draws']}/{TARGET_DRAWS} | "
             f"{baseline.get('exact', '—')} | {ensemble.get('exact', '—')} | "
             f"{baseline.get('reordered', '—')} | {ensemble.get('reordered', '—')} | "
             f"{gate_labels[report['gate']]} |"
         )
+
+    print("\nSettled eight-model records retained separately: " + ", ".join(legacy_counts))
 
 
 def main():

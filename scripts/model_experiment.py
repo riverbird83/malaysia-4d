@@ -1,4 +1,4 @@
-"""Eight fixed 4D candidates and their equal-weight experimental ensemble."""
+"""Twelve 4D candidates and their experimental ensemble."""
 import argparse
 import json
 import math
@@ -11,7 +11,9 @@ from statistics import fmean
 from prediction_engine import rank_numbers, read_draws
 
 OPERATORS = ("magnum", "haolong")
-VERSION = "eight-models-v1"
+LEGACY_VERSION = "eight-models-v1"
+VERSION = "twelve-models-v1"
+TARGET_DRAWS = 9
 ADJACENT = ((0, 1), (1, 2), (2, 3))
 NONADJACENT = ((0, 2), (0, 3), (1, 3))
 PAIRS = ADJACENT + NONADJACENT
@@ -38,12 +40,16 @@ def position_probabilities(counts):
     ]
 
 
-def predict_experiment(rows, as_of):
+def component_scores(rows, as_of):
     long_counts = [Counter() for _ in range(4)]
     decay_counts = [Counter() for _ in range(4)]
     recent_counts = [Counter() for _ in range(4)]
     pair_counts = [Counter() for _ in PAIRS]
     shape_counts = Counter()
+    prize_counts = [[Counter() for _ in range(4)] for _ in range(3)]
+    transitions = [[Counter() for _ in range(4)] for _ in range(3)]
+    whole_counts = Counter()
+    previous = None
     sample_size = 0
 
     for row in rows:
@@ -51,7 +57,12 @@ def predict_experiment(rows, as_of):
         if not 0 < age <= 20 * 365.2425:
             continue
         decay = 2 ** (-age / (2 * 365.2425))
-        for number in row["prizes"]:
+        for prize_index, number in enumerate(row["prizes"]):
+            whole_counts[number] += 1
+            for pos, digit in enumerate(number):
+                prize_counts[prize_index][pos][digit] += 1
+                if previous is not None:
+                    transitions[prize_index][pos][previous[prize_index][pos] + digit] += 1
             sample_size += 1
             for pos, digit in enumerate(number):
                 long_counts[pos][digit] += 1
@@ -62,9 +73,26 @@ def predict_experiment(rows, as_of):
             for counter, pair in zip(pair_counts, pairs):
                 counter[pair] += 1
             shape_counts[shape] += 1
+        previous = row["prizes"]
 
     long = position_probabilities(long_counts)
     decay = position_probabilities(decay_counts)
+    prize_probabilities = [position_probabilities(counts) for counts in prize_counts]
+    conditional_probabilities = []
+    for slot, positions in enumerate(prize_probabilities):
+        conditional = []
+        for pos, marginal in enumerate(positions):
+            if previous is None:
+                conditional.append(marginal)
+                continue
+            prefix = previous[slot][pos]
+            counts = {digit: transitions[slot][pos][prefix + digit] for digit in marginal}
+            denominator = sum(counts.values()) + 300
+            conditional.append({
+                digit: (counts[digit] + 300 * prior) / denominator
+                for digit, prior in marginal.items()
+            })
+        conditional_probabilities.append(conditional)
     blended = [
         {
             digit: (recent[digit] + 300 * long[pos][digit]) / (recent.total() + 300)
@@ -97,6 +125,9 @@ def predict_experiment(rows, as_of):
         "nonadjacent_pairs": [],
         "number_shape": [],
         "regularized_combination": [],
+        "prize_hierarchy": [],
+        "cross_draw_transition": [],
+        "whole_number_frequency": [],
     }
     # Reuse the production ranking, including its tie-break, for the baseline.
     for item in rank_numbers(rows, as_of=as_of, limit=len(NUMBERS)):
@@ -122,15 +153,56 @@ def predict_experiment(rows, as_of):
             blended_score + 0.5 * fmean((adjacent, nonadjacent, shape_lift))
         )
 
-    # Normalize each model over all 10,000 numbers before averaging equally.
-    ensemble = [0.0] * len(NUMBERS)
-    predictions = {}
-    for name, values in scores.items():
-        predictions[name] = top_three(values, precision=8 if name == "baseline" else 12)
-        weights = [math.exp(value) for value in values]
-        total = sum(weights)
-        for index, weight in enumerate(weights):
-            ensemble[index] += weight / total / len(scores)
+        scores["prize_hierarchy"].append(math.log(fmean(
+            math.prod(pos[digit] for pos, digit in zip(slot, number))
+            for slot in prize_probabilities
+        )))
+        scores["cross_draw_transition"].append(math.log(fmean(
+            math.prod(pos[digit] for pos, digit in zip(slot, number))
+            for slot in conditional_probabilities
+        )))
+        scores["whole_number_frequency"].append(math.log(
+            (whole_counts[number] + 10_000 * math.exp(blended_score)) / (sample_size + 10_000)
+        ))
+    return scores
+
+
+def normalize_scores(scores):
+    weights = [math.exp(score) for score in scores]
+    total = sum(weights)
+    return [weight / total for weight in weights]
+
+
+def predict_experiment(rows, as_of):
+    history = sorted((row for row in rows if row["date"] < as_of), key=lambda row: row["date"])
+    scores = component_scores(history, as_of)
+    probabilities = {name: normalize_scores(values) for name, values in scores.items()}
+    predictions = {
+        name: top_three(values, precision=8 if name == "baseline" else 12)
+        for name, values in scores.items()
+    }
+
+    # Score the 11 component models on earlier, strictly out-of-sample draws.
+    validation = history[-12:] if len(history) > 12 else history[1:]
+    log_quality = dict.fromkeys(scores, 0.0)
+    for draw in validation:
+        past_scores = component_scores(history, draw["date"])
+        for name, values in past_scores.items():
+            log_normalizer = math.log(sum(math.exp(value) for value in values))
+            log_quality[name] += fmean(values[int(prize)] - log_normalizer for prize in draw["prizes"])
+    average_quality = {name: value / max(1, len(validation)) for name, value in log_quality.items()}
+    best = max(average_quality.values())
+    weights = {name: math.exp(10 * (value - best)) for name, value in average_quality.items()}
+    total = sum(weights.values())
+    adaptive = [
+        sum(weights[name] * values[index] for name, values in probabilities.items()) / total
+        for index in range(len(NUMBERS))
+    ]
+    predictions["adaptive_fusion"] = top_three(adaptive, 15)
+    ensemble = [
+        fmean((*components, adaptive[index]))
+        for index, components in enumerate(zip(*probabilities.values()))
+    ]
     return {"version": VERSION, "models": predictions, "ensemble_top3": top_three(ensemble, 15)}
 
 
@@ -164,15 +236,15 @@ def evaluate(samples):
     }
 
 
-def evaluate_live(rows, archive):
+def evaluate_live(rows, archive, *, version=VERSION, target=TARGET_DRAWS):
     prizes_by_day = {row["date"].isoformat(): row["prizes"] for row in rows}
     samples = [
         (prizes_by_day[day], entry["experiment"])
         for day, entry in sorted(archive.items())
-        if day in prizes_by_day and entry.get("experiment", {}).get("version") == VERSION
-    ][:10]
+        if day in prizes_by_day and entry.get("experiment", {}).get("version") == version
+    ][:target]
     report = evaluate(samples)
-    if len(samples) < 10:
+    if len(samples) < target:
         report["gate"] = "collecting"
     elif report["hits"]["ensemble"]["exact"] > report["hits"]["baseline"]["exact"]:
         report["gate"] = "continue_validation"
