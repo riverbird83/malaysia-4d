@@ -6,12 +6,12 @@ import os
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
-from model_experiment import LEGACY_VERSION, TARGET_DRAWS, evaluate_live, predict_experiment
-from model_experiment import OPERATORS as EXPERIMENT_OPERATORS
+from model_experiment import LEGACY_VERSION, OPERATORS, TARGET_DRAWS, evaluate_live, predict_experiment
 from prediction_engine import rank_numbers, read_draws
 
 ARCHIVE_DIR = Path(__file__).resolve().parents[1] / "data"
-OPERATORS = ("magnum", "haolong", "damacai", "sportstoto")
+OPERATOR_LABELS = {"magnum": "Magnum", "haolong": "Grand Dragon",
+                   "damacai": "Da Ma Cai", "sportstoto": "Sports Toto"}
 
 
 def archive_path(operator):
@@ -49,7 +49,7 @@ def archive_prediction(records, rows, now, run_id, *, operator=None):
         "top3_model_estimates": [1 - (1 - math.exp(item["score"])) ** 3 for item in ranked],
         "run_id": run_id,
     }
-    if operator in EXPERIMENT_OPERATORS:
+    if operator in OPERATORS:
         entry["experiment"] = predict_experiment(rows, today)
     records[today.isoformat()] = entry
     return True
@@ -66,7 +66,8 @@ def live_summary():
     print("| Operator | Settled draws | Baseline exact | Ensemble exact | Baseline reordered | Ensemble reordered | Status |")
     print("| --- | ---: | ---: | ---: | ---: | ---: | --- |")
     legacy_counts = []
-    for operator, name in (("magnum", "Magnum"), ("haolong", "Grand Dragon")):
+    for operator in OPERATORS:
+        name = OPERATOR_LABELS[operator]
         rows = read_draws(operator)
         archive = read_archive(operator)
         report = evaluate_live(rows, archive)

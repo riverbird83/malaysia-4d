@@ -26,7 +26,7 @@ class ModelExperimentTests(unittest.TestCase):
             self.assertEqual(len(set(picks)), 3)
             self.assertTrue(all(len(pick) == 4 and pick.isdigit() for pick in picks))
 
-    def test_archive_locks_forecasts_and_only_experiments_on_selected_operators(self):
+    def test_archive_locks_forecasts_and_experiments_for_all_operators(self):
         now = datetime(2026, 11, 11, 4, tzinfo=timezone.utc)
         records = {}
         self.assertFalse(archive_prediction(
@@ -42,9 +42,11 @@ class ModelExperimentTests(unittest.TestCase):
         self.assertFalse(archive_prediction(
             {}, self.history, now + timedelta(hours=4), 2, operator="haolong"
         ))
-        records = {}
-        self.assertTrue(archive_prediction(records, self.history, now, 1, operator="sportstoto"))
-        self.assertNotIn("experiment", records[str(self.day)])
+        for operator in ("haolong", "sportstoto", "damacai"):
+            with self.subTest(operator=operator):
+                records = {}
+                self.assertTrue(archive_prediction(records, self.history, now, 1, operator=operator))
+                self.assertEqual(len(records[str(self.day)]["experiment"]["models"]), 12)
 
     def test_gate_uses_first_nine_settled_days_and_exact_matches(self):
         rows = []
