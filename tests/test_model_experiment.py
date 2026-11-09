@@ -11,7 +11,7 @@ from prediction_engine import rank_numbers
 
 class ModelExperimentTests(unittest.TestCase):
     def setUp(self):
-        self.day = date(2026, 11, 9)
+        self.day = date(2026, 11, 11)
         self.history = [{"date": self.day - timedelta(days=1), "prizes": ["0123", "3120", "5541"]}]
 
     def test_eight_candidates_exclude_future_and_match_production_baseline(self):
@@ -27,14 +27,20 @@ class ModelExperimentTests(unittest.TestCase):
             self.assertTrue(all(len(pick) == 4 and pick.isdigit() for pick in picks))
 
     def test_archive_locks_forecasts_and_only_experiments_on_selected_operators(self):
-        now = datetime(2026, 11, 9, 1, tzinfo=timezone.utc)
+        now = datetime(2026, 11, 11, 4, tzinfo=timezone.utc)
         records = {}
+        self.assertFalse(archive_prediction(
+            records, self.history, now - timedelta(minutes=1), 1, operator="magnum"
+        ))
+        self.assertFalse(archive_prediction(
+            records, self.history, now + timedelta(days=1), 1, operator="magnum"
+        ))
         self.assertTrue(archive_prediction(records, self.history, now, 1, operator="magnum"))
         self.assertFalse(archive_prediction(records, self.history, now, 2, operator="magnum"))
         self.assertEqual(records[str(self.day)]["run_id"], 1)
         self.assertIn("experiment", records[str(self.day)])
         self.assertFalse(archive_prediction(
-            {}, self.history, now + timedelta(hours=3), 2, operator="haolong"
+            {}, self.history, now + timedelta(hours=4), 2, operator="haolong"
         ))
         records = {}
         self.assertTrue(archive_prediction(records, self.history, now, 1, operator="sportstoto"))

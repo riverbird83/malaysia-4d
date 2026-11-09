@@ -21,7 +21,7 @@
 <div class="panel"><h2>最新开奖</h2><p class="prediction-date">开奖日期 <time id="latest-date">—</time></p>
 <div id="latest" class="nums latest-numbers"><div>加载中…</div></div>
 <details id="live-panel" class="live-archive"><summary>开奖前 Top 3 存档</summary>
-<p class="muted">每天中午前（马来西亚时间）最多保存一组。只有收到该平台当天的前三奖数据，才计入实测。</p>
+<p class="muted">开奖日马来西亚时间中午 12 点起发布并锁定一组。只有收到该平台当天的前三奖数据，才计入实测。</p>
 <p id="live-summary" role="status">等待载入…</p><div id="live-predictions"></div></details>
 </div>
 <div class="panel backtest-panel"><h2>历史回测记录</h2><p class="muted" id="rate-sample">历史样本外回测 · 等待载入</p>
@@ -182,17 +182,17 @@ function renderLive() {
 }
 
 function render() {
-  const {sample_size, latest, as_of, top3, top3_model_estimates = []} = report;
-  $('top3-date').textContent = as_of;
-  $('top3-date').dateTime = as_of;
-  $('top3-data-date').textContent = latest.date;
-  $('top3-data-date').dateTime = latest.date;
+  const {sample_size, latest, as_of, top3, top3_data_through, top3_model_estimates = []} = report;
+  $('top3-date').textContent = as_of || '待发布';
+  $('top3-date').dateTime = as_of || '';
+  $('top3-data-date').textContent = top3_data_through || '—';
+  $('top3-data-date').dateTime = top3_data_through || '';
   $('numbers').innerHTML = top3.map((number, index) => {
     const estimate = top3_model_estimates[index];
     const label = Number.isFinite(estimate) ? (estimate * 100).toFixed(3) + '%' : '—';
     return '<div class="num"><small>#' + (index + 1) + '</small>' + number +
       '<small class="model-estimate">' + label + '</small></div>';
-  }).join('');
+  }).join('') || '<div class="num">待开奖日中午发布</div>';
   $('status').textContent = '已读取 ' + sample_size.toLocaleString() +
     ' 期有效记录';
   $('method').textContent = '按数字位置频率加权排序（近3年 0.60、3–10年 0.25、10–20年 0.15）；不混用其他运营商数据。';

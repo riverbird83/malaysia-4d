@@ -1,8 +1,9 @@
-"""Record today's operator predictions before noon Malaysia time."""
+"""Record today's operator predictions from noon on draw days."""
 import argparse
 import json
+import math
 import os
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 from model_experiment import OPERATORS as EXPERIMENT_OPERATORS, evaluate_live, predict_experiment
@@ -20,20 +21,31 @@ def read_archive(operator):
     path = archive_path(operator)
     return json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
 MYT = timezone(timedelta(hours=8))
+REGULAR_DRAW_WEEKDAYS = {2, 5, 6}
+# Listed for Magnum, Da Ma Cai and Sports Toto at https://4dd.co/special-draw.
+SPECIAL_DRAW_DATES = {date(2026, 12, 29)}
+
+
+def is_draw_day(operator, day):
+    return operator == "haolong" or day.weekday() in REGULAR_DRAW_WEEKDAYS or day in SPECIAL_DRAW_DATES
 
 
 def archive_prediction(records, rows, now, run_id, *, operator=None):
     local = now.astimezone(MYT)
     today = local.date()
-    if local.hour >= 12 or today.isoformat() in records:
+    if not 12 <= local.hour < 16 or today.isoformat() in records:
+        return False
+    if not is_draw_day(operator, today):
         return False
     if not rows or rows[-1]["date"] >= today:
         return False
 
+    ranked = rank_numbers(rows, as_of=today)
     entry = {
         "recorded_at": local.isoformat(timespec="seconds"),
         "data_through": rows[-1]["date"].isoformat(),
-        "top3": [item["number"] for item in rank_numbers(rows, as_of=today)],
+        "top3": [item["number"] for item in ranked],
+        "top3_model_estimates": [1 - (1 - math.exp(item["score"])) ** 3 for item in ranked],
         "run_id": run_id,
     }
     if operator in EXPERIMENT_OPERATORS:
@@ -79,7 +91,7 @@ def main():
         rows = read_draws(operator)
         if archive_prediction(records, rows, now, run_id, operator=operator):
             archive_path(operator).write_text(json.dumps(records, indent=2) + "\n", encoding="utf-8")
-            print(f"{operator}: archived today's Top 3 before the Malaysia noon cutoff.")
+            print(f"{operator}: archived today's Top 3 in the Malaysia draw-day window.")
         else:
             print(f"{operator}: no new pre-draw snapshot.")
 

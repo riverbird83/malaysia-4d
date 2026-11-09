@@ -2,8 +2,6 @@
 import argparse
 import calendar
 import json
-import math
-from datetime import timedelta
 from itertools import permutations
 from math import comb
 from pathlib import Path
@@ -74,8 +72,10 @@ def build_report(rows, archive=None):
         for index, row in reversed(list(enumerate(rows)))
         if row["date"] > rows[0]["date"] and (row["date"] > three_year_cutoff or index >= recent_start)
     ]
-    as_of = end + timedelta(days=1)
-    ranked = rank_numbers(rows, as_of=as_of)
+    # The published forecast comes from the locked archive, even after results arrive.
+    archive = archive or {}
+    as_of = max(archive, default=None)
+    forecast = archive[as_of] if as_of else {}
     prizes_by_date = {row['date'].isoformat(): row['prizes'] for row in rows}
     return {
         "live_predictions": [
@@ -85,11 +85,10 @@ def build_report(rows, archive=None):
         ],
         "sample_size": len(rows),
         "latest": {"date": end.isoformat(), "prizes": latest["prizes"]},
-        "as_of": as_of.isoformat(),
-        "top3": [item["number"] for item in ranked],
-        # The score is the log of the model's single-prize probability.
-        # This estimate treats the three prize slots as independent.
-        "top3_model_estimates": [1 - (1 - math.exp(item["score"])) ** 3 for item in ranked],
+        "as_of": as_of,
+        "top3": forecast.get("top3", []),
+        "top3_data_through": forecast.get("data_through"),
+        "top3_model_estimates": forecast.get("top3_model_estimates", []),
         "year_cutoff": cutoff.isoformat(),
         "three_year_cutoff": three_year_cutoff.isoformat(),
         "random_baseline": random_comparison([

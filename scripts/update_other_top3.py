@@ -20,7 +20,7 @@ def fetch(day):
 
 def refresh(now, get=fetch):
     local = now.astimezone(timezone(timedelta(hours=8)))
-    last = local.date() - timedelta(days=local.hour < 21)
+    last = local.date() - timedelta(days=local.hour < 20)
     known = {slug: {row["date"] for row in read_draws(slug)} for slug in TOP3_SUPPLEMENTS}
     added = {slug: [] for slug in known}
     first = max(last - timedelta(days=9), min(max(dates) for dates in known.values()) - timedelta(days=2))
