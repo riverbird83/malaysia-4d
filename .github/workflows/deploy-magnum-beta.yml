@@ -3,12 +3,11 @@ name: Deploy Magnum Prediction Beta to GitHub Pages
 on:
   workflow_dispatch:
   schedule:
-    # 21:15 in Vietnam, 22:15 in Malaysia.
-    - cron: "15 14 * * *"
-    # Retry late results at 22:45 in Vietnam, 23:45 in Malaysia.
-    - cron: "45 15 * * *"
-    # 09:15 MYT: archive the day’s forecast before the noon cutoff.
-    - cron: "15 1 * * *"
+    # 20:00 and 21:00 Malaysia time: fetch results, then retry.
+    - cron: "0 12 * * *"
+    - cron: "0 13 * * *"
+    # 12:00 Malaysia time: lock and publish the draw-day forecast.
+    - cron: "0 4 * * *"
   push:
     branches: [main, data-quality-foundation]
     paths:
@@ -54,7 +53,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Lock pre-draw predictions
-        if: github.ref == 'refs/heads/main' && (github.event.schedule == '15 1 * * *' || github.event_name == 'workflow_dispatch')
+        if: github.ref == 'refs/heads/main' && (github.event.schedule == '0 4 * * *' || github.event_name == 'workflow_dispatch')
         run: |
           python scripts/archive_magnum_prediction.py
           git add -- 'data/*-live.json'
@@ -63,7 +62,7 @@ jobs:
             git push origin HEAD:refs/heads/data-quality-foundation
           fi
       - name: Fetch and record complete official draws
-        if: github.ref == 'refs/heads/main' && (github.event.schedule == '15 14 * * *' || github.event.schedule == '45 15 * * *' || github.event_name == 'workflow_dispatch')
+        if: github.ref == 'refs/heads/main' && (github.event.schedule == '0 12 * * *' || github.event.schedule == '0 13 * * *' || github.event_name == 'workflow_dispatch')
         run: |
           python -m pip install requests pandas
           python scripts/update_magnum_beta.py
