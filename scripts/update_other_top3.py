@@ -18,7 +18,32 @@ def fetch(day):
         return json.load(response)
 
 
-def refresh(now, get=fetch):
+def grand_dragon_archive_url(day):
+    return f"https://4dresultsnow.com/history/grand-dragon/{day:%Y/%m/%d}"
+
+
+def parse_grand_dragon(day, html):
+    url = grand_dragon_archive_url(day)
+    if f'<link rel="canonical" href="{url}"' not in html:
+        raise ValueError("Backup page does not identify the requested draw")
+    prizes = []
+    for label in ("1st Prize", "2nd Prize", "3rd Prize"):
+        pattern = rf'>{label}</span>\s*<span\b[^>]*>\s*([0-9]{{4}})\s*</span>'
+        matches = re.findall(pattern, html)
+        if len(matches) != 1:
+            raise ValueError(f"Backup page has no unique {label}")
+        prizes.append(matches[0])
+    if len(set(prizes)) != 3:
+        raise ValueError("Backup page has duplicate main prizes")
+    return prizes
+
+
+def fetch_grand_dragon(day):
+    with urlopen(grand_dragon_archive_url(day), timeout=12) as response:
+        return parse_grand_dragon(day, response.read().decode("utf-8"))
+
+
+def refresh(now, get=fetch, get_grand_dragon=fetch_grand_dragon):
     local = now.astimezone(timezone(timedelta(hours=8)))
     last = local.date() - timedelta(days=local.hour < 20)
     known = {slug: {row["date"] for row in read_draws(slug)} for slug in TOP3_SUPPLEMENTS}
@@ -37,8 +62,8 @@ def refresh(now, get=fetch):
             if not isinstance(results, list):
                 raise ValueError("Expected a list of results")
         except (OSError, KeyError, TypeError, ValueError) as error:
-            print(f"Skipped {day}: {error}")
-            continue
+            print(f"Primary source unavailable for {day}: {error}")
+            results = []
         for source_id, slug in SOURCE_OPERATORS.items():
             if day in known[slug]:
                 continue
@@ -51,9 +76,21 @@ def refresh(now, get=fetch):
             prizes = [str(record.get(key, "")) for key in ("first", "second", "third")]
             if len(set(prizes)) != 3 or not all(re.fullmatch(r"[0-9]{4}", prize) for prize in prizes):
                 continue
+            known[slug].add(day)
             added[slug].append((day.isoformat(), *prizes, f"{SOURCE}/en/results/{day}",
                                 f"{SOURCE}/api/v1/results/{day}", "third_party_4dlivetoday_cc_by_4_0",
                                 now.isoformat(timespec="seconds")))
+
+        if day not in known["haolong"]:
+            try:
+                prizes = get_grand_dragon(day)
+            except (OSError, ValueError) as error:
+                print(f"Grand Dragon backup unavailable for {day}: {error}")
+            else:
+                url = grand_dragon_archive_url(day)
+                added["haolong"].append((day.isoformat(), *prizes, url, url,
+                                          "single_source_pending_review",
+                                          now.isoformat(timespec="seconds")))
 
     for slug, rows in added.items():
         path = TOP3_SUPPLEMENTS[slug]
