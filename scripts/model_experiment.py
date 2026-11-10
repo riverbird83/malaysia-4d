@@ -13,7 +13,7 @@ from prediction_engine import rank_numbers, read_draws
 OPERATORS = ("magnum", "haolong", "damacai", "sportstoto")
 LEGACY_VERSION = "eight-models-v1"
 VERSION = "twelve-models-v1"
-TARGET_DRAWS = 9
+TARGET_DRAWS = 10
 ADJACENT = ((0, 1), (1, 2), (2, 3))
 NONADJACENT = ((0, 2), (0, 3), (1, 3))
 PAIRS = ADJACENT + NONADJACENT

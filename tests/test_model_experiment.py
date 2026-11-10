@@ -48,23 +48,23 @@ class ModelExperimentTests(unittest.TestCase):
                 self.assertTrue(archive_prediction(records, self.history, now, 1, operator=operator))
                 self.assertEqual(len(records[str(self.day)]["experiment"]["models"]), 12)
 
-    def test_gate_uses_first_nine_settled_days_and_exact_matches(self):
+    def test_gate_uses_first_ten_settled_days_and_exact_matches(self):
         rows = []
         archive = {}
-        for offset in range(11):
+        for offset in range(12):
             day = self.day + timedelta(days=offset)
             rows.append({"date": day, "prizes": ["4321", "2020", "3030"]})
             archive[str(day)] = {"experiment": {
                 "version": VERSION,
                 "models": {"baseline": ["1111", "2222", "3333"]},
-                "ensemble_top3": ["1234", "0000", "4321" if offset == 9 else "5555"],
+                "ensemble_top3": ["1234", "0000", "4321" if offset == 10 else "5555"],
             }}
         archive[str(rows[-1]["date"])]["experiment"]["version"] = LEGACY_VERSION
         self.assertEqual(evaluate_live(rows, archive, version=LEGACY_VERSION, target=10)["draws"], 1)
-        self.assertEqual(evaluate_live(rows[:8], archive)["gate"], "collecting")
+        self.assertEqual(evaluate_live(rows[:9], archive)["gate"], "collecting")
         result = evaluate_live(rows, archive)
-        self.assertEqual(result["draws"], 9)
-        self.assertEqual(result["hits"]["ensemble"], {"exact": 0, "reordered": 9})
+        self.assertEqual(result["draws"], 10)
+        self.assertEqual(result["hits"]["ensemble"], {"exact": 0, "reordered": 10})
         self.assertEqual(result["gate"], "did_not_pass")
         archive[str(self.day)]["experiment"]["ensemble_top3"][0] = "4321"
         self.assertEqual(evaluate_live(rows, archive)["gate"], "continue_validation")
