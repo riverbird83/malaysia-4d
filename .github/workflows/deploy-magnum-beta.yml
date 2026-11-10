@@ -26,6 +26,7 @@ on:
       - .github/workflows/deploy-magnum-beta.yml
 
 permissions:
+  actions: read
   contents: write
   pages: write
   id-token: write
@@ -42,6 +43,8 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     timeout-minutes: 12
+    env:
+      PAGES_ARTIFACT: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
     steps:
       - name: Checkout branch
         uses: actions/checkout@v4
@@ -92,6 +95,22 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: public
+          name: ${{ env.PAGES_ARTIFACT }}
+      - name: Wait for Pages artifact metadata
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for attempt in {1..12}; do
+            count=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/artifacts?name=$PAGES_ARTIFACT" --jq '.total_count') || count=0
+            if [[ "$count" == 1 ]]; then
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "::error::Pages artifact metadata did not become available"
+          exit 1
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          artifact_name: ${{ env.PAGES_ARTIFACT }}
