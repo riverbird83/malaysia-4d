@@ -38,9 +38,35 @@ def parse_grand_dragon(day, html):
     return prizes
 
 
+def parse_malaya_grand_dragon(day, html):
+    prizes = []
+    for script in re.findall(r'<script type="application/ld\+json">(.*?)</script>', html, re.S):
+        for item in json.loads(script).get("@graph", []):
+            if item.get("@type") != "Dataset" or item.get("temporalCoverage") != day.isoformat():
+                continue
+            prizes.extend(
+                value["value"].split(" / ")
+                for value in item.get("variableMeasured", [])
+                if value.get("name") == "Grand Dragon 4D 1st/2nd/3rd prize"
+            )
+    if (len(prizes) != 1 or len(prizes[0]) != 3 or len(set(prizes[0])) != 3
+            or not all(re.fullmatch(r"[0-9]{4}", prize) for prize in prizes[0])):
+        raise ValueError("No unique, valid Grand Dragon result for the requested date")
+    return prizes[0]
+
+
 def fetch_grand_dragon(day):
-    with urlopen(grand_dragon_archive_url(day), timeout=12) as response:
-        return parse_grand_dragon(day, response.read().decode("utf-8"))
+    sources = (
+        (grand_dragon_archive_url(day), parse_grand_dragon),
+        (f"https://4dmalaya.com/en/results/{day}", parse_malaya_grand_dragon),
+    )
+    for url, parse in sources:
+        try:
+            with urlopen(url, timeout=12) as response:
+                return parse(day, response.read().decode("utf-8")), url
+        except (OSError, ValueError, KeyError, TypeError, AttributeError) as error:
+            print(f"Grand Dragon backup unavailable at {url}: {error}")
+    raise ValueError("No backup source provided a valid result")
 
 
 def refresh(now, get=fetch, get_grand_dragon=fetch_grand_dragon):
@@ -83,11 +109,10 @@ def refresh(now, get=fetch, get_grand_dragon=fetch_grand_dragon):
 
         if day not in known["haolong"]:
             try:
-                prizes = get_grand_dragon(day)
+                prizes, url = get_grand_dragon(day)
             except (OSError, ValueError) as error:
                 print(f"Grand Dragon backup unavailable for {day}: {error}")
             else:
-                url = grand_dragon_archive_url(day)
                 added["haolong"].append((day.isoformat(), *prizes, url, url,
                                           "single_source_pending_review",
                                           now.isoformat(timespec="seconds")))
