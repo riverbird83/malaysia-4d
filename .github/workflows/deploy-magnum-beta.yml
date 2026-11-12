@@ -6,6 +6,8 @@ on:
     # 20:00 and 21:00 Malaysia time: fetch results, then retry.
     - cron: "0 12 * * *"
     - cron: "0 13 * * *"
+    # 08:15 Malaysia time: catch up on late Grand Dragon results.
+    - cron: "15 0 * * *"
     # 12:00 Malaysia time: lock and publish the draw-day forecast.
     - cron: "0 4 * * *"
   push:
@@ -74,6 +76,15 @@ jobs:
           git add -- data/*_top3_supplement.csv
           if ! git diff --cached --quiet; then
             git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Update official 4D draw results'
+            git push origin HEAD:refs/heads/data-quality-foundation
+          fi
+      - name: Catch up on late Grand Dragon results
+        if: github.ref == 'refs/heads/main' && github.event.schedule == '15 0 * * *'
+        run: |
+          python scripts/update_other_top3.py --grand-dragon-only
+          git add data/grand_dragon_top3_supplement.csv
+          if ! git diff --cached --quiet; then
+            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Catch up on late Grand Dragon results'
             git push origin HEAD:refs/heads/data-quality-foundation
           fi
       - name: Summarize the live model comparison

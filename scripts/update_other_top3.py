@@ -1,4 +1,5 @@
 """Refresh sourced top-three results without rewriting the historical full boards."""
+import argparse
 import csv
 from datetime import datetime, timedelta, timezone
 import json
@@ -69,10 +70,11 @@ def fetch_grand_dragon(day):
     raise ValueError("No backup source provided a valid result")
 
 
-def refresh(now, get=fetch, get_grand_dragon=fetch_grand_dragon):
+def refresh(now, get=fetch, get_grand_dragon=fetch_grand_dragon, *, grand_dragon_only=False):
     local = now.astimezone(timezone(timedelta(hours=8)))
     last = local.date() - timedelta(days=local.hour < 20)
-    known = {slug: {row["date"] for row in read_draws(slug)} for slug in TOP3_SUPPLEMENTS}
+    operators = {"gd": "haolong"} if grand_dragon_only else SOURCE_OPERATORS
+    known = {slug: {row["date"] for row in read_draws(slug)} for slug in operators.values()}
     added = {slug: [] for slug in known}
     first = max(last - timedelta(days=9), min(max(dates) for dates in known.values()) - timedelta(days=2))
 
@@ -90,7 +92,7 @@ def refresh(now, get=fetch, get_grand_dragon=fetch_grand_dragon):
         except (OSError, KeyError, TypeError, ValueError) as error:
             print(f"Primary source unavailable for {day}: {error}")
             results = []
-        for source_id, slug in SOURCE_OPERATORS.items():
+        for source_id, slug in operators.items():
             if day in known[slug]:
                 continue
             matches = [r for r in results if isinstance(r, dict) and r.get("operator") == source_id]
@@ -113,6 +115,7 @@ def refresh(now, get=fetch, get_grand_dragon=fetch_grand_dragon):
             except (OSError, ValueError) as error:
                 print(f"Grand Dragon backup unavailable for {day}: {error}")
             else:
+                known["haolong"].add(day)
                 added["haolong"].append((day.isoformat(), *prizes, url, url,
                                           "single_source_pending_review",
                                           now.isoformat(timespec="seconds")))
@@ -126,8 +129,12 @@ def refresh(now, get=fetch, get_grand_dragon=fetch_grand_dragon):
                     writer.writerow(FIELDS)
                 writer.writerows(rows)
         print(f"{slug}: added {len(rows)} draw(s)")
+    if last not in known["haolong"]:
+        print(f"::warning::Grand Dragon result for {last} is still missing")
     return added
 
 
 if __name__ == "__main__":
-    refresh(datetime.now(timezone.utc))
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--grand-dragon-only", action="store_true")
+    refresh(datetime.now(timezone.utc), grand_dragon_only=parser.parse_args().grand_dragon_only)
