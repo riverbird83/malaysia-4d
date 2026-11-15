@@ -3,6 +3,7 @@ import tempfile
 import unittest
 from datetime import date
 from pathlib import Path
+from unittest.mock import patch
 import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
@@ -44,12 +45,10 @@ class PredictionEngineTests(unittest.TestCase):
                 writer = csv.DictWriter(handle, fieldnames=["date", "prize_1", "prize_2", "prize_3"])
                 writer.writeheader()
                 writer.writerow({"date": "2025-01-01", "prize_1": "0123", "prize_2": "4567", "prize_3": "8901"})
-            original = engine.DATASETS["haolong"]
-            try:
-                engine.DATASETS["haolong"] = path
+            with patch.dict(engine.DATASETS, {"haolong": path}), patch.dict(
+                engine.TOP3_SUPPLEMENTS, {"haolong": Path(directory) / "absent.csv"}
+            ):
                 rows = read_draws("haolong")
-            finally:
-                engine.DATASETS["haolong"] = original
         self.assertEqual(len(rows), 1)
         self.assertEqual(rows[0]["operator"], "Haolong")
         self.assertEqual(rows[0]["prizes"], ["0123", "4567", "8901"])
