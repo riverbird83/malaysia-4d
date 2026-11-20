@@ -201,6 +201,14 @@ function render() {
   $('latest').innerHTML = latest.prizes.map((number, index) =>
     '<div class="num"><small>第' + (index + 1) + '奖</small>' + number + '</div>').join('');
   renderLive();
+  const dual = report.dual_experiment;
+  if (dual && dual.locked) {
+    const hits = dual.hits.ensemble || {};
+    $('status').textContent += '｜第二轮 ' + dual.settled + '/' + dual.target +
+      ' 期｜综合模型前三奖命中 ' + (hits.top3 || 0) +
+      ' 期｜全23奖命中 ' + (hits.all23 || 0) + ' 期' +
+      (dual.pending ? '｜待完整奖表 ' + dual.pending + ' 期' : '');
+  }
   renderBacktest();
 }
 

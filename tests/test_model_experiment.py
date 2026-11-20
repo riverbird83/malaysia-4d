@@ -68,3 +68,49 @@ class ModelExperimentTests(unittest.TestCase):
         self.assertEqual(result["gate"], "did_not_pass")
         archive[str(self.day)]["experiment"]["ensemble_top3"][0] = "4321"
         self.assertEqual(evaluate_live(rows, archive)["gate"], "continue_validation")
+
+    def test_round_two_waits_for_first_round_and_preserves_locked_records(self):
+        from unittest.mock import patch
+        from model_experiment import DUAL_VERSION
+        rows = [{"date": self.day + timedelta(days=i),
+                 "prizes": ["4321", "2020", "3030"]} for i in range(10)]
+        records = {str(row["date"]): {"experiment": {
+            "version": VERSION, "models": {"baseline": ["1111", "2222", "3333"]},
+            "ensemble_top3": ["1234", "0000", "5555"],
+        }} for row in rows}
+        today = self.day + timedelta(days=10)
+        now = datetime.combine(today, datetime.min.time(), timezone.utc) + timedelta(hours=4)
+        import copy
+        original = copy.deepcopy(records)
+        experiment = {"version": VERSION, "models": {}, "ensemble_top3": ["1111", "2222", "3333"]}
+        with patch("archive_magnum_prediction.predict_experiment", return_value=experiment):
+            self.assertTrue(archive_prediction(records, rows, now, 99, operator="haolong"))
+        self.assertEqual(records[str(today)]["experiment"]["version"], DUAL_VERSION)
+        for key, value in original.items():
+            self.assertEqual(records[key], value)
+        self.assertFalse(archive_prediction(records, rows, now, 100, operator="haolong"))
+
+    def test_dual_scoring_keeps_first_ten_forecasts_and_waits_for_complete_board(self):
+        from model_experiment import DUAL_VERSION, evaluate_dual
+        boards = []
+        records = {}
+        for offset in range(11):
+            day = str(self.day + timedelta(days=offset))
+            board = {"date": day}
+            for prefix, numbers in (
+                ("prize", ["1000", "1001", "1002"]),
+                ("special", [f"{n:04d}" for n in range(2000, 2010)]),
+                ("consol", [f"{n:04d}" for n in range(3000, 3010)]),
+            ):
+                board.update({f"{prefix}_{i}": number for i, number in enumerate(numbers, 1)})
+            boards.append(board)
+            records[day] = {"experiment": {"version": DUAL_VERSION,
+                "models": {"baseline": ["2000", "0000", "9999"]},
+                "ensemble_top3": ["1000", "2000", "9999"]}}
+        boards[0]["consol_10"] = ""
+        report = evaluate_dual(boards, records)
+        self.assertEqual((report["locked"], report["settled"], report["pending"]), (10, 9, 1))
+        self.assertEqual(report["hits"]["baseline"], {"top3": 0, "all23": 9})
+        self.assertEqual(report["hits"]["ensemble"], {"top3": 9, "all23": 9})
+        boards[0]["consol_10"] = "3009"
+        self.assertEqual(evaluate_dual(boards, records)["settled"], 10)

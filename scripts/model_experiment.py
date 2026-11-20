@@ -1,5 +1,7 @@
 """Twelve 4D candidates and their experimental ensemble."""
 import argparse
+import csv
+import re
 import json
 import math
 from collections import Counter
@@ -8,11 +10,12 @@ from functools import lru_cache
 from heapq import nsmallest
 from statistics import fmean
 
-from prediction_engine import rank_numbers, read_draws
+from prediction_engine import DATASETS, rank_numbers, read_draws
 
 OPERATORS = ("magnum", "haolong", "damacai", "sportstoto")
 LEGACY_VERSION = "eight-models-v1"
 VERSION = "twelve-models-v1"
+DUAL_VERSION = "twelve-models-dual-v2"
 TARGET_DRAWS = 10
 ADJACENT = ((0, 1), (1, 2), (2, 3))
 NONADJACENT = ((0, 2), (0, 3), (1, 3))
@@ -251,6 +254,41 @@ def evaluate_live(rows, archive, *, version=VERSION, target=TARGET_DRAWS):
     else:
         report["gate"] = "did_not_pass"
     return report
+
+
+
+def evaluate_dual(boards, archive, target=TARGET_DRAWS):
+    """Score the first locked round-two forecasts against matching complete boards."""
+    by_date = {row["date"]: row for row in boards}
+    forecasts = [(day, entry) for day, entry in sorted(archive.items())
+                 if entry.get("experiment", {}).get("version") == DUAL_VERSION][:target]
+    counts = {}
+    settled = 0
+    for day, entry in forecasts:
+        board = by_date.get(day)
+        if not board:
+            continue
+        groups = [[value for key, value in board.items() if key.startswith(prefix) and value]
+                  for prefix in ("prize_", "special_", "consol_")]
+        if [len(group) for group in groups] != [3, 10, 10] or not all(
+            re.fullmatch(r"[0-9]{4}", value) for group in groups for value in group
+        ):
+            continue
+        settled += 1
+        main = set(groups[0])
+        all_prizes = set(sum(groups, []))
+        experiment = entry["experiment"]
+        for name, picks in {**experiment["models"], "ensemble": experiment["ensemble_top3"]}.items():
+            hits = counts.setdefault(name, {"top3": 0, "all23": 0})
+            hits["top3"] += bool(set(picks) & main)
+            hits["all23"] += bool(set(picks) & all_prizes)
+    return {"version": DUAL_VERSION, "target": target, "locked": len(forecasts),
+            "settled": settled, "pending": len(forecasts) - settled, "hits": counts}
+
+
+def operator_dual_summary(operator, archive):
+    with DATASETS[operator].open(newline="", encoding="utf-8-sig") as handle:
+        return evaluate_dual(list(csv.DictReader(handle)), archive)
 
 
 def main():

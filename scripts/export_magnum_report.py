@@ -8,6 +8,7 @@ from pathlib import Path
 
 from archive_magnum_prediction import OPERATORS, read_archive
 from prediction_engine import rank_numbers, read_draws
+from model_experiment import operator_dual_summary
 
 
 def years_before(day, years):
@@ -105,4 +106,5 @@ if __name__ == "__main__":
     args = parser.parse_args()
     archive = read_archive(args.operator)
     report = build_report(read_draws(args.operator), archive)
+    report["dual_experiment"] = operator_dual_summary(args.operator, archive)
     args.output.write_text(json.dumps(report, separators=(",", ":")) + "\n", encoding="utf-8")

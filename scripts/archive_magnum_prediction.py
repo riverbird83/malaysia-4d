@@ -6,7 +6,7 @@ import os
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
-from model_experiment import LEGACY_VERSION, OPERATORS, TARGET_DRAWS, evaluate_live, predict_experiment
+from model_experiment import DUAL_VERSION, operator_dual_summary, LEGACY_VERSION, OPERATORS, TARGET_DRAWS, evaluate_live, predict_experiment
 from prediction_engine import rank_numbers, read_draws
 
 ARCHIVE_DIR = Path(__file__).resolve().parents[1] / "data"
@@ -51,6 +51,9 @@ def archive_prediction(records, rows, now, run_id, *, operator=None):
     }
     if operator in OPERATORS:
         entry["experiment"] = predict_experiment(rows, today)
+        prior = evaluate_live(rows, records)
+        if prior["draws"] >= TARGET_DRAWS:
+            entry["experiment"]["version"] = DUAL_VERSION
     records[today.isoformat()] = entry
     return True
 
@@ -81,6 +84,15 @@ def live_summary():
             f"{baseline.get('reordered', '—')} | {ensemble.get('reordered', '—')} | "
             f"{gate_labels[report['gate']]} |"
         )
+
+    print("\n### Round two: locked forecasts, full prize boards")
+    print("| Operator | Settled | Pending boards | Ensemble top-three | Ensemble all-23 |")
+    print("| --- | ---: | ---: | ---: | ---: |")
+    for operator in OPERATORS:
+        report = operator_dual_summary(operator, read_archive(operator))
+        hits = report["hits"].get("ensemble", {})
+        print(f"| {OPERATOR_LABELS[operator]} | {report['settled']}/{TARGET_DRAWS} | "
+              f"{report['pending']} | {hits.get('top3', 0)} | {hits.get('all23', 0)} |")
 
     print("\nSettled eight-model records retained separately: " + ", ".join(legacy_counts))
 
