@@ -257,6 +257,14 @@ def evaluate_live(rows, archive, *, version=VERSION, target=TARGET_DRAWS):
 
 
 
+def evaluate_website(rows, archive, *, version=VERSION, target=TARGET_DRAWS):
+    prizes = {row["date"].isoformat(): row["prizes"] for row in rows}
+    samples = [(day, entry) for day, entry in sorted(archive.items())
+               if day in prizes and entry.get("experiment", {}).get("version") == version][:target]
+    hits = sum(bool(set(entry["top3"]) & set(prizes[day])) for day, entry in samples)
+    return {"draws": len(samples), "target": target, "hits": hits}
+
+
 def evaluate_dual(boards, archive, target=TARGET_DRAWS):
     """Score the first locked round-two forecasts against matching complete boards."""
     by_date = {row["date"]: row for row in boards}
@@ -278,7 +286,10 @@ def evaluate_dual(boards, archive, target=TARGET_DRAWS):
         main = set(groups[0])
         all_prizes = set(sum(groups, []))
         experiment = entry["experiment"]
-        for name, picks in {**experiment["models"], "ensemble": experiment["ensemble_top3"]}.items():
+        predictions = {**experiment["models"], "ensemble": experiment["ensemble_top3"]}
+        if "top3" in entry:
+            predictions["website"] = entry["top3"]
+        for name, picks in predictions.items():
             hits = counts.setdefault(name, {"top3": 0, "all23": 0})
             hits["top3"] += bool(set(picks) & main)
             hits["all23"] += bool(set(picks) & all_prizes)

@@ -114,3 +114,24 @@ class ModelExperimentTests(unittest.TestCase):
         self.assertEqual(report["hits"]["ensemble"], {"top3": 9, "all23": 9})
         boards[0]["consol_10"] = "3009"
         self.assertEqual(evaluate_dual(boards, records)["settled"], 10)
+
+    def test_website_score_uses_displayed_picks_when_experimental_ensemble_hits(self):
+        from model_experiment import DUAL_VERSION, evaluate_dual, evaluate_website
+        row = {"date": self.day, "prizes": ["6466", "4062", "8372"]}
+        entry = {"top3": ["2093", "6093", "2092"], "experiment": {
+            "version": VERSION, "models": {"baseline": ["2093", "6093", "2092"]},
+            "ensemble_top3": ["4062", "2892", "4092"]}}
+        archive = {str(self.day): entry}
+        self.assertEqual(evaluate_website([row], archive)["hits"], 0)
+        self.assertEqual(evaluate_live([row], archive)["hits"]["ensemble"]["exact"], 1)
+        entry["experiment"]["version"] = DUAL_VERSION
+        board = {"date": str(self.day)}
+        for prefix, numbers in (
+            ("prize", row["prizes"]),
+            ("special", ["2093"] + [f"{n:04d}" for n in range(2000, 2009)]),
+            ("consol", [f"{n:04d}" for n in range(3000, 3010)]),
+        ):
+            board.update({f"{prefix}_{i}": number for i, number in enumerate(numbers, 1)})
+        report = evaluate_dual([board], archive)
+        self.assertEqual(report["hits"]["website"], {"top3": 0, "all23": 1})
+        self.assertEqual(report["hits"]["ensemble"], {"top3": 1, "all23": 1})

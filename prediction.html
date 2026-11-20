@@ -177,7 +177,7 @@ function renderLive() {
     list.append(item);
   }
   $('live-summary').textContent = entries.length ?
-    '累计对奖 ' + settled + ' 期｜顺序全中 ' + exactDraws + ' 期｜四码同组 ' + reorderedDraws + ' 期' :
+    '网站推荐累计对奖 ' + settled + ' 期｜命中前三奖 ' + exactDraws + ' 期｜四码同组 ' + reorderedDraws + ' 期' :
     '暂无开奖前记录';
 }
 
@@ -201,12 +201,20 @@ function render() {
   $('latest').innerHTML = latest.prizes.map((number, index) =>
     '<div class="num"><small>第' + (index + 1) + '奖</small>' + number + '</div>').join('');
   renderLive();
+  const firstRound = report.website_experiment;
+  if (firstRound) {
+    $('status').textContent += '｜网站推荐首轮 ' + firstRound.draws + '/' +
+      firstRound.target + ' 期｜命中前三奖 ' + firstRound.hits + ' 期';
+  }
   const dual = report.dual_experiment;
   if (dual && dual.locked) {
-    const hits = dual.hits.ensemble || {};
+    const websiteHits = dual.hits.website || {};
+    const experimentalHits = dual.hits.ensemble || {};
     $('status').textContent += '｜第二轮 ' + dual.settled + '/' + dual.target +
-      ' 期｜综合模型前三奖命中 ' + (hits.top3 || 0) +
-      ' 期｜全23奖命中 ' + (hits.all23 || 0) + ' 期' +
+      ' 期｜网站推荐前三奖命中 ' + (websiteHits.top3 || 0) +
+      ' 期｜网站推荐全23奖命中 ' + (websiteHits.all23 || 0) +
+      ' 期｜后台实验综合模型前三奖命中 ' + (experimentalHits.top3 || 0) +
+      ' 期、全23奖命中 ' + (experimentalHits.all23 || 0) + ' 期' +
       (dual.pending ? '｜待完整奖表 ' + dual.pending + ' 期' : '');
   }
   renderBacktest();

@@ -6,7 +6,7 @@ import os
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
-from model_experiment import DUAL_VERSION, operator_dual_summary, LEGACY_VERSION, OPERATORS, TARGET_DRAWS, evaluate_live, predict_experiment
+from model_experiment import DUAL_VERSION, operator_dual_summary, evaluate_website, LEGACY_VERSION, OPERATORS, TARGET_DRAWS, evaluate_live, predict_experiment
 from prediction_engine import rank_numbers, read_draws
 
 ARCHIVE_DIR = Path(__file__).resolve().parents[1] / "data"
@@ -66,7 +66,7 @@ def live_summary():
     }
     print("### Twelve-model live comparison")
     print()
-    print("| Operator | Settled draws | Baseline exact | Ensemble exact | Baseline reordered | Ensemble reordered | Status |")
+    print("| Operator | Settled draws | Website top-three hits | Experimental ensemble hits | Baseline reordered | Ensemble reordered | Status |")
     print("| --- | ---: | ---: | ---: | ---: | ---: | --- |")
     legacy_counts = []
     for operator in OPERATORS:
@@ -76,23 +76,25 @@ def live_summary():
         report = evaluate_live(rows, archive)
         legacy = evaluate_live(rows, archive, version=LEGACY_VERSION, target=10)
         legacy_counts.append(f"{name}: {legacy['draws']}")
-        baseline = report["hits"].get("baseline", {})
+        website = evaluate_website(rows, archive)
         ensemble = report["hits"].get("ensemble", {})
         print(
             f"| {name} | {report['draws']}/{TARGET_DRAWS} | "
-            f"{baseline.get('exact', '—')} | {ensemble.get('exact', '—')} | "
-            f"{baseline.get('reordered', '—')} | {ensemble.get('reordered', '—')} | "
+            f"{website['hits']} | {ensemble.get('exact', '—')} | "
+            f"{report['hits'].get('baseline', {}).get('reordered', '—')} | {ensemble.get('reordered', '—')} | "
             f"{gate_labels[report['gate']]} |"
         )
 
     print("\n### Round two: locked forecasts, full prize boards")
-    print("| Operator | Settled | Pending boards | Ensemble top-three | Ensemble all-23 |")
-    print("| --- | ---: | ---: | ---: | ---: |")
+    print("| Operator | Settled | Pending boards | Website top-three | Website all-23 | Experimental ensemble top-three | Experimental ensemble all-23 |")
+    print("| --- | ---: | ---: | ---: | ---: | ---: | ---: |")
     for operator in OPERATORS:
         report = operator_dual_summary(operator, read_archive(operator))
         hits = report["hits"].get("ensemble", {})
+        website = report["hits"].get("website", {})
         print(f"| {OPERATOR_LABELS[operator]} | {report['settled']}/{TARGET_DRAWS} | "
-              f"{report['pending']} | {hits.get('top3', 0)} | {hits.get('all23', 0)} |")
+              f"{report['pending']} | {website.get('top3', 0)} | {website.get('all23', 0)} | "
+              f"{hits.get('top3', 0)} | {hits.get('all23', 0)} |")
 
     print("\nSettled eight-model records retained separately: " + ", ".join(legacy_counts))
 
